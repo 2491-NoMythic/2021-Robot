@@ -9,14 +9,14 @@ package com.frc2491.clank.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import com.frc2491.clank.ControlBoard;
+import com.frc2491.clank.Controllers.IDriveController;
 import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.subsystems.Drivetrain;
 
 public class Drive extends CommandBase {
 
   private Drivetrain drivetrain;
-  private ControlBoard m_ControlBoard;
+  private IDriveController m_ControlBoard;
   double turnSpeed, lastLeftSpeed, lastRightSpeed;
   double currentLeftSpeed = 0;
   double currentRightSpeed = 0;
@@ -24,12 +24,25 @@ public class Drive extends CommandBase {
   /**
    * Creates a new Drive.
    */
-  public Drive(ControlBoard controlBoard, Drivetrain drivetrain) {
+  public Drive(IDriveController controlBoard, Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.drivetrain = drivetrain;
     m_ControlBoard = controlBoard;
     addRequirements(drivetrain);
   }
+
+	/**
+	 * Prevents acceleration faster than the limit in constants.
+	 * @return an updated nextSpeed.
+	 */
+	private double limitAcceleration(double prevSpeed, double nextSpeed) {
+		double acceleration = nextSpeed - prevSpeed;
+		double signOfAcceleration = Math.signum(acceleration);
+		if(Math.abs(acceleration) > Constants.Drivetrain.accelerationSpeed) {
+			return prevSpeed + Constants.Drivetrain.accelerationSpeed * signOfAcceleration;
+		}
+		return nextSpeed;
+	}
 
   // Called when the command is initially scheduled.
   @Override
@@ -43,7 +56,7 @@ public class Drive extends CommandBase {
     turnSpeed = 0.5 * m_ControlBoard.getRawTurnAxis();
 		
 		lastLeftSpeed = currentLeftSpeed;
-    lastRightSpeed = currentRightSpeed;
+		lastRightSpeed = currentRightSpeed;
 		
 		currentLeftSpeed = m_ControlBoard.getDriveAxisDeadzone() - turnSpeed;
     currentRightSpeed = m_ControlBoard.getDriveAxisDeadzone() + turnSpeed;
@@ -52,27 +65,9 @@ public class Drive extends CommandBase {
     }
 		
 		if (Constants.Drivetrain.useLinerAcceleration) {
-			double leftAcceleration = (currentLeftSpeed - lastLeftSpeed);
-			double signOfLeftAcceleration = leftAcceleration / Math.abs(leftAcceleration);
-			if (Math.abs(leftAcceleration) > Constants.Drivetrain.accelerationSpeed) { // otherwise the power is below accel and is fine
-				if (Math.abs(currentLeftSpeed) - Math.abs(lastLeftSpeed) > 0) {
-					//System.out.println(currentLeftSpeed + " was too high, setting to " + (lastLeftSpeed + (Variables.accelerationSpeed * signOfLeftAcceleration)));
-					currentLeftSpeed = lastLeftSpeed + (Constants.Drivetrain.accelerationSpeed * signOfLeftAcceleration);
-					
-				}
-				// if the difference between the numbers is positive it is going up
-			}
-			double rightAcceleration = (currentRightSpeed - lastRightSpeed);
-			double signOfRightAcceleration = rightAcceleration / Math.abs(rightAcceleration);
-			if (Math.abs(rightAcceleration) > Constants.Drivetrain.accelerationSpeed) { // otherwise the power is below 0.05 accel and is fine
-				if (Math.abs(currentRightSpeed) - Math.abs(lastRightSpeed) > 0) {
-					//System.out.println(currentRightSpeed + " was too high, setting to " + (lastRightSpeed + (Variables.accelerationSpeed * signOfRightAcceleration)));
-					currentRightSpeed = lastRightSpeed + (Constants.Drivetrain.accelerationSpeed * signOfRightAcceleration);
-				}
-				// if the difference between the numbers is positive it is going up
-			}
+			currentLeftSpeed = limitAcceleration(lastLeftSpeed, currentLeftSpeed);
+			currentRightSpeed = limitAcceleration(lastRightSpeed, currentRightSpeed);
 		}
-		
 		
 		drivetrain.drivePercentOutput(currentLeftSpeed, currentRightSpeed);
   }
