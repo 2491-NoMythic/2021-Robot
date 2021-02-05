@@ -16,49 +16,49 @@ import com.frc2491.clank.subsystems.Indexer;
 
 public class ShooterRoutine extends CommandBase {
 
-  private Indexer indexer;
-  private Shooter shooter;
-  Timer timer;
+	private Indexer indexer;
+	private Shooter shooter;
+	Timer timer;
 
-  /**
-   * Creates a new ShooterRoutine.
-   */
-  public ShooterRoutine(Shooter shooter, Indexer indexer) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.indexer = indexer;
-    this.shooter = shooter;
-    addRequirements(indexer);
-    addRequirements(shooter);
-  }
+	/**
+	 * Creates a new ShooterRoutine.
+	 */
+	public ShooterRoutine(Shooter shooter, Indexer indexer) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		this.indexer = indexer;
+		this.shooter = shooter;
+		addRequirements(indexer);
+		addRequirements(shooter);
+	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    timer.reset();
-    timer.start();
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		timer.reset();
+		timer.start();
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    shooter.runLeftShooterVelocity(Constants.Shooter.shootSpeedRpm);
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		shooter.runLeftShooterVelocity(Constants.Shooter.shootSpeedRpm);
 
-    if(shooter.getEncoderRate() >= Constants.Shooter.shootSpeedRps && 21000 >= shooter.getEncoderRate()){
-      indexer.runConnectorMotor(Constants.Indexer.connectorTalonSpeed);
-      indexer.runIndexMotor(.8);
-    }
-  }
+		if (shooter.getEncoderRate() >= Constants.Shooter.shootSpeedRps && 21000 >= shooter.getEncoderRate()) {
+			indexer.runConnectorMotor(Constants.Indexer.connectorTalonSpeed);
+			indexer.runIndexMotor(.8);
+		}
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    indexer.stop();
-    shooter.stop();
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+		indexer.stop();
+		shooter.stop();
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return timer.get() >= 5;
-  }
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return timer.get() >= 5;
+	}
 }

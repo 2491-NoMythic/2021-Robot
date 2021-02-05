@@ -14,17 +14,16 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public interface IDriveController {
 
-    public JoystickButton getConnectorAndIndexer();
+	public JoystickButton getConnectorAndIndexer();
 
-    public double getRawDriveAxis();
+	public double getRawDriveAxis();
 
-    public double getDriveAxisDeadzone();
+	public double getDriveAxisDeadzone();
 
-    public double getRawTurnAxis();
+	public double getRawTurnAxis();
 
-    public double getHorizontalClimbAxis();
+	public double getHorizontalClimbAxis();
 
-    public JoystickButton getSlowDrive();
- 
+	public JoystickButton getSlowDrive();
+
 }
-        

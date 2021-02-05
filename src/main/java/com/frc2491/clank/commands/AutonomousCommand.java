@@ -18,14 +18,14 @@ import com.frc2491.clank.commands.drivetrain.timeDrive;
 // information, see:
 // https://docs.wpilib.org/en/latest/docs/software/commandbased/convenience-features.html
 public class AutonomousCommand extends SequentialCommandGroup {
-  /**
-   * Creates a new AutonomousCommand.
-   */
-  public AutonomousCommand(Drivetrain drivetrain, Shooter shooter, Indexer indexer, double speedDriveTransfer, double timeTransfer) {
-    // Add your commands in the super() call, e.g.
-    // super(new FooCommand(), new BarCommand());
-    addCommands(
-      new timeDrive(drivetrain, speedDriveTransfer, timeTransfer),
-      new ShootThreeBalls(shooter, indexer));
-  }
+	/**
+	 * Creates a new AutonomousCommand.
+	 */
+	public AutonomousCommand(Drivetrain drivetrain, Shooter shooter, Indexer indexer, double speedDriveTransfer, double timeTransfer) {
+		// Add your commands in the super() call, e.g.
+		// super(new FooCommand(), new BarCommand());
+		addCommands(
+			new timeDrive(drivetrain, speedDriveTransfer, timeTransfer),
+			new ShootThreeBalls(shooter, indexer));
+	}
 }

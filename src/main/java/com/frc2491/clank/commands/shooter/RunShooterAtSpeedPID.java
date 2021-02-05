@@ -16,58 +16,58 @@ import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 import com.frc2491.clank.subsystems.Shooter;
 
 public class RunShooterAtSpeedPID extends CommandBase {
-  /**
-   * Creates a new RunShooterAtSpeedPID.
-   */
-  Shooter mShooter;
-  double currentSpeed;
-  ControlBoard mBoard;
+	/**
+	 * Creates a new RunShooterAtSpeedPID.
+	 */
+	Shooter mShooter;
+	double currentSpeed;
+	ControlBoard mBoard;
 
-  public RunShooterAtSpeedPID(Shooter shooter, ControlBoard cBoard) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(shooter);
-    mShooter = shooter;
-    mBoard = cBoard;
-  }
+	public RunShooterAtSpeedPID(Shooter shooter, ControlBoard cBoard) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		addRequirements(shooter);
+		mShooter = shooter;
+		mBoard = cBoard;
+	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    mBoard.setShooterSpeed();
-    switch(Variables.Shooter.shooterSpeed){
-      case lowSpeed:
-        currentSpeed = 16500;
-        break;
-      case midSpeed:
-        currentSpeed = 19000;
-        break;
-      case highSpeed:
-        currentSpeed = 21000;
-        break;
-      case stop:
-        currentSpeed = 0;
-        break;
-      case sleepSpeed:
-        currentSpeed = 2000;
-        break;
-    }
-    mShooter.runLeftShooterVelocity(currentSpeed);
-  }
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		mBoard.setShooterSpeed();
+		switch(Variables.Shooter.shooterSpeed){
+			case lowSpeed:
+				currentSpeed = 16500;
+				break;
+			case midSpeed:
+				currentSpeed = 19000;
+				break;
+			case highSpeed:
+				currentSpeed = 21000;
+				break;
+			case stop:
+				currentSpeed = 0;
+				break;
+			case sleepSpeed:
+				currentSpeed = 2000;
+				break;
+		}
+		mShooter.runLeftShooterVelocity(currentSpeed);
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    mShooter.runLeftShooterVelocity(0);
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+		mShooter.runLeftShooterVelocity(0);
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

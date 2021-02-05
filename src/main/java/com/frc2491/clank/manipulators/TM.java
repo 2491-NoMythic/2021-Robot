@@ -17,57 +17,57 @@ import com.frc2491.clank.Settings.Constants;
  */
 public class TM implements IDriveController {
 
-    private Joystick m_Joystick;
-    private static TM m_Instance = null;
-    private JoystickButton connectorAndIndexer, slowDrive;
+	private Joystick m_Joystick;
+	private static TM m_Instance = null;
+	private JoystickButton connectorAndIndexer, slowDrive;
 
-    public static TM getInstance() {
-        if (m_Instance == null) {
-            m_Instance = new TM();
-        }
-        return m_Instance;
-    }
+	public static TM getInstance() {
+		if (m_Instance == null) {
+			m_Instance = new TM();
+		}
+		return m_Instance;
+	}
 
-    private TM() {
-        m_Joystick = new Joystick(Constants.Controller.driveControllerID);
-        connectorAndIndexer = new JoystickButton(m_Joystick, 7);
-        slowDrive = new JoystickButton(m_Joystick, 8);
-    }
+	private TM() {
+		m_Joystick = new Joystick(Constants.Controller.driveControllerID);
+		connectorAndIndexer = new JoystickButton(m_Joystick, 7);
+		slowDrive = new JoystickButton(m_Joystick, 8);
+	}
 
-    @Override
-    public double getRawDriveAxis() {
-        return m_Joystick.getRawAxis(Constants.Drivetrain.driveMainAxis);
-    }
+	@Override
+	public double getRawDriveAxis() {
+		return m_Joystick.getRawAxis(Constants.Drivetrain.driveMainAxis);
+	}
 
-    @Override
-    public double getDriveAxisDeadzone() {
-        return getAxisDeadzoned(m_Joystick.getRawAxis(Constants.Drivetrain.driveMainAxis));
-    }
+	@Override
+	public double getDriveAxisDeadzone() {
+		return getAxisDeadzoned(m_Joystick.getRawAxis(Constants.Drivetrain.driveMainAxis));
+	}
 
-    @Override
-    public double getRawTurnAxis() {
-        return m_Joystick.getRawAxis(Constants.Drivetrain.driveTurnAxis);
-    }
+	@Override
+	public double getRawTurnAxis() {
+		return m_Joystick.getRawAxis(Constants.Drivetrain.driveTurnAxis);
+	}
 
-    @Override
-    public double getHorizontalClimbAxis() {
-        return m_Joystick.getRawAxis(Constants.Drivetrain.driveHorizontalAxis);
-    }
+	@Override
+	public double getHorizontalClimbAxis() {
+		return m_Joystick.getRawAxis(Constants.Drivetrain.driveHorizontalAxis);
+	}
 
-    private double getAxisDeadzoned(double value) {
-        value = value * Math.abs(value);
-        return Math.abs(value) > Constants.Drivetrain.deadzone ? value : 0;
-    }
+	private double getAxisDeadzoned(double value) {
+		value = value * Math.abs(value);
+		return Math.abs(value) > Constants.Drivetrain.deadzone ? value : 0;
+	}
 
-    @Override
-    public JoystickButton getConnectorAndIndexer() {
-        // TODO Auto-generated method stub
-        return connectorAndIndexer;
-    }
+	@Override
+	public JoystickButton getConnectorAndIndexer() {
+		// TODO Auto-generated method stub
+		return connectorAndIndexer;
+	}
 
-    @Override
-    public JoystickButton getSlowDrive() {
-        // TODO Auto-generated method stub
-        return slowDrive;
-    }
+	@Override
+	public JoystickButton getSlowDrive() {
+		// TODO Auto-generated method stub
+		return slowDrive;
+	}
 }

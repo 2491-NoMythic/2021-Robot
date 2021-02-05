@@ -12,43 +12,43 @@ import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Drivetrain;
 
 public class ShiftLol extends CommandBase {
-  /**
-   * Creates a new ShiftLol.
-   */
-  Climber mClimb;
-  Drivetrain mDrivetrain;
+	/**
+	 * Creates a new ShiftLol.
+	 */
+	Climber mClimb;
+	Drivetrain mDrivetrain;
 
-  public ShiftLol(Climber climb, Drivetrain drivetrain) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    mClimb = climb;
-    mDrivetrain = drivetrain;
-    addRequirements(climb);
-  }
+	public ShiftLol(Climber climb, Drivetrain drivetrain) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		mClimb = climb;
+		mDrivetrain = drivetrain;
+		addRequirements(climb);
+	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    mClimb.setShifterOn();
-    mClimb.disengageLeftBreak();
-    mClimb.disengageRightBreak();
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		mClimb.setShifterOn();
+		mClimb.disengageLeftBreak();
+		mClimb.disengageRightBreak();
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    mClimb.setShifterOff();
-    mClimb.engageLeftBreak();
-    mClimb.engageRightBreak();
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+		mClimb.setShifterOff();
+		mClimb.engageLeftBreak();
+		mClimb.engageRightBreak();
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

@@ -15,72 +15,72 @@ import com.frc2491.clank.subsystems.Shooter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Simple3Ball extends CommandBase {
-  /**
-   * Creates a new Simple3Ball.
-   */
-  Drivetrain mDrive;
-  Shooter mShoot;
-  Indexer mDex;
-  Timer timer;
-  int state;
+	/**
+	 * Creates a new Simple3Ball.
+	 */
+	Drivetrain mDrive;
+	Shooter mShoot;
+	Indexer mDex;
+	Timer timer;
+	int state;
 
-  public Simple3Ball(Drivetrain drivetrain, Shooter shooter, Indexer indexer) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drivetrain, shooter, indexer);
-    mDrive = drivetrain;
-    mShoot = shooter;
-    mDex = indexer;
-    timer = new Timer();
-  }
+	public Simple3Ball(Drivetrain drivetrain, Shooter shooter, Indexer indexer) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		addRequirements(drivetrain, shooter, indexer);
+		mDrive = drivetrain;
+		mShoot = shooter;
+		mDex = indexer;
+		timer = new Timer();
+	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    timer.reset();
-    timer.start();
-    state = 0;
-    SmartDashboard.putBoolean("Hello", true);
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		timer.reset();
+		timer.start();
+		state = 0;
+		SmartDashboard.putBoolean("Hello", true);
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    switch(state){
-      case 0:
-        mShoot.runLeftShooterVelocity(16500);
-        if(timer.get() > 2){
-          state = 1;
-        }
-        break;
-      case 1:
-        mDex.runConnectorMotor(1);
-        mDex.runIndexMotor(-0.5);
-        if(timer.get()>7){
-          state = 2;
-          mShoot.runLeftShooterVelocity(0);
-          mDex.runConnectorMotor(0);
-          mDex.runIndexMotor(0);
-        }
-        break;
-      case 2:
-        mDrive.drivePercentOutput(0.25, 0.25);
-        if(timer.get()>7.5){
-          state = 3;
-        }
-        break;
-      case 3:
-        mDrive.stop();
-    }
-  }
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+		switch(state){
+			case 0:
+				mShoot.runLeftShooterVelocity(16500);
+				if(timer.get() > 2){
+					state = 1;
+				}
+				break;
+			case 1:
+				mDex.runConnectorMotor(1);
+				mDex.runIndexMotor(-0.5);
+				if(timer.get()>7){
+					state = 2;
+					mShoot.runLeftShooterVelocity(0);
+					mDex.runConnectorMotor(0);
+					mDex.runIndexMotor(0);
+				}
+				break;
+			case 2:
+				mDrive.drivePercentOutput(0.25, 0.25);
+				if(timer.get()>7.5){
+					state = 3;
+				}
+				break;
+			case 3:
+				mDrive.stop();
+		}
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

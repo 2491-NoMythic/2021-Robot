@@ -15,7 +15,7 @@ import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
  */
 public interface IOperatorController {
 
-    public JoystickButton getActivateIntakeButton();
+	public JoystickButton getActivateIntakeButton();
 
 	public JoystickButton getActivateLiftButton();
 

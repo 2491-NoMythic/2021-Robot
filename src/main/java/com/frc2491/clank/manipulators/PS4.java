@@ -19,134 +19,134 @@ import com.frc2491.clank.Settings.Variables;
  */
 public class PS4 implements IOperatorController {
 
-    private final Joystick m_joystick;
-    private static PS4 m_Instance = null;
-    private JoystickButton activateIntakeButton, activateClimbButton, deactivateClimbButton, activateRobotUpButton,
-            deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterButton, runIndexer, backIndexer, sleepyShotButton;
+	private final Joystick m_joystick;
+	private static PS4 m_Instance = null;
+	private JoystickButton activateIntakeButton, activateClimbButton, deactivateClimbButton, activateRobotUpButton,
+			deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterButton, runIndexer, backIndexer, sleepyShotButton;
 
-    public static PS4 getInstance() {
-        if (m_Instance == null) {
-            m_Instance = new PS4();
-        }
-        return m_Instance;
-    }
+	public static PS4 getInstance() {
+		if (m_Instance == null) {
+			m_Instance = new PS4();
+		}
+		return m_Instance;
+	}
 
-    private PS4() {
-        m_joystick = new Joystick(Constants.Controller.opertatorControllerID);
-        activateIntakeButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateIntakeButtonID);
-        activateClimbButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateClimberButtonID);
-        deactivateClimbButton = new JoystickButton(m_joystick, Constants.Controller.PS4.deactivateClimbButtonID);
-        activateRobotUpButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateRobotUpButtonID);
-        deactivateRobotUpButton = new JoystickButton(m_joystick, Constants.Controller.PS4.deactivateRobotUpButtonID);
-        climbSaftey1 = new JoystickButton(m_joystick, Constants.Controller.PS4.climbSaftey1ID);
-        climbSaftey2 = new JoystickButton(m_joystick, Constants.Controller.PS4.climbSaftey2ID);
-        funnelerAndIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.funnelerAndIndexerID);
-        shooterButton = new JoystickButton(m_joystick, Constants.Controller.PS4.shooterButtonID);
-        runIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.runIndexerButtonID);
-        backIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.backIndexerButtonID);
-        sleepyShotButton = new JoystickButton(m_joystick, 10);
+	private PS4() {
+		m_joystick = new Joystick(Constants.Controller.opertatorControllerID);
+		activateIntakeButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateIntakeButtonID);
+		activateClimbButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateClimberButtonID);
+		deactivateClimbButton = new JoystickButton(m_joystick, Constants.Controller.PS4.deactivateClimbButtonID);
+		activateRobotUpButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateRobotUpButtonID);
+		deactivateRobotUpButton = new JoystickButton(m_joystick, Constants.Controller.PS4.deactivateRobotUpButtonID);
+		climbSaftey1 = new JoystickButton(m_joystick, Constants.Controller.PS4.climbSaftey1ID);
+		climbSaftey2 = new JoystickButton(m_joystick, Constants.Controller.PS4.climbSaftey2ID);
+		funnelerAndIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.funnelerAndIndexerID);
+		shooterButton = new JoystickButton(m_joystick, Constants.Controller.PS4.shooterButtonID);
+		runIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.runIndexerButtonID);
+		backIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.backIndexerButtonID);
+		sleepyShotButton = new JoystickButton(m_joystick, 10);
 
-    }
+	}
 
-    @Override
-    public JoystickButton getActivateIntakeButton() {
-        return activateIntakeButton;
-    }
+	@Override
+	public JoystickButton getActivateIntakeButton() {
+		return activateIntakeButton;
+	}
 
-    @Override
-    public double getIntakeAxis() {
-        return m_joystick.getRawAxis(Constants.Intake.intakeAxisID);
-    }
+	@Override
+	public double getIntakeAxis() {
+		return m_joystick.getRawAxis(Constants.Intake.intakeAxisID);
+	}
 
-    @Override
-    public double getLeftClimbAxis() {
-        return m_joystick.getRawAxis(Constants.Climber.rightAxisID);
-    }
+	@Override
+	public double getLeftClimbAxis() {
+		return m_joystick.getRawAxis(Constants.Climber.rightAxisID);
+	}
 
-    @Override
-    public JoystickButton getActivateLiftButton() {
-        return activateClimbButton;
-    }
+	@Override
+	public JoystickButton getActivateLiftButton() {
+		return activateClimbButton;
+	}
 
-    @Override
-    public JoystickButton getActivateRobotUp() {
-        // TODO Auto-generated method stub
-        return activateRobotUpButton;
-    }
+	@Override
+	public JoystickButton getActivateRobotUp() {
+		// TODO Auto-generated method stub
+		return activateRobotUpButton;
+	}
 
-    @Override
-    public JoystickButton getDisableRobotUp() {
-        // TODO Auto-generated method stub
-        return deactivateRobotUpButton;
-    }
+	@Override
+	public JoystickButton getDisableRobotUp() {
+		// TODO Auto-generated method stub
+		return deactivateRobotUpButton;
+	}
 
-    @Override
-    public boolean climbSaftey() {
-        // TODO Auto-generated method stub
-        return climbSaftey1.get() && climbSaftey2.get();
-    }
+	@Override
+	public boolean climbSaftey() {
+		// TODO Auto-generated method stub
+		return climbSaftey1.get() && climbSaftey2.get();
+	}
 
-    @Override
-    public JoystickButton getDeactivateLiftButton() {
-        // TODO Auto-generated method stub
-        return deactivateClimbButton;
-    }
+	@Override
+	public JoystickButton getDeactivateLiftButton() {
+		// TODO Auto-generated method stub
+		return deactivateClimbButton;
+	}
 
-    @Override
-    public JoystickButton getClimbCheck1() {
-        // TODO Auto-generated method stub
-        return climbSaftey1;
-    }
+	@Override
+	public JoystickButton getClimbCheck1() {
+		// TODO Auto-generated method stub
+		return climbSaftey1;
+	}
 
-    @Override
-    public JoystickButton getClimbCheck2() {
-        // TODO Auto-generated method stub
-        return climbSaftey2;
-    }
+	@Override
+	public JoystickButton getClimbCheck2() {
+		// TODO Auto-generated method stub
+		return climbSaftey2;
+	}
 
-    @Override
-    public JoystickButton getShooterButton() {
-        // TODO Auto-generated method stub
-        return shooterButton;
-    }
+	@Override
+	public JoystickButton getShooterButton() {
+		// TODO Auto-generated method stub
+		return shooterButton;
+	}
 
-    @Override
-    public JoystickButton getFunnelerAndIndexer() {
-        // TODO Auto-generated method stub
-        return funnelerAndIndexer;
-    }
+	@Override
+	public JoystickButton getFunnelerAndIndexer() {
+		// TODO Auto-generated method stub
+		return funnelerAndIndexer;
+	}
 
-    @Override
-    public JoystickButton runIndexer() {
-        // TODO Auto-generated method stub
-        return runIndexer;
-    }
+	@Override
+	public JoystickButton runIndexer() {
+		// TODO Auto-generated method stub
+		return runIndexer;
+	}
 
-    @Override
-    public JoystickButton backIndexer() {
-        // TODO Auto-generated method stub
-        return backIndexer;
-    }
+	@Override
+	public JoystickButton backIndexer() {
+		// TODO Auto-generated method stub
+		return backIndexer;
+	}
 
-    @Override
-    public void setShooterSpeed() {
-        if (m_joystick.getPOV() == 0){
-            Variables.Shooter.shooterSpeed = ShooterSpeeds.lowSpeed;
-        }else if (m_joystick.getPOV() == 270){
-            Variables.Shooter.shooterSpeed = ShooterSpeeds.midSpeed;
-        }else if (m_joystick.getPOV() == 180){
-            Variables.Shooter.shooterSpeed = ShooterSpeeds.highSpeed;
-        }else if (m_joystick.getPOV() == 90){
-            Variables.Shooter.shooterSpeed = ShooterSpeeds.stop;   
-        }else if (sleepyShotButton.get()){
-            Variables.Shooter.shooterSpeed = ShooterSpeeds.sleepSpeed;
-        }
-    }
+	@Override
+	public void setShooterSpeed() {
+		if (m_joystick.getPOV() == 0){
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.lowSpeed;
+		}else if (m_joystick.getPOV() == 270){
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.midSpeed;
+		}else if (m_joystick.getPOV() == 180){
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.highSpeed;
+		}else if (m_joystick.getPOV() == 90){
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.stop;   
+		}else if (sleepyShotButton.get()){
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.sleepSpeed;
+		}
+	}
 
-    @Override
-    public double getShooterSpeed() {
-        // TODO Auto-generated method stub
-        return getShooterSpeed();
-    }
+	@Override
+	public double getShooterSpeed() {
+		// TODO Auto-generated method stub
+		return getShooterSpeed();
+	}
 
 }

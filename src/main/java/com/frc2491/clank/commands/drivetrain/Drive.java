@@ -15,21 +15,21 @@ import com.frc2491.clank.subsystems.Drivetrain;
 
 public class Drive extends CommandBase {
 
-  private Drivetrain drivetrain;
-  private IDriveController m_ControlBoard;
-  double turnSpeed, lastLeftSpeed, lastRightSpeed;
-  double currentLeftSpeed = 0;
-  double currentRightSpeed = 0;
+	private Drivetrain drivetrain;
+	private IDriveController m_ControlBoard;
+	double turnSpeed, lastLeftSpeed, lastRightSpeed;
+	double currentLeftSpeed = 0;
+	double currentRightSpeed = 0;
 
-  /**
-   * Creates a new Drive.
-   */
-  public Drive(IDriveController controlBoard, Drivetrain drivetrain) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    this.drivetrain = drivetrain;
-    m_ControlBoard = controlBoard;
-    addRequirements(drivetrain);
-  }
+	/**
+	 * Creates a new Drive.
+	 */
+	public Drive(IDriveController controlBoard, Drivetrain drivetrain) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		this.drivetrain = drivetrain;
+		m_ControlBoard = controlBoard;
+		addRequirements(drivetrain);
+	}
 
 	/**
 	 * Prevents acceleration faster than the limit in constants.
@@ -44,43 +44,43 @@ public class Drive extends CommandBase {
 		return nextSpeed;
 	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
 
-    turnSpeed = 0.5 * m_ControlBoard.getRawTurnAxis();
-		
+		turnSpeed = 0.5 * m_ControlBoard.getRawTurnAxis();
+
 		lastLeftSpeed = currentLeftSpeed;
 		lastRightSpeed = currentRightSpeed;
-		
+
 		currentLeftSpeed = m_ControlBoard.getDriveAxisDeadzone() - turnSpeed;
-    currentRightSpeed = m_ControlBoard.getDriveAxisDeadzone() + turnSpeed;
-    if(SmartDashboard.getBoolean("Record?", false)){
-      System.out.print("{ " + currentLeftSpeed + ", " + currentRightSpeed + " },");
-    }
-		
+		currentRightSpeed = m_ControlBoard.getDriveAxisDeadzone() + turnSpeed;
+		if(SmartDashboard.getBoolean("Record?", false)){
+			System.out.print("{ " + currentLeftSpeed + ", " + currentRightSpeed + " },");
+		}
+
 		if (Constants.Drivetrain.useLinerAcceleration) {
 			currentLeftSpeed = limitAcceleration(lastLeftSpeed, currentLeftSpeed);
 			currentRightSpeed = limitAcceleration(lastRightSpeed, currentRightSpeed);
 		}
-		
+
 		drivetrain.drivePercentOutput(currentLeftSpeed, currentRightSpeed);
-  }
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    drivetrain.stop();
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+		drivetrain.stop();
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

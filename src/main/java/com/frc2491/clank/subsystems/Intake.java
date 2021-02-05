@@ -16,43 +16,43 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.frc2491.clank.Settings.Constants;
 
 public class Intake extends SubsystemBase {
-  TalonSRX CoreIntakeMotor;
-  DoubleSolenoid IntakeSolenoid;
-  /**
-   * Creates a new Intake.
-   */
-  public Intake() {
-    CoreIntakeMotor = new TalonSRX(Constants.Intake.intakeMotorPort);
-    IntakeSolenoid = new DoubleSolenoid(Constants.Intake.intakeSolenoidPortForward,Constants.Intake.intakeSolenoidPortBackward);
-    pullIntakeIn();
-  }
-  
-  public void StartIntakeMotor(double motorPercent) {
-    CoreIntakeMotor.set(ControlMode.PercentOutput, motorPercent);
-  }
+	TalonSRX CoreIntakeMotor;
+	DoubleSolenoid IntakeSolenoid;
+	/**
+	 * Creates a new Intake.
+	 */
+	public Intake() {
+		CoreIntakeMotor = new TalonSRX(Constants.Intake.intakeMotorPort);
+		IntakeSolenoid = new DoubleSolenoid(Constants.Intake.intakeSolenoidPortForward,Constants.Intake.intakeSolenoidPortBackward);
+		pullIntakeIn();
+	}
 
-  public void StopIntakeMotor() {
-    CoreIntakeMotor.set(ControlMode.PercentOutput,0);
-  }
+	public void StartIntakeMotor(double motorPercent) {
+		CoreIntakeMotor.set(ControlMode.PercentOutput, motorPercent);
+	}
 
-  public void toggleIntakeSolenoid() {
-    Value a = IntakeSolenoid.get();
-    if(a == Value.kReverse){
-      IntakeSolenoid.set(Value.kForward);
-    } else {
-      IntakeSolenoid.set(Value.kReverse);
-    }  
-  }
+	public void StopIntakeMotor() {
+		CoreIntakeMotor.set(ControlMode.PercentOutput,0);
+	}
 
-  public void pullIntakeIn(){
-    IntakeSolenoid.set(Value.kReverse);
-  }
+	public void toggleIntakeSolenoid() {
+		Value a = IntakeSolenoid.get();
+		if(a == Value.kReverse){
+			IntakeSolenoid.set(Value.kForward);
+		} else {
+			IntakeSolenoid.set(Value.kReverse);
+		}
+	}
 
-  public Value checkIntakeSolenoid() {
-    return IntakeSolenoid.get();
-  }
-  @Override
-  public void periodic() {
-    // This method will be called once per scheduler run
-  }
+	public void pullIntakeIn(){
+		IntakeSolenoid.set(Value.kReverse);
+	}
+
+	public Value checkIntakeSolenoid() {
+		return IntakeSolenoid.get();
+	}
+	@Override
+	public void periodic() {
+		// This method will be called once per scheduler run
+	}
 }

@@ -13,38 +13,38 @@ import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Indexer;
 
 public class ClimbUp extends CommandBase {
-  /**
-   * Creates a new ClimbUp.
-   */
-  Climber m_Climber;
-  ControlBoard m_ControlBoard;
+	/**
+	 * Creates a new ClimbUp.
+	 */
+	Climber m_Climber;
+	ControlBoard m_ControlBoard;
 
-  public ClimbUp(Climber climber, Indexer indexer, ControlBoard controlBoard) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_Climber = climber;
-    m_ControlBoard = controlBoard;
-    addRequirements(m_Climber);
-    addRequirements(indexer);
-  }
+	public ClimbUp(Climber climber, Indexer indexer, ControlBoard controlBoard) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		m_Climber = climber;
+		m_ControlBoard = controlBoard;
+		addRequirements(m_Climber);
+		addRequirements(indexer);
+	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-  }
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return false;
+	}
 }

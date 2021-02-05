@@ -12,48 +12,48 @@ import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.subsystems.Drivetrain;
 
 public class DriveReplay extends CommandBase {
-  /**
-   * Creates a new DriveReplay.
-   */
-  Drivetrain m_drivetrain;
-  int count;
-  double currentLeftSpeed, currentRightSpeed;
-  double lastLeftSpeed, lastRightSpeed;
-  double[][] m_recording;
+	/**
+	 * Creates a new DriveReplay.
+	 */
+	Drivetrain m_drivetrain;
+	int count;
+	double currentLeftSpeed, currentRightSpeed;
+	double lastLeftSpeed, lastRightSpeed;
+	double[][] m_recording;
 
-  public DriveReplay(Drivetrain drivetrain, double[][] recording) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    m_drivetrain = drivetrain;
-    addRequirements(drivetrain);
-    m_recording = recording;
-  }
+	public DriveReplay(Drivetrain drivetrain, double[][] recording) {
+		// Use addRequirements() here to declare subsystem dependencies.
+		m_drivetrain = drivetrain;
+		addRequirements(drivetrain);
+		m_recording = recording;
+	}
 
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {
-    count = 0;
-    currentRightSpeed = 0;
-    currentLeftSpeed = 0;
-  }
+	// Called when the command is initially scheduled.
+	@Override
+	public void initialize() {
+		count = 0;
+		currentRightSpeed = 0;
+		currentLeftSpeed = 0;
+	}
 
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-    
-    lastLeftSpeed = currentLeftSpeed;
-    lastRightSpeed = currentRightSpeed;
+	// Called every time the scheduler runs while the command is scheduled.
+	@Override
+	public void execute() {
 
-    currentLeftSpeed = m_recording[count][0];
-    currentRightSpeed = m_recording[count][1];
+		lastLeftSpeed = currentLeftSpeed;
+		lastRightSpeed = currentRightSpeed;
 
-    if (Constants.Drivetrain.useLinerAcceleration) {
+		currentLeftSpeed = m_recording[count][0];
+		currentRightSpeed = m_recording[count][1];
+
+		if (Constants.Drivetrain.useLinerAcceleration) {
 			double leftAcceleration = (currentLeftSpeed - lastLeftSpeed);
 			double signOfLeftAcceleration = leftAcceleration / Math.abs(leftAcceleration);
 			if (Math.abs(leftAcceleration) > Constants.Drivetrain.accelerationSpeed) { // otherwise the power is below accel and is fine
 				if (Math.abs(currentLeftSpeed) - Math.abs(lastLeftSpeed) > 0) {
 					//System.out.println(currentLeftSpeed + " was too high, setting to " + (lastLeftSpeed + (Variables.accelerationSpeed * signOfLeftAcceleration)));
 					currentLeftSpeed = lastLeftSpeed + (Constants.Drivetrain.accelerationSpeed * signOfLeftAcceleration);
-					
+
 				}
 				// if the difference between the numbers is positive it is going up
 			}
@@ -67,19 +67,19 @@ public class DriveReplay extends CommandBase {
 				// if the difference between the numbers is positive it is going up
 			}
 		}
-    m_drivetrain.drivePercentOutput(currentLeftSpeed, currentRightSpeed);
-    count++;
-  }
+		m_drivetrain.drivePercentOutput(currentLeftSpeed, currentRightSpeed);
+		count++;
+	}
 
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {
-    m_drivetrain.stop();
-  }
+	// Called once the command ends or is interrupted.
+	@Override
+	public void end(boolean interrupted) {
+		m_drivetrain.stop();
+	}
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return count>=(m_recording.length-1);
-  }
+	// Returns true when the command should end.
+	@Override
+	public boolean isFinished() {
+		return count>=(m_recording.length-1);
+	}
 }
