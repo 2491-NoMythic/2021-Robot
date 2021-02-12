@@ -15,6 +15,7 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.frc2491.clank.Settings.Constants;
@@ -23,6 +24,8 @@ public class Shooter extends SubsystemBase {
 
 	WPI_TalonFX shooterLeftMotor;
 	WPI_TalonFX shooterRightMotor;
+	Servo servo1;
+	Servo servo2;
 
 	double fGain, pGain, iGain, dGain;
 	int iZone;
@@ -36,6 +39,9 @@ public class Shooter extends SubsystemBase {
 
 		shooterRightMotor.follow(shooterLeftMotor);
 		shooterRightMotor.setInverted(InvertType.OpposeMaster);
+
+		servo1 = new Servo(Constants.Shooter.servo1);
+		servo2 = new Servo(Constants.Shooter.servo2);
 
 		// PID
 
@@ -80,6 +86,14 @@ public class Shooter extends SubsystemBase {
 	// Creating Drive Velocity for Motors
 	public void runLeftShooterVelocity(final double speed) {
 		shooterLeftMotor.set(ControlMode.Velocity, speed);
+	}
+	/**
+	 * Set hood position
+	 * @param degrees (between 0-54 degrees)
+	 */
+	public void setHoodPosition(int degrees){
+		servo1.setAngle(degrees);
+		servo2.setAngle(degrees);
 	}
 
 	public void runLeftShooterPercent(double speed){

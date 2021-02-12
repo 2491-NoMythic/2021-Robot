@@ -135,6 +135,8 @@ public final class Constants {
 		// shooter
 		public static final int shooterTalonLeftMotor = 4;
 		public static final int shooterTalonRightMotor = 5;
+		public static final int servo1 = 2491;
+		public static final int servo2 = 2491;
 		// encoders
 		public final static double shooterEncoderTicks = 2048.0; // Encoder ticks per wheel rotation is 2048
 		public final static double shooterWheelDiameter = 4.0; // Inches
