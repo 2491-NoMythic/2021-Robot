@@ -131,6 +131,12 @@ public final class Constants {
 		public static final int sensorEightPin = 10;
 	}
 
+	public final class Spindexer {
+		public static final int MainMotor = 2491;
+		public static final int OuttakeMotor = 2491;
+		public static final int AntiJamMotor = 2491;
+	}
+
 	public final class Shooter {
 		// shooter
 		public static final int shooterTalonLeftMotor = 4;
