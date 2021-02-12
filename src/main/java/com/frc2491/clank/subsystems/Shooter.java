@@ -91,7 +91,7 @@ public class Shooter extends SubsystemBase {
 	 * Set hood position
 	 * @param degrees (between 0-54 degrees)
 	 */
-	public void setHoodPosition(int degrees){
+	public void setHoodPosition(double degrees){
 		servo1.setAngle(degrees);
 		servo2.setAngle(degrees);
 	}
