@@ -15,7 +15,6 @@ import com.frc2491.clank.commands.drivetrain.LineupDrive;
 import com.frc2491.clank.commands.drivetrain.Rotate;
 import com.frc2491.clank.commands.intake.AutoIntake;
 import com.frc2491.clank.commands.ConnectorAndIndex;
-import com.frc2491.clank.commands.DefaultIntakeRoutine;
 import com.frc2491.clank.commands.FunnlerTest;
 import com.frc2491.clank.commands.RunIndexer;
 import com.frc2491.clank.commands.ShiftLol;
@@ -24,16 +23,18 @@ import com.frc2491.clank.commands.funnelOnlyDefaultCommand;
 import com.frc2491.clank.commands.climber.ClimbExtendControl;
 import com.frc2491.clank.commands.climber.RobotUp;
 import com.frc2491.clank.commands.shooter.RunConnector;
-import com.frc2491.clank.commands.shooter.RunFullSpeed;
 import com.frc2491.clank.commands.shooter.RunShooterAtSpeedPID;
-import com.frc2491.clank.Settings.Constants;
-import com.frc2491.clank.commands.AutonomousCommand;
 import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Shooter;
 import com.frc2491.clank.subsystems.Indexer;
 import com.frc2491.clank.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
+import com.frc2491.clank.commands.spindexer.ShootingRotation;
+import com.frc2491.clank.commands.spindexer.IntakeRotation;
+import com.frc2491.clank.subsystems.Spindexer;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -53,6 +54,7 @@ public class RobotContainer {
 	private final Indexer m_Indexer = new Indexer();
 	private final Intake m_Intake = new Intake();
 	private final Climber m_Climber = new Climber();
+	private final Spindexer m_Spindexer = new Spindexer();
 
 	/**
 	 * Here is where we get the current instace of the controlboard that we are using. There can only be one instance of
@@ -65,12 +67,12 @@ public class RobotContainer {
 	 * instanciation of the class once.
 	 */
 	private final RunShooterAtSpeedPID shooterAtSpeedPID = new RunShooterAtSpeedPID(m_Shooter, m_ControlBoard);
-	private final RunConnector runConnector = new RunConnector(m_Indexer);
+	//private final RunConnector runConnector = new RunConnector(m_Indexer);
 	private final ClimbExtendControl climbExtendControl = new ClimbExtendControl(m_Climber, m_Indexer, m_ControlBoard);
 	private final RobotUp robotUp = new RobotUp(m_drivetrain, m_Climber, m_ControlBoard);
-	private final FunnlerTest funnelTest = new FunnlerTest(m_Indexer);
+	//private final FunnlerTest funnelTest = new FunnlerTest(m_Indexer);
 	private final ConnectorAndIndex connectorAndIndex = new ConnectorAndIndex(m_Indexer);
-	private final AutonomousCommand autonomousCommand = new AutonomousCommand(m_drivetrain, m_Shooter, m_Indexer, Constants.Drivetrain.timeDriveSpeed, Constants.Drivetrain.timeDriveTime);
+	//private final AutonomousCommand autonomousCommand = new AutonomousCommand(m_drivetrain, m_Shooter, m_Indexer, Constants.Drivetrain.timeDriveSpeed, Constants.Drivetrain.timeDriveTime);
 
 	/**
 	 * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -100,7 +102,7 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 		//Data that is put on the smart dashboard will appear as a UI element.
-		SmartDashboard.putData(new RunShooterAtSpeedPID(m_Shooter, m_ControlBoard));
+		SmartDashboard.putData(shooterAtSpeedPID);
 		SmartDashboard.putData(new RunConnector(m_Indexer));
 		SmartDashboard.putData(new FunnlerTest(m_Indexer));
 		SmartDashboard.putData(new ShiftLol(m_Climber, m_drivetrain));
@@ -109,12 +111,14 @@ public class RobotContainer {
 		//.and is used to create the safteys. Note that in current form safteys are not neccesary for turining off the system.
 		m_ControlBoard.getActivateLiftButton().and(m_ControlBoard.getClimbCheck1()).and(m_ControlBoard.getClimbCheck2()).whenActive(climbExtendControl);
 		m_ControlBoard.getDeactivateLiftButton().cancelWhenPressed(climbExtendControl);
+
 		m_ControlBoard.getActivateIntakeButton().whileHeld(new AutoIntake(m_Intake, m_ControlBoard, m_Indexer));
 		m_ControlBoard.getActivateRobotUp().and(m_ControlBoard.getClimbCheck1()).and(m_ControlBoard.getClimbCheck2()).whenActive(robotUp);
 		m_ControlBoard.getDisableRobotUp().cancelWhenPressed(robotUp);
-		m_ControlBoard.getShooterButton().whileHeld(shooterAtSpeedPID);
+
+		m_ControlBoard.getShooterButton().whileHeld(new SequentialCommandGroup(new ShootingRotation(m_Spindexer),shooterAtSpeedPID)); 
 		m_ControlBoard.getConnectorAndIndexer().whileHeld(connectorAndIndex);
-		m_ControlBoard.runIndexer().whileHeld(new RunIndexer(m_Indexer, true));
+		m_ControlBoard.runIndexer().whileHeld(new IntakeRotation(m_Spindexer));
 		m_ControlBoard.getSlowDrive().whileHeld(new LineupDrive(m_drivetrain,m_ControlBoard));
 		m_ControlBoard.backIndexer().whileHeld(new RunIndexer(m_Indexer,false));
 		SmartDashboard.putData("TurnUp", new Rotate(m_drivetrain, 30));
