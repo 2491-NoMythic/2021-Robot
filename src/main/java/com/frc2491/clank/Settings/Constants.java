@@ -96,6 +96,9 @@ public final class Constants {
 			public static final int runIndexerButtonID = 14;
 			public static final int backIndexerButtonID = 13;
 			public static final int slowModeButtonID = 10;
+			public static final int setHoodPositionOneID = 2491; // TODO change to actual value
+			public static final int setHoodPositionTwoID = 2491; // TODO change to actual value
+			public static final int setHoodPositionThreeID = 2491; // TODO change to actual value
 		}
 	}
 
@@ -163,6 +166,11 @@ public final class Constants {
 		public final static double kF = 0.0455;
 		public final static int kIzone = 100;
 		public final static double PeakOutput = 0;
+
+		// hood positions
+		public final static double hoodPositionOne = 2491; //TODO replace for real value
+		public final static double hoodPositionTwo = 2491; //TODO replace for real value
+		public final static double hoodPositionThree = 2491; //TODO replace for real value
 
 		// Values
 		public final static double testSpeed = 1000;
