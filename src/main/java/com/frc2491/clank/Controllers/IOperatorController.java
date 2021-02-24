@@ -43,13 +43,17 @@ public interface IOperatorController {
 
 	public JoystickButton backIndexer();
 
+	public JoystickButton getShooterRevFlywheelButton();
+
 	public double getIntakeAxis();
 
 	public double getLeftClimbAxis();
 
 	public boolean climbSaftey();
 
-	public void setShooterSpeed();
+	public void setShooterSpeedLow();
+
+	public void setShooterSpeedHigh();
 
 	public double getShooterSpeed();
 

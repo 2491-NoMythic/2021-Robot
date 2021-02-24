@@ -133,18 +133,13 @@ public class PS4 implements IOperatorController {
 	}
 
 	@Override
-	public void setShooterSpeed() {
-		if (m_joystick.getPOV() == 0){
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.lowSpeed;
-		}else if (m_joystick.getPOV() == 270){
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.midSpeed;
-		}else if (m_joystick.getPOV() == 180){
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.highSpeed;
-		}else if (m_joystick.getPOV() == 90){
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.stop;   
-		}else if (sleepyShotButton.get()){
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.sleepSpeed;
-		}
+	public void setShooterSpeedLow(){
+		Variables.Shooter.shooterSpeed = ShooterSpeeds.lowSpeed;
+	}
+
+	@Override
+	public void setShooterSpeedHigh(){
+		Variables.Shooter.shooterSpeed = ShooterSpeeds.highSpeed;
 	}
 
 	@Override
@@ -166,6 +161,11 @@ public class PS4 implements IOperatorController {
 	@Override
 	public JoystickButton getShooterHoodPositionThreeButton() {
 		return setHoodPositionThree;
+	}
+
+	@Override
+	public JoystickButton getShooterRevFlywheelButton(){
+		return getShooterRevFlywheelButton;
 	}
 
 }

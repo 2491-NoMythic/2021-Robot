@@ -23,15 +23,21 @@ import com.frc2491.clank.commands.Simple3Ball;
 import com.frc2491.clank.commands.funnelOnlyDefaultCommand;
 import com.frc2491.clank.commands.climber.ClimbExtendControl;
 import com.frc2491.clank.commands.climber.RobotUp;
+import com.frc2491.clank.commands.shooter.FlywheelRev;
 import com.frc2491.clank.commands.shooter.RunConnector;
 import com.frc2491.clank.commands.shooter.RunFullSpeed;
 import com.frc2491.clank.commands.shooter.RunShooterAtSpeedPID;
 import com.frc2491.clank.commands.shooter.SetHoodPosition;
 import com.frc2491.clank.Settings.Constants;
+import com.frc2491.clank.Settings.Variables;
 import com.frc2491.clank.commands.AutonomousCommand;
 import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Shooter;
+
+
+import org.ejml.equation.Variable;
+
 import com.frc2491.clank.subsystems.Indexer;
 import com.frc2491.clank.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -65,7 +71,6 @@ public class RobotContainer {
 	 * Here is where we declare instances of the commands that we want to run. Notice that these will only run the
 	 * instanciation of the class once.
 	 */
-	private final RunShooterAtSpeedPID shooterAtSpeedPID = new RunShooterAtSpeedPID(m_Shooter, m_ControlBoard);
 	private final RunConnector runConnector = new RunConnector(m_Indexer);
 	private final ClimbExtendControl climbExtendControl = new ClimbExtendControl(m_Climber, m_Indexer, m_ControlBoard);
 	private final RobotUp robotUp = new RobotUp(m_drivetrain, m_Climber, m_ControlBoard);
@@ -101,7 +106,7 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 		//Data that is put on the smart dashboard will appear as a UI element.
-		SmartDashboard.putData(new RunShooterAtSpeedPID(m_Shooter, m_ControlBoard));
+		//SmartDashboard.putData(new RunShooterAtSpeedPID(m_Shooter, m_ControlBoard)); TODO add pid value tracking for FlywheelRev
 		SmartDashboard.putData(new RunConnector(m_Indexer));
 		SmartDashboard.putData(new FunnlerTest(m_Indexer));
 		SmartDashboard.putData(new ShiftLol(m_Climber, m_drivetrain));
@@ -113,7 +118,6 @@ public class RobotContainer {
 		m_ControlBoard.getActivateIntakeButton().whileHeld(new AutoIntake(m_Intake, m_ControlBoard, m_Indexer));
 		m_ControlBoard.getActivateRobotUp().and(m_ControlBoard.getClimbCheck1()).and(m_ControlBoard.getClimbCheck2()).whenActive(robotUp);
 		m_ControlBoard.getDisableRobotUp().cancelWhenPressed(robotUp);
-		m_ControlBoard.getShooterButton().whileHeld(shooterAtSpeedPID);
 		m_ControlBoard.getConnectorAndIndexer().whileHeld(connectorAndIndex);
 		m_ControlBoard.runIndexer().whileHeld(new RunIndexer(m_Indexer, true));
 		m_ControlBoard.getSlowDrive().whileHeld(new LineupDrive(m_drivetrain,m_ControlBoard));
@@ -122,6 +126,7 @@ public class RobotContainer {
 		m_ControlBoard.getShooterHoodPositionTwoButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionTwo));
 		m_ControlBoard.getShooterHoodPositionThreeButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionThree));
 		SmartDashboard.putData("TurnUp", new Rotate(m_drivetrain, 30));
+		m_ControlBoard.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
 	}
 
 	/**

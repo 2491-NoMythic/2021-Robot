@@ -135,9 +135,13 @@ public class ControlBoard implements IControlBoard {
 	}
 
 	@Override
-	public void setShooterSpeed() {
-		// TODO Auto-generated method stub
-		mOperatorController.setShooterSpeed();
+	public void setShooterSpeedLow() {
+		mOperatorController.setShooterSpeedLow();
+	}
+
+	@Override
+	public void setShooterSpeedHigh(){
+		mOperatorController.setShooterSpeedHigh();
 	}
 
 	@Override
@@ -153,5 +157,9 @@ public class ControlBoard implements IControlBoard {
 	@Override
 	public JoystickButton getShooterHoodPositionThreeButton() {
 		return mOperatorController.getShooterHoodPositionThreeButton();
+	}
+
+	public JoystickButton getShooterRevFlywheelButton(){
+		return mOperatorController.getShooterRevFlywheelButton();
 	}
 }

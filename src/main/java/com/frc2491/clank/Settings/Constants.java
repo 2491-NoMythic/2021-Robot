@@ -181,8 +181,8 @@ public final class Constants {
 	}
 
 	public enum ShooterSpeeds {
-		lowSpeed(16000), midSpeed(19000), highSpeed(21000), stop(0), sleepSpeed(2000);
-
+		lowSpeed(16000), highSpeed(21000); //TODO repalce for real values
+		
 		private double speed;
 
 		private ShooterSpeeds(double mSpeed) {
