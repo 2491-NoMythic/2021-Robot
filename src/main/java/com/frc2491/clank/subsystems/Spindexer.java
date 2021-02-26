@@ -4,18 +4,19 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.frc2491.clank.Settings.Constants;
 
-import edu.wpi.first.wpilibj.Spark;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Spindexer extends SubsystemBase {
 
-	Spark MainRotationMotor;
-	Spark AntiJamMotor;
+	CANSparkMax MainRotationMotor;
+	CANSparkMax AntiJamMotor;
 	TalonSRX OuttakeMotor;
 
 	public Spindexer() {
-		MainRotationMotor = new Spark(Constants.Spindexer.MainMotor);
-		AntiJamMotor = new Spark(Constants.Spindexer.AntiJamMotor);
+		MainRotationMotor = new CANSparkMax(Constants.Spindexer.MainMotor, MotorType.kBrushless);
+		AntiJamMotor = new CANSparkMax(Constants.Spindexer.AntiJamMotor, MotorType.kBrushless);
 		OuttakeMotor = new TalonSRX(Constants.Spindexer.OuttakeMotor);
 
 	}
