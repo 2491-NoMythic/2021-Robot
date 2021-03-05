@@ -5,11 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frc2491.clank.manipulators;
+package com.frc2491.clank.HID;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import com.frc2491.clank.Controllers.IOperatorController;
+
 import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 
@@ -118,14 +118,9 @@ public class ButtonBoard implements IOperatorController {
 	}
 
 	@Override
-	public void setShooterSpeed() {
+	public ShooterSpeeds getShooterSpeed() {
 		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public double getShooterSpeed() {
-		// TODO Auto-generated method stub
-		return getShooterSpeed();
+		return null;
 	}
 
 	@Override

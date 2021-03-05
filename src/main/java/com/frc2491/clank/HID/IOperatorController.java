@@ -5,10 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frc2491.clank.Controllers;
+package com.frc2491.clank.HID;
+
+import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 
 /**
  * Add your docs here.
@@ -49,8 +50,6 @@ public interface IOperatorController {
 
 	public boolean climbSaftey();
 
-	public void setShooterSpeed();
-
-	public double getShooterSpeed();
+	public ShooterSpeeds getShooterSpeed();
 
 }

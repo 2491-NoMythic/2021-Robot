@@ -5,12 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frc2491.clank.manipulators;
+package com.frc2491.clank.HID;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
-import com.frc2491.clank.Controllers.IOperatorController;
 import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.Settings.Variables;
 
@@ -20,19 +19,11 @@ import com.frc2491.clank.Settings.Variables;
 public class PS4 implements IOperatorController {
 
 	private final Joystick m_joystick;
-	private static PS4 m_Instance = null;
 	private JoystickButton activateIntakeButton, activateClimbButton, deactivateClimbButton, activateRobotUpButton,
 			deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterButton, runIndexer, backIndexer, 
 			sleepyShotButton, setHoodPositionOne, setHoodPositionTwo, setHoodPositionThree;
 
-	public static PS4 getInstance() {
-		if (m_Instance == null) {
-			m_Instance = new PS4();
-		}
-		return m_Instance;
-	}
-
-	private PS4() {
+	public PS4() {
 		m_joystick = new Joystick(Constants.Controller.opertatorControllerID);
 		activateIntakeButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateIntakeButtonID);
 		activateClimbButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateClimberButtonID);
@@ -49,7 +40,6 @@ public class PS4 implements IOperatorController {
 		setHoodPositionOne = new JoystickButton(m_joystick, Constants.Controller.PS4.setHoodPositionOneID);
 		setHoodPositionTwo = new JoystickButton(m_joystick, Constants.Controller.PS4.setHoodPositionTwoID);
 		setHoodPositionThree = new JoystickButton(m_joystick, Constants.Controller.PS4.setHoodPositionThreeID);
-
 	}
 
 	@Override
@@ -74,68 +64,61 @@ public class PS4 implements IOperatorController {
 
 	@Override
 	public JoystickButton getActivateRobotUp() {
-		// TODO Auto-generated method stub
 		return activateRobotUpButton;
 	}
 
 	@Override
 	public JoystickButton getDisableRobotUp() {
-		// TODO Auto-generated method stub
 		return deactivateRobotUpButton;
 	}
 
 	@Override
 	public boolean climbSaftey() {
-		// TODO Auto-generated method stub
 		return climbSaftey1.get() && climbSaftey2.get();
 	}
 
 	@Override
 	public JoystickButton getDeactivateLiftButton() {
-		// TODO Auto-generated method stub
 		return deactivateClimbButton;
 	}
 
 	@Override
 	public JoystickButton getClimbCheck1() {
-		// TODO Auto-generated method stub
 		return climbSaftey1;
 	}
 
 	@Override
 	public JoystickButton getClimbCheck2() {
-		// TODO Auto-generated method stub
 		return climbSaftey2;
 	}
 
 	@Override
 	public JoystickButton getShooterButton() {
-		// TODO Auto-generated method stub
 		return shooterButton;
 	}
 
 	@Override
 	public JoystickButton getFunnelerAndIndexer() {
-		// TODO Auto-generated method stub
 		return funnelerAndIndexer;
 	}
 
 	@Override
 	public JoystickButton runIndexer() {
-		// TODO Auto-generated method stub
 		return runIndexer;
 	}
 
 	@Override
 	public JoystickButton backIndexer() {
-		// TODO Auto-generated method stub
 		return backIndexer;
 	}
 
 	@Override
-	public void setShooterSpeed() {
+	public ShooterSpeeds getShooterSpeed() {
+		// TODO Picking STOP as the default. Not sure what default should be. 
+		// We should remove the if for the default after we know what it is.
+		ShooterSpeeds speed = ShooterSpeeds.stop;
 		if (m_joystick.getPOV() == 0){
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.lowSpeed;
+			return ShooterSpeeds.lowSpeed;
 		}else if (m_joystick.getPOV() == 270){
 			Variables.Shooter.shooterSpeed = ShooterSpeeds.midSpeed;
 		}else if (m_joystick.getPOV() == 180){
@@ -145,12 +128,7 @@ public class PS4 implements IOperatorController {
 		}else if (sleepyShotButton.get()){
 			Variables.Shooter.shooterSpeed = ShooterSpeeds.sleepSpeed;
 		}
-	}
-
-	@Override
-	public double getShooterSpeed() {
-		// TODO Auto-generated method stub
-		return getShooterSpeed();
+		return speed;
 	}
 
 	@Override

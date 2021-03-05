@@ -7,8 +7,6 @@
 
 package com.frc2491.clank.subsystems;
 
-import java.util.ArrayList;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
@@ -114,7 +112,6 @@ public class Shooter extends SubsystemBase {
 		return new TalonFX[] { shooterLeftMotor, shooterRightMotor };
 	}
 
-	// Getting encoder distance and rate
 	// Getting encoder distance and rate
 	public double getRightEncoderDistance() {
 		return shooterRightMotor.getSelectedSensorPosition(0) * Constants.Shooter.shooterEncoderToInches;
