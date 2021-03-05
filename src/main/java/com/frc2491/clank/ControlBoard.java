@@ -139,4 +139,19 @@ public class ControlBoard implements IControlBoard {
 		// TODO Auto-generated method stub
 		mOperatorController.setShooterSpeed();
 	}
+
+	@Override
+	public JoystickButton getShooterHoodPositionOneButton() {
+		return mOperatorController.getShooterHoodPositionOneButton();
+	}
+
+	@Override
+	public JoystickButton getShooterHoodPositionTwoButton() {
+		return mOperatorController.getShooterHoodPositionTwoButton();
+	}
+
+	@Override
+	public JoystickButton getShooterHoodPositionThreeButton() {
+		return mOperatorController.getShooterHoodPositionThreeButton();
+	}
 }

@@ -22,7 +22,8 @@ public class PS4 implements IOperatorController {
 	private final Joystick m_joystick;
 	private static PS4 m_Instance = null;
 	private JoystickButton activateIntakeButton, activateClimbButton, deactivateClimbButton, activateRobotUpButton,
-			deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterButton, runIndexer, backIndexer, sleepyShotButton;
+			deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterButton, runIndexer, backIndexer, 
+			sleepyShotButton, setHoodPositionOne, setHoodPositionTwo, setHoodPositionThree;
 
 	public static PS4 getInstance() {
 		if (m_Instance == null) {
@@ -45,6 +46,9 @@ public class PS4 implements IOperatorController {
 		runIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.runIndexerButtonID);
 		backIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.backIndexerButtonID);
 		sleepyShotButton = new JoystickButton(m_joystick, 10);
+		setHoodPositionOne = new JoystickButton(m_joystick, Constants.Controller.PS4.setHoodPositionOneID);
+		setHoodPositionTwo = new JoystickButton(m_joystick, Constants.Controller.PS4.setHoodPositionTwoID);
+		setHoodPositionThree = new JoystickButton(m_joystick, Constants.Controller.PS4.setHoodPositionThreeID);
 
 	}
 
@@ -147,6 +151,21 @@ public class PS4 implements IOperatorController {
 	public double getShooterSpeed() {
 		// TODO Auto-generated method stub
 		return getShooterSpeed();
+	}
+
+	@Override
+	public JoystickButton getShooterHoodPositionOneButton() {
+		return setHoodPositionOne;
+	}
+
+	@Override
+	public JoystickButton getShooterHoodPositionTwoButton() {
+		return setHoodPositionTwo;
+	}
+
+	@Override
+	public JoystickButton getShooterHoodPositionThreeButton() {
+		return setHoodPositionThree;
 	}
 
 }

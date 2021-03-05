@@ -128,4 +128,22 @@ public class ButtonBoard implements IOperatorController {
 		return getShooterSpeed();
 	}
 
+	@Override
+	public JoystickButton getShooterHoodPositionOneButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JoystickButton getShooterHoodPositionTwoButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public JoystickButton getShooterHoodPositionThreeButton() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

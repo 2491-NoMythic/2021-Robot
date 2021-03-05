@@ -31,6 +31,12 @@ public interface IOperatorController {
 
 	public JoystickButton getShooterButton();
 
+	public JoystickButton getShooterHoodPositionOneButton();
+
+	public JoystickButton getShooterHoodPositionTwoButton();
+
+	public JoystickButton getShooterHoodPositionThreeButton();
+
 	public JoystickButton getFunnelerAndIndexer();
 
 	public JoystickButton runIndexer();

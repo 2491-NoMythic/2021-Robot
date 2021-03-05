@@ -24,6 +24,9 @@ import com.frc2491.clank.commands.climber.ClimbExtendControl;
 import com.frc2491.clank.commands.climber.RobotUp;
 import com.frc2491.clank.commands.shooter.RunConnector;
 import com.frc2491.clank.commands.shooter.RunShooterAtSpeedPID;
+import com.frc2491.clank.commands.shooter.SetHoodPosition;
+import com.frc2491.clank.Settings.Constants;
+import com.frc2491.clank.commands.AutonomousCommand;
 import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Shooter;
@@ -121,6 +124,9 @@ public class RobotContainer {
 		m_ControlBoard.runIndexer().whileHeld(new IntakeRotation(m_Spindexer));
 		m_ControlBoard.getSlowDrive().whileHeld(new LineupDrive(m_drivetrain,m_ControlBoard));
 		m_ControlBoard.backIndexer().whileHeld(new RunIndexer(m_Indexer,false));
+		m_ControlBoard.getShooterHoodPositionOneButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionOne));
+		m_ControlBoard.getShooterHoodPositionTwoButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionTwo));
+		m_ControlBoard.getShooterHoodPositionThreeButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionThree));
 		SmartDashboard.putData("TurnUp", new Rotate(m_drivetrain, 30));
 	}
 
