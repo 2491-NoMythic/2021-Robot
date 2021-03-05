@@ -33,6 +33,11 @@ import com.frc2491.clank.subsystems.Shooter;
 import com.frc2491.clank.subsystems.Indexer;
 import com.frc2491.clank.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
+import com.frc2491.clank.commands.spindexer.ShootingRotation;
+import com.frc2491.clank.commands.spindexer.IntakeRotation;
+import com.frc2491.clank.subsystems.Spindexer;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -52,6 +57,7 @@ public class RobotContainer {
 	private final Indexer m_Indexer = new Indexer();
 	private final Intake m_Intake = new Intake();
 	private final Climber m_Climber = new Climber();
+	private final Spindexer m_Spindexer = new Spindexer();
 
 	/**
 	 * Here is where we get the current instace of the CurrentHIDs that we are using. There can only be one instance of
@@ -104,7 +110,7 @@ public class RobotContainer {
 		operatorController.getActivateIntakeButton().whileHeld(new AutoIntake(m_Intake));
 		operatorController.getActivateRobotUp().and(operatorController.getClimbCheck1()).and(operatorController.getClimbCheck2()).whenActive(robotUp);
 		operatorController.getDisableRobotUp().cancelWhenPressed(robotUp);
-		operatorController.getShooterButton().whileHeld(shooterAtSpeedPID);
+		operatorController.getShooterButton().whileHeld(new SequentialCommandGroup(new ShootingRotation(m_Spindexer),shooterAtSpeedPID));
 		
 		operatorController.runIndexer().whileHeld(new RunIndexer(m_Indexer, true));
 		
