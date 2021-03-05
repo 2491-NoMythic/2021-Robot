@@ -138,6 +138,9 @@ public final class Constants {
 		public static final int MainMotor = 2491;
 		public static final int OuttakeMotor = 2491;
 		public static final int AntiJamMotor = 2491;
+
+		public static final double intakeSpindexerSpeed = .3;
+		public static final double shootingSpindexerSpeed = .8;
 	}
 
 	public final class Shooter {
