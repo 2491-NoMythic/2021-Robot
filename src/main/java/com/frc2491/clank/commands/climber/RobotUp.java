@@ -6,8 +6,8 @@
 /*----------------------------------------------------------------------------*/
 
 package com.frc2491.clank.commands.climber;
-import com.frc2491.clank.ControlBoard;
 import com.frc2491.clank.subsystems.Drivetrain;
+import com.frc2491.clank.HID.CurrentHIDs;
 import com.frc2491.clank.subsystems.Climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -16,9 +16,7 @@ public class RobotUp extends CommandBase {
 
 	private Drivetrain m_Drivetrain;
 	private Climber m_Climber;
-	private ControlBoard m_ControlBoard;
 	private RobotUpState currentState;
-	private ControlBoard mControlBoard;
 	private double rightSpeed, leftSpeed;
 	/**
 	 * Creates a new RobotUp.
@@ -27,13 +25,12 @@ public class RobotUp extends CommandBase {
 		Stopped, Moving, LeftDrive, RightDrive;
 	}
 
-	public RobotUp(Drivetrain drivetrain, Climber climber, ControlBoard controlBoard) {
+	public RobotUp(Drivetrain drivetrain, Climber climber) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		addRequirements(drivetrain);
 		addRequirements(climber);
 		m_Drivetrain = drivetrain;
 		m_Climber = climber;
-		mControlBoard = controlBoard;
 	}
 
 	// Called when the command is initially scheduled.
@@ -46,8 +43,8 @@ public class RobotUp extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		rightSpeed = (mControlBoard.getRawDriveAxis()/2) + (getRightStickScaled()/2);
-		leftSpeed = (mControlBoard.getRawDriveAxis()/2) + (getLeftStickScaled()/2);
+		rightSpeed = (CurrentHIDs.getInstance().getDriveController().getRawDriveAxis()/2) + (getRightStickScaled()/2);
+		leftSpeed = (CurrentHIDs.getInstance().getDriveController().getRawDriveAxis()/2) + (getLeftStickScaled()/2);
 		switch(currentState){
 			case Moving:
 				m_Climber.disengageLeftBreak();
@@ -66,7 +63,7 @@ public class RobotUp extends CommandBase {
 				changeState(rightSpeed, leftSpeed);
 				break;
 			case Stopped:
-				System.out.println("Hello");
+				System.out.println("Stopped");
 				m_Climber.engageLeftBreak();
 				m_Climber.engageRightBreak();
 				changeState(rightSpeed, leftSpeed);
@@ -102,19 +99,19 @@ public class RobotUp extends CommandBase {
 
 	public double getLeftStickScaled()
 	{
-		if(mControlBoard.getHorizontalClimbAxis() > 0){
+		if(CurrentHIDs.getInstance().getDriveController().getHorizontalClimbAxis() > 0){
 			return 0;
 		}else{
-			return mControlBoard.getHorizontalClimbAxis() * -1;
+			return CurrentHIDs.getInstance().getDriveController().getHorizontalClimbAxis() * -1;
 		}
 	}
 
 	public double getRightStickScaled()
 	{
-		if(mControlBoard.getHorizontalClimbAxis() < 0){
+		if(CurrentHIDs.getInstance().getDriveController().getHorizontalClimbAxis() < 0){
 			return 0;
 		}else{
-			return mControlBoard.getHorizontalClimbAxis();
+			return CurrentHIDs.getInstance().getDriveController().getHorizontalClimbAxis();
 		}
 	}
 }

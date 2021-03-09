@@ -8,7 +8,9 @@
 package com.frc2491.clank.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import com.frc2491.clank.ControlBoard;
+
+import com.frc2491.clank.HID.CurrentHIDs;
+import com.frc2491.clank.HID.IOperatorController;
 import com.frc2491.clank.subsystems.Indexer;
 
 public class funnelOnlyDefaultCommand extends CommandBase {
@@ -16,12 +18,10 @@ public class funnelOnlyDefaultCommand extends CommandBase {
 	 * Creates a new funnelOnlyDefaultCommand.
 	 */
 	Indexer m_Indexer;
-	ControlBoard mControlBoard;
 
-	public funnelOnlyDefaultCommand(Indexer indexer, ControlBoard controlBoard) {
+	public funnelOnlyDefaultCommand(Indexer indexer) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		m_Indexer = indexer;
-		mControlBoard = controlBoard;
 		addRequirements(indexer);
 	}
 
@@ -33,10 +33,11 @@ public class funnelOnlyDefaultCommand extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		if(mControlBoard.getLeftClimbAxis() < -0.5){
+		IOperatorController operatorController = CurrentHIDs.getInstance().getOperatorController();
+		if(operatorController.getLeftClimbAxis() < -0.5){
 			m_Indexer.runFunnelMotorLeft(-.5);
 			m_Indexer.runFunnelMotorRight(-.5);
-		} else if(mControlBoard.getLeftClimbAxis() > 0.5) {
+		} else if(operatorController.getLeftClimbAxis() > 0.5) {
 			m_Indexer.runFunnelMotorLeft(.75);
 			m_Indexer.runFunnelMotorRight(1);
 		} else {

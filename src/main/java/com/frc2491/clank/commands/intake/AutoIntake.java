@@ -7,28 +7,22 @@
 
 package com.frc2491.clank.commands.intake;
 
-import com.frc2491.clank.subsystems.Indexer;
 import com.frc2491.clank.subsystems.Intake;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.ScheduleCommand;
-import com.frc2491.clank.ControlBoard;
-import com.frc2491.clank.Settings.Constants;
-import com.frc2491.clank.commands.RunIndexer;
+
+import com.frc2491.clank.HID.CurrentHIDs;
 
 public class AutoIntake extends CommandBase {
 	/**
 	 * Creates a new AutoIntake.
 	 */
-	Intake m_Intake;
-	ControlBoard m_ControlBoard;
-	Indexer m_Indexer;
+	private Intake m_Intake;
 
-	public AutoIntake(Intake intake, ControlBoard controlBoard, Indexer indexer) {
+	public AutoIntake(Intake intake) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		m_Intake = intake;
-		m_ControlBoard = controlBoard;
 		addRequirements(intake);
 	}
 
@@ -45,11 +39,7 @@ public class AutoIntake extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		double intakeSpeed;
-
-		intakeSpeed = m_ControlBoard.getIntakeAxis();
-
-		m_Intake.StartIntakeMotor(intakeSpeed);
+		m_Intake.StartIntakeMotor(CurrentHIDs.getInstance().getOperatorController().getIntakeAxis());
 	}
 
 	// Called once the command ends or is interrupted.

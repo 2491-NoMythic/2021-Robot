@@ -9,8 +9,8 @@ package com.frc2491.clank.commands.climber;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import com.frc2491.clank.ControlBoard;
-import com.frc2491.clank.Settings.Constants;
+
+import com.frc2491.clank.HID.CurrentHIDs;
 import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Indexer;
 
@@ -19,7 +19,6 @@ public class ClimbExtendControl extends CommandBase {
 	 * Creates a new ClimbExtendControl.
 	 */
 	Climber m_Climber;
-	ControlBoard mBoard;
 	private UpClimberState currentState;
 	double count = 0;
 
@@ -27,17 +26,16 @@ public class ClimbExtendControl extends CommandBase {
 		Moving, Stopped;
 	}
 
-	public ClimbExtendControl(Climber climber, Indexer index, ControlBoard board) {
+	public ClimbExtendControl(Climber climber, Indexer index) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		m_Climber = climber;
-		mBoard = board;
 		addRequirements(climber, index);
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		SmartDashboard.putBoolean("Nicew", mBoard.climbSaftey());
+		SmartDashboard.putBoolean("Nicew", CurrentHIDs.getInstance().getOperatorController().climbSaftey());
 		currentState = UpClimberState.Stopped;
 		m_Climber.disengageRightBreak();
 		m_Climber.disengageLeftBreak();
@@ -52,9 +50,9 @@ public class ClimbExtendControl extends CommandBase {
 			case Moving:
 				m_Climber.setBrakeOff();
 				if(count > 5){
-					m_Climber.runLift(mBoard.getLeftClimbAxis()/2);
+					m_Climber.runLift(CurrentHIDs.getInstance().getOperatorController().getLeftClimbAxis()/2);
 				}
-				if(Math.abs(mBoard.getLeftClimbAxis()) <= 0.05){
+				if(Math.abs(CurrentHIDs.getInstance().getOperatorController().getLeftClimbAxis()) <= 0.05){
 					currentState = UpClimberState.Stopped;
 				}
 				count++;
@@ -63,7 +61,7 @@ public class ClimbExtendControl extends CommandBase {
 				count = 0;
 				m_Climber.runLift(0);
 				m_Climber.setBrakeOn();
-				if(Math.abs(mBoard.getLeftClimbAxis()) > 0.05){
+				if(Math.abs(CurrentHIDs.getInstance().getOperatorController().getLeftClimbAxis()) > 0.05){
 					currentState = UpClimberState.Moving;
 				}
 				break;

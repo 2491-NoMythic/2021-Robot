@@ -9,9 +9,7 @@ package com.frc2491.clank.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import com.frc2491.clank.Settings.Constants;
-import com.frc2491.clank.Settings.Variables;
 import com.frc2491.clank.subsystems.Indexer;
-import com.frc2491.clank.subsystems.Intake;
 
 public class DefaultIntakeRoutine extends CommandBase {
 

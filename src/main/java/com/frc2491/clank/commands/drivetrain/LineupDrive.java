@@ -8,7 +8,7 @@
 package com.frc2491.clank.commands.drivetrain;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import com.frc2491.clank.ControlBoard;
+import com.frc2491.clank.HID.CurrentHIDs;
 import com.frc2491.clank.subsystems.Drivetrain;
 
 public class LineupDrive extends CommandBase {
@@ -16,15 +16,13 @@ public class LineupDrive extends CommandBase {
 	 * Creates a new LineupDrive.
 	 */
 	Drivetrain mDrive;
-	private ControlBoard m_ControlBoard;
 	double turnSpeed;
 	double currentLeftSpeed = 0;
 	double currentRightSpeed = 0;
 
-	public LineupDrive(Drivetrain drivetrain, ControlBoard board) {
+	public LineupDrive(Drivetrain drivetrain) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		mDrive = drivetrain;
-		m_ControlBoard = board;
 		addRequirements(drivetrain);
 	}
 
@@ -37,7 +35,7 @@ public class LineupDrive extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		turnSpeed = m_ControlBoard.getRawTurnAxis()/7;
+		turnSpeed = CurrentHIDs.getInstance().getDriveController().getRawTurnAxis()/7;
 		mDrive.drivePercentOutput(-turnSpeed, turnSpeed);
 	}
 

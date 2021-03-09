@@ -5,11 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frc2491.clank.manipulators;
+package com.frc2491.clank.HID;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import com.frc2491.clank.Controllers.IDriveController;
+
 import com.frc2491.clank.Settings.Constants;
 
 /**
@@ -18,17 +18,9 @@ import com.frc2491.clank.Settings.Constants;
 public class TM implements IDriveController {
 
 	private Joystick m_Joystick;
-	private static TM m_Instance = null;
 	private JoystickButton connectorAndIndexer, slowDrive;
 
-	public static TM getInstance() {
-		if (m_Instance == null) {
-			m_Instance = new TM();
-		}
-		return m_Instance;
-	}
-
-	private TM() {
+	public TM() {
 		m_Joystick = new Joystick(Constants.Controller.driveControllerID);
 		connectorAndIndexer = new JoystickButton(m_Joystick, 7);
 		slowDrive = new JoystickButton(m_Joystick, 8);
