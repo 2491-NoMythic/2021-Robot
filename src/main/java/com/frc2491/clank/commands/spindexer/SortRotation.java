@@ -31,6 +31,8 @@ public class SortRotation extends CommandBase {
 
 		timer.reset();
 		timer.start();
+
+		spindexer.RunAntiJam(Constants.Spindexer.intakeOuttakeSpeed);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
@@ -41,7 +43,6 @@ public class SortRotation extends CommandBase {
 		double time = timer.get();
 
 		spindexer.Rotate(Math.sin(time * Math.PI / Variables.Spindexer.sortModeReverseTime) * Variables.Spindexer.sortModeMaxPower );
-		
 	}
 
 	// Called once the command ends or is interrupted.

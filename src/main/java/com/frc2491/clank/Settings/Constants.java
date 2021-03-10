@@ -141,6 +141,8 @@ public final class Constants {
 
 		public static final double intakeSpindexerSpeed = .3;
 		public static final double shootingSpindexerSpeed = .8;
+
+		public static final double intakeOuttakeSpeed = -.8;
 	}
 
 	public final class Shooter {
