@@ -9,14 +9,15 @@ package com.frc2491.clank.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import com.frc2491.clank.Controllers.IDriveController;
+
+import com.frc2491.clank.HID.CurrentHIDs;
+import com.frc2491.clank.HID.IDriveController;
 import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.subsystems.Drivetrain;
 
 public class Drive extends CommandBase {
 
 	private Drivetrain drivetrain;
-	private IDriveController m_ControlBoard;
 	double turnSpeed, lastLeftSpeed, lastRightSpeed;
 	double currentLeftSpeed = 0;
 	double currentRightSpeed = 0;
@@ -24,10 +25,9 @@ public class Drive extends CommandBase {
 	/**
 	 * Creates a new Drive.
 	 */
-	public Drive(IDriveController controlBoard, Drivetrain drivetrain) {
+	public Drive(Drivetrain drivetrain) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		this.drivetrain = drivetrain;
-		m_ControlBoard = controlBoard;
 		addRequirements(drivetrain);
 	}
 
@@ -52,14 +52,15 @@ public class Drive extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-
-		turnSpeed = 0.5 * m_ControlBoard.getRawTurnAxis();
-
+		IDriveController driveController = CurrentHIDs.getInstance().getDriveController();
+		
+		turnSpeed = 0.5 * driveController.getRawTurnAxis();
 		lastLeftSpeed = currentLeftSpeed;
 		lastRightSpeed = currentRightSpeed;
 
-		currentLeftSpeed = m_ControlBoard.getDriveAxisDeadzone() - turnSpeed;
-		currentRightSpeed = m_ControlBoard.getDriveAxisDeadzone() + turnSpeed;
+		currentLeftSpeed = driveController.getDriveAxisDeadzone() - turnSpeed;
+		currentRightSpeed = driveController.getDriveAxisDeadzone() + turnSpeed;
+
 		if(SmartDashboard.getBoolean("Record?", false)){
 			System.out.print("{ " + currentLeftSpeed + ", " + currentRightSpeed + " },");
 		}

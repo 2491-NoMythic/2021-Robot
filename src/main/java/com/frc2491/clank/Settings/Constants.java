@@ -138,6 +138,9 @@ public final class Constants {
 		public static final int MainMotor = 2491;
 		public static final int OuttakeMotor = 2491;
 		public static final int AntiJamMotor = 2491;
+
+		public static final double intakeSpindexerSpeed = .3;
+		public static final double shootingSpindexerSpeed = .8;
 	}
 
 	public final class Shooter {
@@ -181,7 +184,7 @@ public final class Constants {
 	}
 
 	public enum ShooterSpeeds {
-		lowSpeed(16000), highSpeed(21000); //TODO repalce for real values
+		stop(0), sleepSpeed(800), lowSpeed(16000), midSpeed(18000), highSpeed(21000); //TODO repalce for real values
 		
 		private double speed;
 

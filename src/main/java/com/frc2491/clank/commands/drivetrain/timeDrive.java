@@ -7,8 +7,6 @@
 
 package com.frc2491.clank.commands.drivetrain;
 
-import com.ctre.phoenix.time.StopWatch;
-
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import com.frc2491.clank.subsystems.Drivetrain;

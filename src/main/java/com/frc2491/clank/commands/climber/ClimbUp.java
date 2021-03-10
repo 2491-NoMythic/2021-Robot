@@ -8,7 +8,6 @@
 package com.frc2491.clank.commands.climber;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import com.frc2491.clank.ControlBoard;
 import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Indexer;
 
@@ -17,12 +16,10 @@ public class ClimbUp extends CommandBase {
 	 * Creates a new ClimbUp.
 	 */
 	Climber m_Climber;
-	ControlBoard m_ControlBoard;
 
-	public ClimbUp(Climber climber, Indexer indexer, ControlBoard controlBoard) {
+	public ClimbUp(Climber climber, Indexer indexer) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		m_Climber = climber;
-		m_ControlBoard = controlBoard;
 		addRequirements(m_Climber);
 		addRequirements(indexer);
 	}

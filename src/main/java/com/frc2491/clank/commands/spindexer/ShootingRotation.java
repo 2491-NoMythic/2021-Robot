@@ -5,49 +5,40 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frc2491.clank.commands.intake;
+package com.frc2491.clank.commands.spindexer;
 
-import com.frc2491.clank.subsystems.Intake;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import com.frc2491.clank.Settings.Constants;
+import com.frc2491.clank.subsystems.Spindexer;
 
-import com.frc2491.clank.HID.CurrentHIDs;
+public class ShootingRotation extends CommandBase {
 
-public class AutoIntake extends CommandBase {
+	private Spindexer spindexer;
+
 	/**
-	 * Creates a new AutoIntake.
+	 * Creates a new Rotate command.
 	 */
-	private Intake m_Intake;
-
-	public AutoIntake(Intake intake) {
+	public ShootingRotation(Spindexer spindexer) {
 		// Use addRequirements() here to declare subsystem dependencies.
-		m_Intake = intake;
-		addRequirements(intake);
+		this.spindexer = spindexer;
+		addRequirements(spindexer);
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		if (m_Intake.checkIntakeSolenoid() == Value.kReverse) {
-			m_Intake.toggleIntakeSolenoid();
-		}
-		SmartDashboard.putBoolean("Working", true);
-		//new RunIndexer(m_Indexer).schedule();
+		spindexer.Rotate(Constants.Spindexer.shootingSpindexerSpeed);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		m_Intake.StartIntakeMotor(CurrentHIDs.getInstance().getOperatorController().getIntakeAxis());
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		m_Intake.pullIntakeIn();
-		m_Intake.StopIntakeMotor();
-		SmartDashboard.putBoolean("Working", false);
+		spindexer.Rotate(0);
 	}
 
 	// Returns true when the command should end.

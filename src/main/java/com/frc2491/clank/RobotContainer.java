@@ -7,15 +7,12 @@
 
 package com.frc2491.clank;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.frc2491.clank.commands.drivetrain.Drive;
 import com.frc2491.clank.commands.drivetrain.LineupDrive;
 import com.frc2491.clank.commands.drivetrain.Rotate;
 import com.frc2491.clank.commands.intake.AutoIntake;
 import com.frc2491.clank.commands.ConnectorAndIndex;
-import com.frc2491.clank.commands.DefaultIntakeRoutine;
 import com.frc2491.clank.commands.FunnlerTest;
 import com.frc2491.clank.commands.RunIndexer;
 import com.frc2491.clank.commands.ShiftLol;
@@ -25,22 +22,24 @@ import com.frc2491.clank.commands.climber.ClimbExtendControl;
 import com.frc2491.clank.commands.climber.RobotUp;
 import com.frc2491.clank.commands.shooter.FlywheelRev;
 import com.frc2491.clank.commands.shooter.RunConnector;
-import com.frc2491.clank.commands.shooter.RunFullSpeed;
 import com.frc2491.clank.commands.shooter.RunShooterAtSpeedPID;
 import com.frc2491.clank.commands.shooter.SetHoodPosition;
+import com.frc2491.clank.HID.CurrentHIDs;
+import com.frc2491.clank.HID.IDriveController;
+import com.frc2491.clank.HID.IOperatorController;
 import com.frc2491.clank.Settings.Constants;
-import com.frc2491.clank.Settings.Variables;
-import com.frc2491.clank.commands.AutonomousCommand;
+
 import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Shooter;
 
-
-import org.ejml.equation.Variable;
-
 import com.frc2491.clank.subsystems.Indexer;
 import com.frc2491.clank.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+
+import com.frc2491.clank.commands.spindexer.ShootingRotation;
+import com.frc2491.clank.subsystems.Spindexer;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -60,23 +59,24 @@ public class RobotContainer {
 	private final Indexer m_Indexer = new Indexer();
 	private final Intake m_Intake = new Intake();
 	private final Climber m_Climber = new Climber();
+	private final Spindexer m_Spindexer = new Spindexer();
 
 	/**
-	 * Here is where we get the current instace of the controlboard that we are using. There can only be one instance of
-	 * the controlboard ever, so the control board in this class is a refrence to the singleton controlboard.
+	 * Here is where we get the current instace of the CurrentHIDs that we are using. There can only be one instance of
+	 * the CurrentHIDs ever, so the control board in this class is a refrence to the singleton controlboard.
+	 * This contains the current driver and operator controls.
 	 */
-	private final ControlBoard m_ControlBoard = ControlBoard.getInstance();
+	private final CurrentHIDs currentHIDs = CurrentHIDs.getInstance();
 
 	/**
 	 * Here is where we declare instances of the commands that we want to run. Notice that these will only run the
-	 * instanciation of the class once.
+	 * instantiation of the class once. We only need these here if used more than once in class.
 	 */
-	private final RunConnector runConnector = new RunConnector(m_Indexer);
-	private final ClimbExtendControl climbExtendControl = new ClimbExtendControl(m_Climber, m_Indexer, m_ControlBoard);
-	private final RobotUp robotUp = new RobotUp(m_drivetrain, m_Climber, m_ControlBoard);
-	private final FunnlerTest funnelTest = new FunnlerTest(m_Indexer);
+	private final RunShooterAtSpeedPID shooterAtSpeedPID = new RunShooterAtSpeedPID(m_Shooter);
+	private final ClimbExtendControl climbExtendControl = new ClimbExtendControl(m_Climber, m_Indexer);
+	private final RobotUp robotUp = new RobotUp(m_drivetrain, m_Climber);
 	private final ConnectorAndIndex connectorAndIndex = new ConnectorAndIndex(m_Indexer);
-	private final AutonomousCommand autonomousCommand = new AutonomousCommand(m_drivetrain, m_Shooter, m_Indexer, Constants.Drivetrain.timeDriveSpeed, Constants.Drivetrain.timeDriveTime);
+	// private final AutonomousCommand autonomousCommand = new AutonomousCommand(m_drivetrain, m_Shooter, m_Indexer, Constants.Drivetrain.timeDriveSpeed, Constants.Drivetrain.timeDriveTime);
 
 	/**
 	 * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -86,47 +86,45 @@ public class RobotContainer {
 		configureButtonBindings();
 
 		//Set the default command to grab controller axis
-		m_drivetrain.setDefaultCommand(
-			new Drive(
-				m_ControlBoard,
-				m_drivetrain)
-		);
-		m_Indexer.setDefaultCommand(
-			new funnelOnlyDefaultCommand(
-				m_Indexer,
-				m_ControlBoard)
-		);
+		m_drivetrain.setDefaultCommand(new Drive(m_drivetrain));
+		m_Indexer.setDefaultCommand(new funnelOnlyDefaultCommand(m_Indexer));
 	}
 
 	/**
-	 * Use this method to define your button->command mappings.  Buttons can be created by
-	 * instantiating a {@link GenericHID} or one of its subclasses ({@link
-	 * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a
-	 * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
+	 * We are configuring some of the button presses here. Some are also defined within subsystems.
 	 */
 	private void configureButtonBindings() {
-		//Data that is put on the smart dashboard will appear as a UI element.
-		//SmartDashboard.putData(new RunShooterAtSpeedPID(m_Shooter, m_ControlBoard)); TODO add pid value tracking for FlywheelRev
+		IOperatorController operatorController = currentHIDs.getOperatorController();
+		IDriveController driveController = currentHIDs.getDriveController();
+
+		SmartDashboard.putData(shooterAtSpeedPID);
 		SmartDashboard.putData(new RunConnector(m_Indexer));
 		SmartDashboard.putData(new FunnlerTest(m_Indexer));
 		SmartDashboard.putData(new ShiftLol(m_Climber, m_drivetrain));
-		SmartDashboard.putNumber("Axis", m_ControlBoard.getLeftClimbAxis());
+		SmartDashboard.putNumber("Axis", operatorController.getLeftClimbAxis());
+		SmartDashboard.putData("TurnUp", new Rotate(m_drivetrain, 30));
+
 		//Button assignments
 		//.and is used to create the safteys. Note that in current form safteys are not neccesary for turining off the system.
-		m_ControlBoard.getActivateLiftButton().and(m_ControlBoard.getClimbCheck1()).and(m_ControlBoard.getClimbCheck2()).whenActive(climbExtendControl);
-		m_ControlBoard.getDeactivateLiftButton().cancelWhenPressed(climbExtendControl);
-		m_ControlBoard.getActivateIntakeButton().whileHeld(new AutoIntake(m_Intake, m_ControlBoard, m_Indexer));
-		m_ControlBoard.getActivateRobotUp().and(m_ControlBoard.getClimbCheck1()).and(m_ControlBoard.getClimbCheck2()).whenActive(robotUp);
-		m_ControlBoard.getDisableRobotUp().cancelWhenPressed(robotUp);
-		m_ControlBoard.getConnectorAndIndexer().whileHeld(connectorAndIndex);
-		m_ControlBoard.runIndexer().whileHeld(new RunIndexer(m_Indexer, true));
-		m_ControlBoard.getSlowDrive().whileHeld(new LineupDrive(m_drivetrain,m_ControlBoard));
-		m_ControlBoard.backIndexer().whileHeld(new RunIndexer(m_Indexer,false));
-		m_ControlBoard.getShooterHoodPositionOneButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionOne));
-		m_ControlBoard.getShooterHoodPositionTwoButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionTwo));
-		m_ControlBoard.getShooterHoodPositionThreeButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionThree));
+
 		SmartDashboard.putData("TurnUp", new Rotate(m_drivetrain, 30));
-		m_ControlBoard.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
+		// operatorController.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
+		operatorController.getActivateLiftButton().and(operatorController.getClimbCheck1()).and(operatorController.getClimbCheck2()).whenActive(climbExtendControl);
+		operatorController.getDeactivateLiftButton().cancelWhenPressed(climbExtendControl);
+		operatorController.getActivateIntakeButton().whileHeld(new AutoIntake(m_Intake));
+		operatorController.getActivateRobotUp().and(operatorController.getClimbCheck1()).and(operatorController.getClimbCheck2()).whenActive(robotUp);
+		operatorController.getDisableRobotUp().cancelWhenPressed(robotUp);
+		operatorController.getShooterButton().whileHeld(new SequentialCommandGroup(new ShootingRotation(m_Spindexer),shooterAtSpeedPID));
+		
+		operatorController.runIndexer().whileHeld(new RunIndexer(m_Indexer, true));
+		
+		operatorController.backIndexer().whileHeld(new RunIndexer(m_Indexer,false));
+		operatorController.getShooterHoodPositionOneButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionOne));
+		operatorController.getShooterHoodPositionTwoButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionTwo));
+		operatorController.getShooterHoodPositionThreeButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionThree));
+
+		driveController.getConnectorAndIndexer().whileHeld(connectorAndIndex);
+		driveController.getSlowDrive().whileHeld(new LineupDrive(m_drivetrain));
 	}
 
 	/**

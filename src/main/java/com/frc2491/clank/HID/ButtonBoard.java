@@ -5,14 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frc2491.clank.manipulators;
+package com.frc2491.clank.HID;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import com.frc2491.clank.Controllers.IOperatorController;
+
 import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
-import com.frc2491.clank.Settings.Variables;
 
 /**
  * Add your docs here.
@@ -117,22 +116,10 @@ public class ButtonBoard implements IOperatorController {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public void setShooterSpeedLow() {
-		Variables.Shooter.shooterSpeed = ShooterSpeeds.lowSpeed;
-	}
-
-	@Override
-	public void setShooterSpeedHigh(){
-		Variables.Shooter.shooterSpeed = ShooterSpeeds.highSpeed;
-
-	}
-
-	@Override
-	public double getShooterSpeed() {
+	
+	public ShooterSpeeds getShooterSpeed() {
 		// TODO Auto-generated method stub
-		return getShooterSpeed();
+		return null;
 	}
 
 	@Override
@@ -151,11 +138,6 @@ public class ButtonBoard implements IOperatorController {
 	public JoystickButton getShooterHoodPositionThreeButton() {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public JoystickButton getShooterRevFlywheelButton(){
-		return getShooterRevFlywheelButton;
 	}
 
 }

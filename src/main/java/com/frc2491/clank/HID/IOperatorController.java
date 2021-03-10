@@ -5,10 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package com.frc2491.clank.Controllers;
+package com.frc2491.clank.HID;
+
+import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 
 /**
  * Add your docs here.
@@ -43,18 +44,11 @@ public interface IOperatorController {
 
 	public JoystickButton backIndexer();
 
-	public JoystickButton getShooterRevFlywheelButton();
-
 	public double getIntakeAxis();
 
 	public double getLeftClimbAxis();
 
 	public boolean climbSaftey();
 
-	public void setShooterSpeedLow();
-
-	public void setShooterSpeedHigh();
-
-	public double getShooterSpeed();
-
+	public ShooterSpeeds getShooterSpeed();
 }
