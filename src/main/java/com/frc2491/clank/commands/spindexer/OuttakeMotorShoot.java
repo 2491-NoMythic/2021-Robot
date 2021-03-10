@@ -22,7 +22,7 @@ public class OuttakeMotorShoot extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		spindexer.Rotate(Constants.Spindexer.shootingOutTakeSpeed);
+		spindexer.RunOuttakeMotor(Constants.Spindexer.shootingOutTakeSpeed);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
@@ -33,7 +33,7 @@ public class OuttakeMotorShoot extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		spindexer.Rotate(0);
+		spindexer.RunOuttakeMotor(0);
 	}
 
 	// Returns true when the command should end.

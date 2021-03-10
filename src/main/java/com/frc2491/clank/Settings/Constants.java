@@ -143,7 +143,7 @@ public final class Constants {
 		public static final double shootingSpindexerSpeed = .8;
 
 		public static final double shootingOutTakeSpeed = 1;
-		public static final double AntiJamOutTakeSpeed = .8;
+		public static final double AntiJamOutTakeSpeed = -.8;
 	}
 
 	public final class Shooter {
