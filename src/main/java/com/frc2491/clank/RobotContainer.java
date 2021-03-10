@@ -56,7 +56,6 @@ public class RobotContainer {
 	 */
 	private final Drivetrain m_drivetrain = new Drivetrain();
 	private final Shooter m_Shooter = new Shooter();
-	private final Indexer m_Indexer = new Indexer();
 	private final Intake m_Intake = new Intake();
 	private final Climber m_Climber = new Climber();
 	private final Spindexer m_Spindexer = new Spindexer();
@@ -73,9 +72,7 @@ public class RobotContainer {
 	 * instantiation of the class once. We only need these here if used more than once in class.
 	 */
 	private final RunShooterAtSpeedPID shooterAtSpeedPID = new RunShooterAtSpeedPID(m_Shooter);
-	private final ClimbExtendControl climbExtendControl = new ClimbExtendControl(m_Climber, m_Indexer);
 	private final RobotUp robotUp = new RobotUp(m_drivetrain, m_Climber);
-	private final ConnectorAndIndex connectorAndIndex = new ConnectorAndIndex(m_Indexer);
 	// private final AutonomousCommand autonomousCommand = new AutonomousCommand(m_drivetrain, m_Shooter, m_Indexer, Constants.Drivetrain.timeDriveSpeed, Constants.Drivetrain.timeDriveTime);
 
 	/**
@@ -87,7 +84,7 @@ public class RobotContainer {
 
 		//Set the default command to grab controller axis
 		m_drivetrain.setDefaultCommand(new Drive(m_drivetrain));
-		m_Indexer.setDefaultCommand(new funnelOnlyDefaultCommand(m_Indexer));
+		m_Intake.setDefaultCommand(new AutoIntake(m_Intake));
 	}
 
 	/**
@@ -98,8 +95,6 @@ public class RobotContainer {
 		IDriveController driveController = currentHIDs.getDriveController();
 
 		SmartDashboard.putData(shooterAtSpeedPID);
-		SmartDashboard.putData(new RunConnector(m_Indexer));
-		SmartDashboard.putData(new FunnlerTest(m_Indexer));
 		SmartDashboard.putData(new ShiftLol(m_Climber, m_drivetrain));
 		SmartDashboard.putNumber("Axis", operatorController.getLeftClimbAxis());
 		SmartDashboard.putData("TurnUp", new Rotate(m_drivetrain, 30));
@@ -109,21 +104,17 @@ public class RobotContainer {
 
 		SmartDashboard.putData("TurnUp", new Rotate(m_drivetrain, 30));
 		// operatorController.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
-		operatorController.getActivateLiftButton().and(operatorController.getClimbCheck1()).and(operatorController.getClimbCheck2()).whenActive(climbExtendControl);
-		operatorController.getDeactivateLiftButton().cancelWhenPressed(climbExtendControl);
+
 		operatorController.getActivateIntakeButton().whileHeld(new AutoIntake(m_Intake));
 		operatorController.getActivateRobotUp().and(operatorController.getClimbCheck1()).and(operatorController.getClimbCheck2()).whenActive(robotUp);
 		operatorController.getDisableRobotUp().cancelWhenPressed(robotUp);
 		operatorController.getShooterButton().whileHeld(new SequentialCommandGroup(new ShootingRotation(m_Spindexer),shooterAtSpeedPID));
 		
-		operatorController.runIndexer().whileHeld(new RunIndexer(m_Indexer, true));
 		
-		operatorController.backIndexer().whileHeld(new RunIndexer(m_Indexer,false));
 		operatorController.getShooterHoodPositionOneButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionOne));
 		operatorController.getShooterHoodPositionTwoButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionTwo));
 		operatorController.getShooterHoodPositionThreeButton().whenPressed(new SetHoodPosition(m_Shooter, Constants.Shooter.hoodPositionThree));
 
-		driveController.getConnectorAndIndexer().whileHeld(connectorAndIndex);
 		driveController.getSlowDrive().whileHeld(new LineupDrive(m_drivetrain));
 	}
 
@@ -132,8 +123,5 @@ public class RobotContainer {
 	 *
 	 * @return the command to run in autonomous
 	 */
-	public Command getAutonomousCommand() {
-		// An ExampleCommand will run in autonomous
-		return new Simple3Ball(m_drivetrain, m_Shooter, m_Indexer);
-	}
+	
 }

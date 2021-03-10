@@ -7,50 +7,36 @@
 
 package com.frc2491.clank.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.frc2491.clank.Settings.Constants;
+import com.frc2491.clank.commands.intake.AutoIntake;
 
 public class Intake extends SubsystemBase {
-	TalonSRX CoreIntakeMotor;
-	DoubleSolenoid IntakeSolenoid;
+	CANSparkMax coreIntakeMotor;
 	/**
 	 * Creates a new Intake.
 	 */
 	public Intake() {
-		CoreIntakeMotor = new TalonSRX(Constants.Intake.intakeMotorPort);
-		IntakeSolenoid = new DoubleSolenoid(Constants.Intake.intakeSolenoidPortForward,Constants.Intake.intakeSolenoidPortBackward);
-		pullIntakeIn();
+		coreIntakeMotor = new CANSparkMax(Constants.Intake.intakeMotorPort, MotorType.kBrushless);
+		
 	}
 
-	public void StartIntakeMotor(double motorPercent) {
-		CoreIntakeMotor.set(ControlMode.PercentOutput, motorPercent);
+	public void initDefaultCommand() {
+        // Set the default command for a subsystem here.
+        setDefaultCommand(new AutoIntake(this));
+    }
+
+	public void startIntakeMotor(double motorPercent) {
+		coreIntakeMotor.set(motorPercent);
 	}
 
-	public void StopIntakeMotor() {
-		CoreIntakeMotor.set(ControlMode.PercentOutput,0);
+	public void stopIntakeMotor() {
+		coreIntakeMotor.set(0);
 	}
 
-	public void toggleIntakeSolenoid() {
-		Value a = IntakeSolenoid.get();
-		if(a == Value.kReverse){
-			IntakeSolenoid.set(Value.kForward);
-		} else {
-			IntakeSolenoid.set(Value.kReverse);
-		}
-	}
-
-	public void pullIntakeIn(){
-		IntakeSolenoid.set(Value.kReverse);
-	}
-
-	public Value checkIntakeSolenoid() {
-		return IntakeSolenoid.get();
-	}
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
