@@ -49,6 +49,7 @@ public class SortRotation extends CommandBase {
 	@Override
 	public void end(boolean interrupted) {
 		spindexer.Rotate(0);
+		spindexer.RunAntiJam(0);
 	}
 
 	// Returns true when the command should end.
