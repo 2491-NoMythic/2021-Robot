@@ -20,6 +20,7 @@ import com.frc2491.clank.commands.Simple3Ball;
 import com.frc2491.clank.commands.funnelOnlyDefaultCommand;
 import com.frc2491.clank.commands.climber.ClimbExtendControl;
 import com.frc2491.clank.commands.climber.RobotUp;
+import com.frc2491.clank.commands.shooter.FlywheelRev;
 import com.frc2491.clank.commands.shooter.RunConnector;
 import com.frc2491.clank.commands.shooter.RunShooterAtSpeedPID;
 import com.frc2491.clank.commands.shooter.SetHoodPosition;
@@ -27,16 +28,17 @@ import com.frc2491.clank.HID.CurrentHIDs;
 import com.frc2491.clank.HID.IDriveController;
 import com.frc2491.clank.HID.IOperatorController;
 import com.frc2491.clank.Settings.Constants;
+
 import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Shooter;
+
 import com.frc2491.clank.subsystems.Indexer;
 import com.frc2491.clank.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import com.frc2491.clank.commands.spindexer.ShootingRotation;
-import com.frc2491.clank.commands.spindexer.IntakeRotation;
 import com.frc2491.clank.subsystems.Spindexer;
 
 /**
@@ -95,7 +97,6 @@ public class RobotContainer {
 		IOperatorController operatorController = currentHIDs.getOperatorController();
 		IDriveController driveController = currentHIDs.getDriveController();
 
-		//Data that is put on the smart dashboard will appear as a UI element.
 		SmartDashboard.putData(shooterAtSpeedPID);
 		SmartDashboard.putData(new RunConnector(m_Indexer));
 		SmartDashboard.putData(new FunnlerTest(m_Indexer));
@@ -105,6 +106,9 @@ public class RobotContainer {
 
 		//Button assignments
 		//.and is used to create the safteys. Note that in current form safteys are not neccesary for turining off the system.
+
+		SmartDashboard.putData("TurnUp", new Rotate(m_drivetrain, 30));
+		// operatorController.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
 		operatorController.getActivateLiftButton().and(operatorController.getClimbCheck1()).and(operatorController.getClimbCheck2()).whenActive(climbExtendControl);
 		operatorController.getDeactivateLiftButton().cancelWhenPressed(climbExtendControl);
 		operatorController.getActivateIntakeButton().whileHeld(new AutoIntake(m_Intake));

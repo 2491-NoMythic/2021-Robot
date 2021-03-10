@@ -112,21 +112,20 @@ public class PS4 implements IOperatorController {
 		return backIndexer;
 	}
 
-	@Override
 	public ShooterSpeeds getShooterSpeed() {
 		// TODO Picking STOP as the default. Not sure what default should be. 
 		// We should remove the if for the default after we know what it is.
 		ShooterSpeeds speed = ShooterSpeeds.stop;
-		if (m_joystick.getPOV() == 0){
-			return ShooterSpeeds.lowSpeed;
-		}else if (m_joystick.getPOV() == 270){
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.midSpeed;
-		}else if (m_joystick.getPOV() == 180){
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.highSpeed;
-		}else if (m_joystick.getPOV() == 90){
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.stop;   
-		}else if (sleepyShotButton.get()){
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.sleepSpeed;
+		if (m_joystick.getPOV() == 0) {
+			speed = ShooterSpeeds.lowSpeed;
+		}else if (m_joystick.getPOV() == 270) {
+			speed = ShooterSpeeds.midSpeed;
+		}else if (m_joystick.getPOV() == 180) {
+			speed = ShooterSpeeds.highSpeed;
+		}else if (m_joystick.getPOV() == 90) {
+			speed = ShooterSpeeds.stop;   
+		}else if (sleepyShotButton.get()) {
+			speed = ShooterSpeeds.sleepSpeed;
 		}
 		return speed;
 	}

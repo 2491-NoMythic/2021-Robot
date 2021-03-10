@@ -51,5 +51,4 @@ public interface IOperatorController {
 	public boolean climbSaftey();
 
 	public ShooterSpeeds getShooterSpeed();
-
 }
