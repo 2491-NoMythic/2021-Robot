@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 import com.frc2491.clank.Settings.Constants;
-import com.frc2491.clank.Settings.Variables;
 
 /**
  * Add your docs here.

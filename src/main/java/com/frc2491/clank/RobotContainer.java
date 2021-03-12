@@ -11,17 +11,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import com.frc2491.clank.commands.drivetrain.Drive;
 import com.frc2491.clank.commands.drivetrain.LineupDrive;
 import com.frc2491.clank.commands.drivetrain.Rotate;
-import com.frc2491.clank.commands.intake.AutoIntake;
-import com.frc2491.clank.commands.ConnectorAndIndex;
-import com.frc2491.clank.commands.FunnlerTest;
-import com.frc2491.clank.commands.RunIndexer;
+import com.frc2491.clank.commands.intake.IntakeCommand;
 import com.frc2491.clank.commands.ShiftLol;
-import com.frc2491.clank.commands.Simple3Ball;
-import com.frc2491.clank.commands.funnelOnlyDefaultCommand;
-import com.frc2491.clank.commands.climber.ClimbExtendControl;
 import com.frc2491.clank.commands.climber.RobotUp;
 import com.frc2491.clank.commands.shooter.FlywheelRev;
-import com.frc2491.clank.commands.shooter.RunConnector;
 import com.frc2491.clank.commands.shooter.RunShooterAtSpeedPID;
 import com.frc2491.clank.commands.shooter.SetHoodPosition;
 import com.frc2491.clank.HID.CurrentHIDs;
@@ -33,9 +26,7 @@ import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Shooter;
 
-import com.frc2491.clank.subsystems.Indexer;
 import com.frc2491.clank.subsystems.Intake;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import com.frc2491.clank.commands.spindexer.OuttakeMotorShoot;
@@ -85,7 +76,7 @@ public class RobotContainer {
 
 		//Set the default command to grab controller axis
 		drivetrain.setDefaultCommand(new Drive(drivetrain));
-		intake.setDefaultCommand(new AutoIntake(intake));
+		intake.setDefaultCommand(new IntakeCommand(intake));
 	}
 
 	/**
@@ -106,7 +97,7 @@ public class RobotContainer {
 		SmartDashboard.putData("TurnUp", new Rotate(drivetrain, 30));
 		// operatorController.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
 
-		operatorController.getActivateIntakeButton().whileHeld(new AutoIntake(intake));
+		operatorController.getActivateIntakeButton().whileHeld(new IntakeCommand(intake));
 		operatorController.getActivateRobotUp().and(operatorController.getClimbCheck1()).and(operatorController.getClimbCheck2()).whenActive(robotUp);
 		operatorController.getDisableRobotUp().cancelWhenPressed(robotUp);
 		operatorController.getShooterPrepButton().whileHeld(new SequentialCommandGroup(new ShootingRotation(spindexer), new FlywheelRev(shooter)));
