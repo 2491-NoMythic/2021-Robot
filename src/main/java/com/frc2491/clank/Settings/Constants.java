@@ -103,7 +103,7 @@ public final class Constants {
 	}
 
 	public final class Intake {
-		public static final int intakeMotorPort = 11;
+		public static final int intakeMotorPort = 12;
 
 		// Speed
 		public static final int autoIntakeSpeed = 0;
@@ -136,7 +136,7 @@ public final class Constants {
 	public final class Spindexer {
 		public static final int MainMotor = 10;
 		public static final int OuttakeMotor = 13;
-		public static final int AntiJamMotor = 12;
+		public static final int AntiJamMotor = 11;
 
 		public static final double intakeSpindexerSpeed = .3;
 		public static final double shootingSpindexerSpeed = .8;
