@@ -78,7 +78,23 @@ public final class Constants {
 		public static final int opertatorControllerID = 1; // TODO change to actual value
 
 		public final class ButtonBoard {
-			public static final int intakeButtonID = 0; // TODO change to actual value
+			public static final int activateIntakeButtonID = 2491; // TODO change to value
+			public static final int rightClimbAxisID = 2491; // TODO change to value
+			public static final int leftClimbAxisID = 2491; // TODO change to value
+			public static final int activateClimberButtonID = 2491; // TODO change to value
+			public static final int deactivateClimbButtonID = 2491; // TODO change to value
+			public static final int activateRobotUpButtonID = 2491; // TODO change to value
+			public static final int deactivateRobotUpButtonID = 2491; // TODO change to value
+			public static final int climbSaftey1ID = 2491; // TODO change to value
+			public static final int climbSaftey2ID = 2491; // TODO change to value
+			public static final int funnelerAndIndexerID = 2491; // TODO change to value
+			public static final int shooterButtonID = 2491; // TODO change to value
+			public static final int runIndexerButtonID = 2491; // TODO change to value
+			public static final int backIndexerButtonID = 2491; // TODO change to value
+			public static final int slowModeButtonID = 2491; // TODO change to value
+			public static final int setHoodPositionOneID = 2491; // TODO change to actual value
+			public static final int setHoodPositionTwoID = 2491; // TODO change to actual value
+			public static final int setHoodPositionThreeID = 2491; // TODO change to actual value
 		}
 
 		public final class PS4 {
@@ -104,10 +120,8 @@ public final class Constants {
 
 	public final class Intake {
 		public static final int intakeMotorPort = 12;
-
-		// Speed
-		public static final int autoIntakeSpeed = 0;
 		public static final int intakeAxisID = 5;
+		public static final double autoIntakeSpeed = 0.5;
 	}
 
 	public final class Indexer {
@@ -140,6 +154,9 @@ public final class Constants {
 
 		public static final double intakeSpindexerSpeed = .3;
 		public static final double shootingSpindexerSpeed = .8;
+
+		public static final double shootingOutTakeSpeed = 1;
+		public static final double AntiJamOutTakeSpeed = -.8;
 	}
 
 	public final class Shooter {
@@ -183,7 +200,7 @@ public final class Constants {
 	}
 
 	public enum ShooterSpeeds {
-		stop(0), sleepSpeed(800), lowSpeed(16000), midSpeed(18000), highSpeed(21000); //TODO replace for real values
+		stop(0), lowSpeed(16000), highSpeed(21000); //TODO replace for real values
 		
 		private double speed;
 

@@ -3,9 +3,11 @@ package com.frc2491.clank.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.frc2491.clank.Settings.Constants;
-
+import com.frc2491.clank.Settings.Variables;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Spindexer extends SubsystemBase {
@@ -18,6 +20,9 @@ public class Spindexer extends SubsystemBase {
 		MainRotationMotor = new CANSparkMax(Constants.Spindexer.MainMotor, MotorType.kBrushless);
 		AntiJamMotor = new CANSparkMax(Constants.Spindexer.AntiJamMotor, MotorType.kBrushless);
 		OuttakeMotor = new TalonSRX(Constants.Spindexer.OuttakeMotor);
+
+		SmartDashboard.putNumber("Spindexer reverse rotation time", Variables.Spindexer.sortModeReverseTime);
+		SmartDashboard.putNumber("Spindexer sorting motor power", Variables.Spindexer.sortModeMaxPower);
 
 	}
 
@@ -52,6 +57,10 @@ public class Spindexer extends SubsystemBase {
 	@Override
 	public void periodic() {
 		// This method will be called once per scheduler run
+
+		
+		Variables.Spindexer.sortModeReverseTime = SmartDashboard.getNumber("Spindexer reverse rotation time", 2);
+		Variables.Spindexer.sortModeMaxPower = SmartDashboard.getNumber("Spindexer sorting motor power", .5);
 	}
 	
 }

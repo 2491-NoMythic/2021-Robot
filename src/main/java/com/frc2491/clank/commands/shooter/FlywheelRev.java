@@ -6,19 +6,18 @@ package com.frc2491.clank.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
+import com.frc2491.clank.Settings.Variables;
 import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 import com.frc2491.clank.subsystems.Shooter;
 
 public class FlywheelRev extends CommandBase {
 
 	Shooter shooter;
-	ShooterSpeeds speed;
 
 	/** Creates a new FlywheelRev. */
-	public FlywheelRev(Shooter shooter, ShooterSpeeds speed) {
+	public FlywheelRev(Shooter shooter) {
 		// Use addRequirements() here to declare subsystem dependencies.
 		this.shooter = shooter;
-		this.speed = speed;
 		addRequirements(shooter);
 	}
 
@@ -29,7 +28,7 @@ public class FlywheelRev extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-		shooter.runLeftShooterVelocity(speed.getSpeed());
+		shooter.runLeftShooterVelocity(Variables.Shooter.shooterSpeed.getSpeed());
 	}
 
 	// Called once the command ends or is interrupted.

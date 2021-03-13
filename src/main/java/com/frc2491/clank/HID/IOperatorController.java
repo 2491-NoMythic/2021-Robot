@@ -30,7 +30,7 @@ public interface IOperatorController {
 
 	public JoystickButton getDisableRobotUp();
 
-	public JoystickButton getShooterButton();
+	public JoystickButton getShooterPrepButton();
 
 	public JoystickButton getShooterHoodPositionOneButton();
 

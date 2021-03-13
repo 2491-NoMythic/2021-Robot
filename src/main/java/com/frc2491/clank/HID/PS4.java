@@ -11,35 +11,33 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
 import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 import com.frc2491.clank.Settings.Constants;
-import com.frc2491.clank.Settings.Variables;
 
 /**
  * Add your docs here.
  */
 public class PS4 implements IOperatorController {
 
-	private final Joystick m_joystick;
+	private final Joystick joystick;
 	private JoystickButton activateIntakeButton, activateClimbButton, deactivateClimbButton, activateRobotUpButton,
-			deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterButton, runIndexer, backIndexer, 
-			sleepyShotButton, setHoodPositionOne, setHoodPositionTwo, setHoodPositionThree;
+			deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterPrepButton, runIndexer, backIndexer, 
+			setHoodPositionOne, setHoodPositionTwo, setHoodPositionThree;
 
 	public PS4() {
-		m_joystick = new Joystick(Constants.Controller.opertatorControllerID);
-		activateIntakeButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateIntakeButtonID);
-		activateClimbButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateClimberButtonID);
-		deactivateClimbButton = new JoystickButton(m_joystick, Constants.Controller.PS4.deactivateClimbButtonID);
-		activateRobotUpButton = new JoystickButton(m_joystick, Constants.Controller.PS4.activateRobotUpButtonID);
-		deactivateRobotUpButton = new JoystickButton(m_joystick, Constants.Controller.PS4.deactivateRobotUpButtonID);
-		climbSaftey1 = new JoystickButton(m_joystick, Constants.Controller.PS4.climbSaftey1ID);
-		climbSaftey2 = new JoystickButton(m_joystick, Constants.Controller.PS4.climbSaftey2ID);
-		funnelerAndIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.funnelerAndIndexerID);
-		shooterButton = new JoystickButton(m_joystick, Constants.Controller.PS4.shooterButtonID);
-		runIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.runIndexerButtonID);
-		backIndexer = new JoystickButton(m_joystick, Constants.Controller.PS4.backIndexerButtonID);
-		sleepyShotButton = new JoystickButton(m_joystick, 10);
-		setHoodPositionOne = new JoystickButton(m_joystick, Constants.Controller.PS4.setHoodPositionOneID);
-		setHoodPositionTwo = new JoystickButton(m_joystick, Constants.Controller.PS4.setHoodPositionTwoID);
-		setHoodPositionThree = new JoystickButton(m_joystick, Constants.Controller.PS4.setHoodPositionThreeID);
+		joystick = new Joystick(Constants.Controller.opertatorControllerID);
+		activateIntakeButton = new JoystickButton(joystick, Constants.Controller.PS4.activateIntakeButtonID);
+		activateClimbButton = new JoystickButton(joystick, Constants.Controller.PS4.activateClimberButtonID);
+		deactivateClimbButton = new JoystickButton(joystick, Constants.Controller.PS4.deactivateClimbButtonID);
+		activateRobotUpButton = new JoystickButton(joystick, Constants.Controller.PS4.activateRobotUpButtonID);
+		deactivateRobotUpButton = new JoystickButton(joystick, Constants.Controller.PS4.deactivateRobotUpButtonID);
+		climbSaftey1 = new JoystickButton(joystick, Constants.Controller.PS4.climbSaftey1ID);
+		climbSaftey2 = new JoystickButton(joystick, Constants.Controller.PS4.climbSaftey2ID);
+		funnelerAndIndexer = new JoystickButton(joystick, Constants.Controller.PS4.funnelerAndIndexerID);
+		shooterPrepButton = new JoystickButton(joystick, Constants.Controller.PS4.shooterButtonID);
+		runIndexer = new JoystickButton(joystick, Constants.Controller.PS4.runIndexerButtonID);
+		backIndexer = new JoystickButton(joystick, Constants.Controller.PS4.backIndexerButtonID);
+		setHoodPositionOne = new JoystickButton(joystick, Constants.Controller.PS4.setHoodPositionOneID);
+		setHoodPositionTwo = new JoystickButton(joystick, Constants.Controller.PS4.setHoodPositionTwoID);
+		setHoodPositionThree = new JoystickButton(joystick, Constants.Controller.PS4.setHoodPositionThreeID);
 	}
 
 	@Override
@@ -49,12 +47,12 @@ public class PS4 implements IOperatorController {
 
 	@Override
 	public double getIntakeAxis() {
-		return m_joystick.getRawAxis(Constants.Intake.intakeAxisID);
+		return joystick.getRawAxis(Constants.Intake.intakeAxisID);
 	}
 
 	@Override
 	public double getLeftClimbAxis() {
-		return m_joystick.getRawAxis(Constants.Climber.rightAxisID);
+		return joystick.getRawAxis(Constants.Climber.rightAxisID);
 	}
 
 	@Override
@@ -93,8 +91,8 @@ public class PS4 implements IOperatorController {
 	}
 
 	@Override
-	public JoystickButton getShooterButton() {
-		return shooterButton;
+	public JoystickButton getShooterPrepButton() {
+		return shooterPrepButton;
 	}
 
 	@Override
@@ -116,16 +114,12 @@ public class PS4 implements IOperatorController {
 		// TODO Picking STOP as the default. Not sure what default should be. 
 		// We should remove the if for the default after we know what it is.
 		ShooterSpeeds speed = ShooterSpeeds.stop;
-		if (m_joystick.getPOV() == 0) {
+		if (joystick.getPOV() == 0) {
 			speed = ShooterSpeeds.lowSpeed;
-		}else if (m_joystick.getPOV() == 270) {
-			speed = ShooterSpeeds.midSpeed;
-		}else if (m_joystick.getPOV() == 180) {
+		}else if (joystick.getPOV() == 180) {
 			speed = ShooterSpeeds.highSpeed;
-		}else if (m_joystick.getPOV() == 90) {
-			speed = ShooterSpeeds.stop;   
-		}else if (sleepyShotButton.get()) {
-			speed = ShooterSpeeds.sleepSpeed;
+		}else if (joystick.getPOV() == 90) {
+			speed = ShooterSpeeds.stop;
 		}
 		return speed;
 	}

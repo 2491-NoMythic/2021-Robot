@@ -18,12 +18,12 @@ import com.frc2491.clank.Settings.Constants;
 public class TM implements IDriveController {
 
 	private Joystick m_Joystick;
-	private JoystickButton connectorAndIndexer, slowDrive;
+	private JoystickButton shootButton, slowDriveButton;
 
 	public TM() {
 		m_Joystick = new Joystick(Constants.Controller.driveControllerID);
-		connectorAndIndexer = new JoystickButton(m_Joystick, 7);
-		slowDrive = new JoystickButton(m_Joystick, 8);
+		shootButton = new JoystickButton(m_Joystick, 7);
+		slowDriveButton = new JoystickButton(m_Joystick, 8);
 	}
 
 	@Override
@@ -52,14 +52,14 @@ public class TM implements IDriveController {
 	}
 
 	@Override
-	public JoystickButton getConnectorAndIndexer() {
+	public JoystickButton getShootButton() {
 		// TODO Auto-generated method stub
-		return connectorAndIndexer;
+		return shootButton;
 	}
 
 	@Override
-	public JoystickButton getSlowDrive() {
+	public JoystickButton getSlowDriveButton() {
 		// TODO Auto-generated method stub
-		return slowDrive;
+		return slowDriveButton;
 	}
 }

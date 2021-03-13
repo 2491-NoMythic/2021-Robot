@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
  */
 public interface IDriveController {
 
-	public JoystickButton getConnectorAndIndexer();
+	public JoystickButton getShootButton();
+
+	public JoystickButton getSlowDriveButton();
 
 	public double getRawDriveAxis();
 
@@ -23,7 +25,4 @@ public interface IDriveController {
 	public double getRawTurnAxis();
 
 	public double getHorizontalClimbAxis();
-
-	public JoystickButton getSlowDrive();
-
 }
