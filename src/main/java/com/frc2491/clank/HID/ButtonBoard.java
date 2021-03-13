@@ -122,11 +122,12 @@ public class ButtonBoard implements IOperatorController {
 	public ShooterSpeeds getShooterSpeed() {
 		// TODO Picking STOP as the default. Not sure what default should be. 
 		// We should remove the if for the default after we know what it is.
+
+		//TODO: replace method with three methods for buttons that set speed to stop, low, high
+
 		ShooterSpeeds speed = ShooterSpeeds.stop;
 		if (joystick.getPOV() == 0) {
 			speed = ShooterSpeeds.lowSpeed;
-		}else if (joystick.getPOV() == 270) {
-			speed = ShooterSpeeds.midSpeed;
 		}else if (joystick.getPOV() == 180) {
 			speed = ShooterSpeeds.highSpeed;
 		}else if (joystick.getPOV() == 90) {

@@ -27,9 +27,13 @@ import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Shooter;
 
 import com.frc2491.clank.subsystems.Intake;
+
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
+import com.frc2491.clank.commands.spindexer.IntakeRotation;
 import com.frc2491.clank.commands.spindexer.OuttakeMotorShoot;
+import com.frc2491.clank.commands.spindexer.RunAntiJam;
 import com.frc2491.clank.commands.spindexer.ShootingRotation;
 import com.frc2491.clank.subsystems.Spindexer;
 
@@ -97,10 +101,10 @@ public class RobotContainer {
 		SmartDashboard.putData("TurnUp", new Rotate(drivetrain, 30));
 		// operatorController.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
 
-		operatorController.getActivateIntakeButton().whileHeld(new IntakeCommand(intake));
 		operatorController.getActivateRobotUp().and(operatorController.getClimbCheck1()).and(operatorController.getClimbCheck2()).whenActive(robotUp);
 		operatorController.getDisableRobotUp().cancelWhenPressed(robotUp);
-		operatorController.getShooterPrepButton().whileHeld(new SequentialCommandGroup(new ShootingRotation(spindexer), new FlywheelRev(shooter)));
+		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new FlywheelRev(shooter)));
+		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new RunAntiJam(spindexer), new IntakeCommand(intake), new IntakeRotation(spindexer)));
 		
 		operatorController.getShooterHoodPositionOneButton().whenPressed(new SetHoodPosition(shooter, Constants.Shooter.hoodPositionOne));
 		operatorController.getShooterHoodPositionTwoButton().whenPressed(new SetHoodPosition(shooter, Constants.Shooter.hoodPositionTwo));
