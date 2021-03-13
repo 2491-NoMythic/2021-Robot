@@ -34,10 +34,10 @@ public final class Constants {
 		public final static int driveTurnAxis = 2;
 		public final static int driveMainAxis = 1;
 		public final static int driveHorizontalAxis = 0;
-		public final static int driveTalonLeftMotor1 = 2;
-		public final static int driveTalonLeftMotor2 = 3;
-		public final static int driveTalonRightMotor1 = 0;
-		public final static int driveTalonRightMotor2 = 1; // 0 should be replaced
+		public final static int driveTalonLeftMotor1 = 6;
+		public final static int driveTalonLeftMotor2 = 1;
+		public final static int driveTalonRightMotor1 = 2;
+		public final static int driveTalonRightMotor2 = 3;
 
 		// encoders
 		public final static double driveEncoderTicks = 2048.0; // encoder ticks per wheel rotation is 2048
@@ -119,9 +119,8 @@ public final class Constants {
 	}
 
 	public final class Intake {
-		public static final int intakeMotorPort = 2491;
+		public static final int intakeMotorPort = 12;
 		public static final int intakeAxisID = 5;
-		// Speed
 		public static final double autoIntakeSpeed = 0.5;
 	}
 
@@ -149,9 +148,9 @@ public final class Constants {
 	}
 
 	public final class Spindexer {
-		public static final int MainMotor = 2491;
-		public static final int OuttakeMotor = 2491;
-		public static final int AntiJamMotor = 2491;
+		public static final int MainMotor = 10;
+		public static final int OuttakeMotor = 13;
+		public static final int AntiJamMotor = 11;
 
 		public static final double intakeSpindexerSpeed = .3;
 		public static final double shootingSpindexerSpeed = .8;
@@ -188,9 +187,9 @@ public final class Constants {
 		public final static double PeakOutput = 0;
 
 		// hood positions
-		public final static double hoodPositionOne = 2491; //TODO replace for real value
-		public final static double hoodPositionTwo = 2491; //TODO replace for real value
-		public final static double hoodPositionThree = 2491; //TODO replace for real value
+		public final static double hoodPositionOne = 0;
+		public final static double hoodPositionTwo = 25; //TODO replace for real value
+		public final static double hoodPositionThree = 50; //TODO replace for real value
 
 		// Values
 		public final static double testSpeed = 1000;
