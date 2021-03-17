@@ -14,12 +14,12 @@ public class Spindexer extends SubsystemBase {
 
 	CANSparkMax MainRotationMotor;
 	CANSparkMax AntiJamMotor;
-	TalonSRX OuttakeMotor;
+	CANSparkMax OuttakeMotor;
 
 	public Spindexer() {
 		MainRotationMotor = new CANSparkMax(Constants.Spindexer.MainMotor, MotorType.kBrushless);
 		AntiJamMotor = new CANSparkMax(Constants.Spindexer.AntiJamMotor, MotorType.kBrushless);
-		OuttakeMotor = new TalonSRX(Constants.Spindexer.OuttakeMotor);
+		OuttakeMotor = new CANSparkMax(Constants.Spindexer.OuttakeMotor, MotorType.kBrushless);
 
 		SmartDashboard.putNumber("Spindexer reverse rotation time", Variables.Spindexer.sortModeReverseTime);
 		SmartDashboard.putNumber("Spindexer sorting motor power", Variables.Spindexer.sortModeMaxPower);
@@ -51,7 +51,8 @@ public class Spindexer extends SubsystemBase {
 	 * @param motorPercent is the speed of the motor
 	 */
 	public void RunOuttakeMotor(double motorPercent) {
-		OuttakeMotor.set(ControlMode.PercentOutput, motorPercent);
+		System.out.println("speed percent " + motorPercent);
+		OuttakeMotor.set(motorPercent);
 	}
 
 	@Override

@@ -22,7 +22,7 @@ public class TM implements IDriveController {
 
 	public TM() {
 		m_Joystick = new Joystick(Constants.Controller.driveControllerID);
-		shootButton = new JoystickButton(m_Joystick, 7);
+		shootButton = new JoystickButton(m_Joystick, 1);
 		slowDriveButton = new JoystickButton(m_Joystick, 8);
 	}
 
@@ -53,7 +53,7 @@ public class TM implements IDriveController {
 
 	@Override
 	public JoystickButton getShootButton() {
-		// TODO Auto-generated method stub
+
 		return shootButton;
 	}
 

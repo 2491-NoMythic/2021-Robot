@@ -12,8 +12,6 @@ import com.frc2491.clank.commands.drivetrain.Drive;
 import com.frc2491.clank.commands.drivetrain.LineupDrive;
 import com.frc2491.clank.commands.drivetrain.Rotate;
 import com.frc2491.clank.commands.intake.IntakeCommand;
-import com.frc2491.clank.commands.ShiftLol;
-import com.frc2491.clank.commands.climber.RobotUp;
 import com.frc2491.clank.commands.shooter.FlywheelRev;
 import com.frc2491.clank.commands.shooter.RunShooterAtSpeedPID;
 import com.frc2491.clank.commands.shooter.SetHoodPosition;
@@ -22,18 +20,20 @@ import com.frc2491.clank.HID.IDriveController;
 import com.frc2491.clank.HID.IOperatorController;
 import com.frc2491.clank.Settings.Constants;
 
-import com.frc2491.clank.subsystems.Climber;
 import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Shooter;
 
 import com.frc2491.clank.subsystems.Intake;
 
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+//import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
 import com.frc2491.clank.commands.spindexer.IntakeRotation;
 import com.frc2491.clank.commands.spindexer.OuttakeMotorShoot;
 import com.frc2491.clank.commands.spindexer.RunAntiJam;
+//import com.frc2491.clank.commands.spindexer.IntakeRotation;
+//import com.frc2491.clank.commands.spindexer.OuttakeMotorShoot;
+//import com.frc2491.clank.commands.spindexer.RunAntiJam;
 import com.frc2491.clank.commands.spindexer.ShootingRotation;
 import com.frc2491.clank.subsystems.Spindexer;
 
@@ -53,7 +53,6 @@ public class RobotContainer {
 	private final Drivetrain drivetrain = new Drivetrain();
 	private final Shooter shooter = new Shooter();
 	private final Intake intake = new Intake();
-	private final Climber m_Climber = new Climber();
 	private final Spindexer spindexer = new Spindexer();
 
 	/**
@@ -68,7 +67,6 @@ public class RobotContainer {
 	 * instantiation of the class once. We only need these here if used more than once in class.
 	 */
 	private final RunShooterAtSpeedPID shooterAtSpeedPID = new RunShooterAtSpeedPID(shooter);
-	private final RobotUp robotUp = new RobotUp(drivetrain, m_Climber);
 	// private final AutonomousCommand autonomousCommand = new AutonomousCommand(m_drivetrain, m_Shooter, m_Indexer, Constants.Drivetrain.timeDriveSpeed, Constants.Drivetrain.timeDriveTime);
 
 	/**
@@ -91,7 +89,6 @@ public class RobotContainer {
 		IDriveController driveController = currentHIDs.getDriveController();
 
 		SmartDashboard.putData(shooterAtSpeedPID);
-		SmartDashboard.putData(new ShiftLol(m_Climber, drivetrain));
 		SmartDashboard.putNumber("Axis", operatorController.getLeftClimbAxis());
 		SmartDashboard.putData("TurnUp", new Rotate(drivetrain, 30));
 
@@ -99,13 +96,11 @@ public class RobotContainer {
 		//.and is used to create the safteys. Note that in current form safteys are not neccesary for turining off the system.
 
 		SmartDashboard.putData("TurnUp", new Rotate(drivetrain, 30));
-		// operatorController.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
+		//operatorController.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
 
-		operatorController.getActivateRobotUp().and(operatorController.getClimbCheck1()).and(operatorController.getClimbCheck2()).whenActive(robotUp);
-		operatorController.getDisableRobotUp().cancelWhenPressed(robotUp);
 		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new FlywheelRev(shooter)));
-		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new RunAntiJam(spindexer), new IntakeCommand(intake), new IntakeRotation(spindexer)));
-		
+		//operatorController.getShooterPrepButton().whileHeld(new FlywheelRev(shooter));
+		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new RunAntiJam(spindexer), new IntakeCommand(intake)));
 		operatorController.getShooterHoodPositionOneButton().whenPressed(new SetHoodPosition(shooter, Constants.Shooter.hoodPositionOne));
 		operatorController.getShooterHoodPositionTwoButton().whenPressed(new SetHoodPosition(shooter, Constants.Shooter.hoodPositionTwo));
 		operatorController.getShooterHoodPositionThreeButton().whenPressed(new SetHoodPosition(shooter, Constants.Shooter.hoodPositionThree));

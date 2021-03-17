@@ -33,6 +33,7 @@ public class RunShooterAtSpeedPID extends CommandBase {
 	@Override
 	public void execute() {
 		// this will currently only run the shooter when a button is held down
+		System.out.println("run shooter at speed pid");
 		mShooter.runLeftShooterVelocity(CurrentHIDs.getInstance().getOperatorController().getShooterSpeed().getSpeed());
 	}
 

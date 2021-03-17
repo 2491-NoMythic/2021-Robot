@@ -99,22 +99,15 @@ public final class Constants {
 
 		public final class PS4 {
 			public static final int activateIntakeButtonID = 6; // TODO change to value
-			public static final int rightClimbAxisID = 5;
-			public static final int leftClimbAxisID = 1;
-			public static final int activateClimberButtonID = 2;
-			public static final int deactivateClimbButtonID = 3;
-			public static final int activateRobotUpButtonID = 1;
 			public static final int deactivateRobotUpButtonID = 4;
-			public static final int climbSaftey1ID = 7;
-			public static final int climbSaftey2ID = 8;
 			public static final int funnelerAndIndexerID = 15;
 			public static final int shooterButtonID = 5;
 			public static final int runIndexerButtonID = 14;
 			public static final int backIndexerButtonID = 13;
 			public static final int slowModeButtonID = 10;
-			public static final int setHoodPositionOneID = 2491; // TODO change to actual value
-			public static final int setHoodPositionTwoID = 2491; // TODO change to actual value
-			public static final int setHoodPositionThreeID = 2491; // TODO change to actual value
+			public static final int setHoodPositionOneID = 1;
+			public static final int setHoodPositionTwoID = 2;
+			public static final int setHoodPositionThreeID = 3;
 		}
 	}
 
@@ -130,7 +123,6 @@ public final class Constants {
 		public static final int connectorTalonID = 11;
 		public static final int funnelLeftTalonID = 8;
 		public static final int funnelRightTalonID = 7;
-		public static final int indexSolenoidID = 0;
 		// Motor Speeds
 		public static final double indexIntakeSpeed = 0;
 		public static final double connectorTalonSpeed = 1;
@@ -153,9 +145,9 @@ public final class Constants {
 		public static final int AntiJamMotor = 11;
 
 		public static final double intakeSpindexerSpeed = .3;
-		public static final double shootingSpindexerSpeed = .8;
+		public static final double shootingSpindexerSpeed = .3;
 
-		public static final double shootingOutTakeSpeed = 1;
+		public static final double shootingOutTakeSpeed = 0.5;
 		public static final double AntiJamOutTakeSpeed = -.8;
 	}
 
@@ -188,8 +180,8 @@ public final class Constants {
 
 		// hood positions
 		public final static double hoodPositionOne = 0;
-		public final static double hoodPositionTwo = 25; //TODO replace for real value
-		public final static double hoodPositionThree = 50; //TODO replace for real value
+		public final static double hoodPositionTwo = 50; 
+		public final static double hoodPositionThree = 130; 
 
 		// Values
 		public final static double testSpeed = 1000;
@@ -200,12 +192,12 @@ public final class Constants {
 	}
 
 	public enum ShooterSpeeds {
-		stop(0), lowSpeed(16000), highSpeed(21000); //TODO replace for real values
+		stop(0), lowSpeed(8000), highSpeed(21000); //TODO replace for real values
 		
 		private double speed;
 
 		private ShooterSpeeds(double mSpeed) {
-			mSpeed = speed;
+			speed = mSpeed;
 		}
 
 		public double getSpeed() {

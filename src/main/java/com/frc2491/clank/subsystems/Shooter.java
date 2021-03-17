@@ -83,6 +83,7 @@ public class Shooter extends SubsystemBase {
 
 	// Creating Drive Velocity for Motors
 	public void runLeftShooterVelocity(final double speed) {
+		System.out.println("velocity " + speed);
 		shooterLeftMotor.set(ControlMode.Velocity, speed);
 	}
 	/**

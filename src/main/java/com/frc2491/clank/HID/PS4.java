@@ -25,12 +25,7 @@ public class PS4 implements IOperatorController {
 	public PS4() {
 		joystick = new Joystick(Constants.Controller.opertatorControllerID);
 		activateIntakeButton = new JoystickButton(joystick, Constants.Controller.PS4.activateIntakeButtonID);
-		activateClimbButton = new JoystickButton(joystick, Constants.Controller.PS4.activateClimberButtonID);
-		deactivateClimbButton = new JoystickButton(joystick, Constants.Controller.PS4.deactivateClimbButtonID);
-		activateRobotUpButton = new JoystickButton(joystick, Constants.Controller.PS4.activateRobotUpButtonID);
 		deactivateRobotUpButton = new JoystickButton(joystick, Constants.Controller.PS4.deactivateRobotUpButtonID);
-		climbSaftey1 = new JoystickButton(joystick, Constants.Controller.PS4.climbSaftey1ID);
-		climbSaftey2 = new JoystickButton(joystick, Constants.Controller.PS4.climbSaftey2ID);
 		funnelerAndIndexer = new JoystickButton(joystick, Constants.Controller.PS4.funnelerAndIndexerID);
 		shooterPrepButton = new JoystickButton(joystick, Constants.Controller.PS4.shooterButtonID);
 		runIndexer = new JoystickButton(joystick, Constants.Controller.PS4.runIndexerButtonID);
