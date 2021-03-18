@@ -7,6 +7,7 @@
 
 package com.frc2491.clank.HID;
 
+import com.frc2491.clank.Settings.Constants.ShooterHoodPositions;
 import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -32,12 +33,6 @@ public interface IOperatorController {
 
 	public JoystickButton getShooterPrepButton();
 
-	public JoystickButton getShooterHoodPositionOneButton();
-
-	public JoystickButton getShooterHoodPositionTwoButton();
-
-	public JoystickButton getShooterHoodPositionThreeButton();
-
 	public JoystickButton getFunnelerAndIndexer();
 
 	public JoystickButton runIndexer();
@@ -50,5 +45,7 @@ public interface IOperatorController {
 
 	public boolean climbSaftey();
 
-	public ShooterSpeeds getShooterSpeed();
+	public void getShooterSpeed();
+
+	public void getShooterHoodPositions();
 }
