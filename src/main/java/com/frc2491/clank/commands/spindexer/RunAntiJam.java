@@ -22,7 +22,7 @@ public class RunAntiJam extends CommandBase {
 	@Override
 	public void initialize() {
 		//Runs an anti jam motor at a uniform speed
-		spindexer.RunOuttakeMotor(Constants.Spindexer.AntiJamOutTakeSpeed);
+		spindexer.RunAntiJam(Constants.Spindexer.AntiJamOutTakeSpeed);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
@@ -33,7 +33,7 @@ public class RunAntiJam extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		spindexer.RunOuttakeMotor(0);
+		spindexer.RunAntiJam(0);
 	}
 
 	// Returns true when the command should end.
