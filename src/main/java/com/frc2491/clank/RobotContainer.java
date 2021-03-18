@@ -12,8 +12,6 @@ import com.frc2491.clank.commands.drivetrain.Drive;
 import com.frc2491.clank.commands.drivetrain.LineupDrive;
 import com.frc2491.clank.commands.drivetrain.Rotate;
 import com.frc2491.clank.commands.intake.IntakeCommand;
-import com.frc2491.clank.commands.ShiftLol;
-import com.frc2491.clank.commands.climber.RobotUp;
 import com.frc2491.clank.commands.shooter.PrepareShooter;
 import com.frc2491.clank.commands.shooter.RunShooterAtSpeedPID;
 import com.frc2491.clank.commands.shooter.UpdateShooterParams;
@@ -97,8 +95,6 @@ public class RobotContainer {
 		SmartDashboard.putData("TurnUp", new Rotate(drivetrain, 30));
 		//operatorController.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
 
-		operatorController.getActivateRobotUp().and(operatorController.getClimbCheck1()).and(operatorController.getClimbCheck2()).whenActive(robotUp);
-		operatorController.getDisableRobotUp().cancelWhenPressed(robotUp);
 		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new PrepareShooter(shooter)));
 		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new StoreBalls(spindexer), new IntakeCommand(intake)));
 		
