@@ -7,6 +7,7 @@
 
 package com.frc2491.clank.Settings;
 
+import com.frc2491.clank.Settings.Constants.ShooterHoodPositions;
 import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 
 /**
@@ -21,6 +22,7 @@ public class Variables {
 
 	public static class Shooter{
 		public static ShooterSpeeds shooterSpeed = ShooterSpeeds.lowSpeed;
+		public static ShooterHoodPositions shooterHoodPosition = ShooterHoodPositions.lowHood;
 	}
 
 	public static class Drivetrain{

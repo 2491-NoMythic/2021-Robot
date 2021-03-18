@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import com.frc2491.clank.Settings.Constants;
+import com.frc2491.clank.Settings.Variables;
+import com.frc2491.clank.Settings.Constants.ShooterHoodPositions;
 import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 
 /**
@@ -21,8 +23,7 @@ public class ButtonBoard implements IOperatorController {
 	private final Joystick joystick;
 	private static ButtonBoard m_Instance = null;
 	private JoystickButton activateIntakeButton, activateClimbButton, deactivateClimbButton, activateRobotUpButton,
-	deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterPrepButton, runIndexer, backIndexer, 
-	setHoodPositionOne, setHoodPositionTwo, setHoodPositionThree;
+	deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterPrepButton, runIndexer, backIndexer;
 
 	public static ButtonBoard getInstance() {
 		if (m_Instance == null) {
@@ -44,9 +45,6 @@ public class ButtonBoard implements IOperatorController {
 		shooterPrepButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.shooterButtonID);
 		runIndexer = new JoystickButton(joystick, Constants.Controller.ButtonBoard.runIndexerButtonID);
 		backIndexer = new JoystickButton(joystick, Constants.Controller.ButtonBoard.backIndexerButtonID);
-		setHoodPositionOne = new JoystickButton(joystick, Constants.Controller.ButtonBoard.setHoodPositionOneID);
-		setHoodPositionTwo = new JoystickButton(joystick, Constants.Controller.ButtonBoard.setHoodPositionTwoID);
-		setHoodPositionThree = new JoystickButton(joystick, Constants.Controller.ButtonBoard.setHoodPositionThreeID);
 	}
 
 	@Override
@@ -119,36 +117,30 @@ public class ButtonBoard implements IOperatorController {
 		return backIndexer;
 	}
 	
-	public ShooterSpeeds getShooterSpeed() {
+	public void getShooterSpeed() {
 		// TODO Picking STOP as the default. Not sure what default should be. 
 		// We should remove the if for the default after we know what it is.
 
-		//TODO: replace method with three methods for buttons that set speed to stop, low, high
-
-		ShooterSpeeds speed = ShooterSpeeds.stop;
 		if (joystick.getPOV() == 0) {
-			speed = ShooterSpeeds.lowSpeed;
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.lowSpeed;
 		}else if (joystick.getPOV() == 180) {
-			speed = ShooterSpeeds.highSpeed;
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.highSpeed;
 		}else if (joystick.getPOV() == 90) {
-			speed = ShooterSpeeds.stop;
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.stop;
 		}
-		return speed;
 	}
 
-	@Override
-	public JoystickButton getShooterHoodPositionOneButton() {
-		return setHoodPositionOne;
-	}
-
-	@Override
-	public JoystickButton getShooterHoodPositionTwoButton() {
-		return setHoodPositionTwo;
-	}
-
-	@Override
-	public JoystickButton getShooterHoodPositionThreeButton() {
-		return setHoodPositionThree;
+	public void getShooterHoodPositions() {
+		// TODO Picking COLLAPSED as the default. Not sure what default should be.
+		// We should remove the if for the default after we know what it is.
+		
+		if (joystick.getPOV() == 0) {
+			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.lowHood;
+		}else if (joystick.getPOV() == 180) {
+			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.highHood;
+		}else if (joystick.getPOV() == 90) {
+			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.collapsed;
+		}
 	}
 
 }

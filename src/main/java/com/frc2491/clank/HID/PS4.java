@@ -9,8 +9,11 @@ package com.frc2491.clank.HID;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj.Joystick;
+
+import com.frc2491.clank.Settings.Constants.ShooterHoodPositions;
 import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 import com.frc2491.clank.Settings.Constants;
+import com.frc2491.clank.Settings.Variables;
 
 /**
  * Add your docs here.
@@ -19,8 +22,7 @@ public class PS4 implements IOperatorController {
 
 	private final Joystick joystick;
 	private JoystickButton activateIntakeButton, activateClimbButton, deactivateClimbButton, activateRobotUpButton,
-			deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterPrepButton, runIndexer, backIndexer, 
-			setHoodPositionOne, setHoodPositionTwo, setHoodPositionThree;
+			deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterPrepButton, runIndexer, backIndexer;
 
 	public PS4() {
 		joystick = new Joystick(Constants.Controller.opertatorControllerID);
@@ -35,9 +37,6 @@ public class PS4 implements IOperatorController {
 		shooterPrepButton = new JoystickButton(joystick, Constants.Controller.PS4.shooterButtonID);
 		runIndexer = new JoystickButton(joystick, Constants.Controller.PS4.runIndexerButtonID);
 		backIndexer = new JoystickButton(joystick, Constants.Controller.PS4.backIndexerButtonID);
-		setHoodPositionOne = new JoystickButton(joystick, Constants.Controller.PS4.setHoodPositionOneID);
-		setHoodPositionTwo = new JoystickButton(joystick, Constants.Controller.PS4.setHoodPositionTwoID);
-		setHoodPositionThree = new JoystickButton(joystick, Constants.Controller.PS4.setHoodPositionThreeID);
 	}
 
 	@Override
@@ -110,33 +109,30 @@ public class PS4 implements IOperatorController {
 		return backIndexer;
 	}
 
-	public ShooterSpeeds getShooterSpeed() {
+	public void getShooterSpeed() {
 		// TODO Picking STOP as the default. Not sure what default should be. 
 		// We should remove the if for the default after we know what it is.
-		ShooterSpeeds speed = ShooterSpeeds.stop;
+		
 		if (joystick.getPOV() == 0) {
-			speed = ShooterSpeeds.lowSpeed;
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.lowSpeed;
 		}else if (joystick.getPOV() == 180) {
-			speed = ShooterSpeeds.highSpeed;
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.highSpeed;
 		}else if (joystick.getPOV() == 90) {
-			speed = ShooterSpeeds.stop;
+			Variables.Shooter.shooterSpeed = ShooterSpeeds.stop;
 		}
-		return speed;
 	}
 
-	@Override
-	public JoystickButton getShooterHoodPositionOneButton() {
-		return setHoodPositionOne;
-	}
-
-	@Override
-	public JoystickButton getShooterHoodPositionTwoButton() {
-		return setHoodPositionTwo;
-	}
-
-	@Override
-	public JoystickButton getShooterHoodPositionThreeButton() {
-		return setHoodPositionThree;
+	public void getShooterHoodPositions() {
+		// TODO Picking COLLAPSED as the default. Not sure what default should be.
+		// We should remove the if for the default after we know what it is.
+		
+		if (joystick.getPOV() == 0) {
+			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.lowHood;
+		}else if (joystick.getPOV() == 180) {
+			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.highHood;
+		}else if (joystick.getPOV() == 90) {
+			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.collapsed;
+		}
 	}
 
 }

@@ -28,6 +28,7 @@ public class FlywheelRev extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
+		//Rev the Flywheel to an enum defined in constants
 		shooter.runLeftShooterVelocity(Variables.Shooter.shooterSpeed.getSpeed());
 	}
 

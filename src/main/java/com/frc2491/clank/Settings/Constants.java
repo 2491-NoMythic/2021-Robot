@@ -92,9 +92,6 @@ public final class Constants {
 			public static final int runIndexerButtonID = 2491; // TODO change to value
 			public static final int backIndexerButtonID = 2491; // TODO change to value
 			public static final int slowModeButtonID = 2491; // TODO change to value
-			public static final int setHoodPositionOneID = 2491; // TODO change to actual value
-			public static final int setHoodPositionTwoID = 2491; // TODO change to actual value
-			public static final int setHoodPositionThreeID = 2491; // TODO change to actual value
 		}
 
 		public final class PS4 {
@@ -112,9 +109,6 @@ public final class Constants {
 			public static final int runIndexerButtonID = 14;
 			public static final int backIndexerButtonID = 13;
 			public static final int slowModeButtonID = 10;
-			public static final int setHoodPositionOneID = 2491; // TODO change to actual value
-			public static final int setHoodPositionTwoID = 2491; // TODO change to actual value
-			public static final int setHoodPositionThreeID = 2491; // TODO change to actual value
 		}
 	}
 
@@ -187,11 +181,6 @@ public final class Constants {
 		public final static int kIzone = 100;
 		public final static double PeakOutput = 0;
 
-		// hood positions
-		public final static double hoodPositionOne = 2491; //TODO replace for real value
-		public final static double hoodPositionTwo = 2491; //TODO replace for real value
-		public final static double hoodPositionThree = 2491; //TODO replace for real value
-
 		// Values
 		public final static double testSpeed = 1000;
 		public final static int lowSpeedButton = 0;
@@ -205,12 +194,26 @@ public final class Constants {
 		
 		private double speed;
 
-		private ShooterSpeeds(double mSpeed) {
-			mSpeed = speed;
+		private ShooterSpeeds(double speed) {
+			this.speed = speed;
 		}
 
 		public double getSpeed() {
 			return speed;
+		}
+	}
+
+	public enum ShooterHoodPositions {
+		collapsed(0), lowHood(2491), highHood(2491); //TODO replace for real values
+
+		private double angle;
+
+		private ShooterHoodPositions(double angle) {
+			this.angle = angle;
+		}
+
+		public double getAngle() {
+			return angle;
 		}
 	}
 
