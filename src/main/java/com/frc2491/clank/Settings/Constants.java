@@ -144,8 +144,8 @@ public final class Constants {
 		public static final int OuttakeMotor = 13;
 		public static final int AntiJamMotor = 11;
 
-		public static final double intakeSpindexerSpeed = .3;
-		public static final double shootingSpindexerSpeed = .3;
+		public static final double intakeSpindexerSpeed = -.3;
+		public static final double shootingSpindexerSpeed = -.3;
 
 		public static final double shootingOutTakeSpeed = 0.5;
 		public static final double AntiJamOutTakeSpeed = -.8;

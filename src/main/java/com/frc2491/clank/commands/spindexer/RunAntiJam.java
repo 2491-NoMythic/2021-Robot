@@ -21,7 +21,7 @@ public class RunAntiJam extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		spindexer.RunOuttakeMotor(Constants.Spindexer.AntiJamOutTakeSpeed);
+		spindexer.RunAntiJam(Constants.Spindexer.AntiJamOutTakeSpeed);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
