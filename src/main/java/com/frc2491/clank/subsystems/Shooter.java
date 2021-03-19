@@ -88,11 +88,12 @@ public class Shooter extends SubsystemBase {
 	}
 	/**
 	 * Set hood position
-	 * @param degrees (between 0-54 degrees)
+	 * @param servoUnits (between 0-180 servo units)
+	 * 0 is zero degrees and 180 is 54 degrees (maximum supported hood position)
 	 */
-	public void setHoodPosition(double degrees){
-		servo1.setAngle(degrees);
-		servo2.setAngle(degrees);
+	public void setHoodPosition(double servoUnits){
+		servo1.setAngle(180 - servoUnits);
+		servo2.setAngle(servoUnits);
 	}
 
 	public void runLeftShooterPercent(double speed){

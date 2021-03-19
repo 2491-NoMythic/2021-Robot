@@ -180,8 +180,8 @@ public final class Constants {
 
 		// hood positions
 		public final static double hoodPositionOne = 0;
-		public final static double hoodPositionTwo = 50; 
-		public final static double hoodPositionThree = 130; 
+		public final static double hoodPositionTwo = 90; 
+		public final static double hoodPositionThree = 170; 
 
 		// Values
 		public final static double testSpeed = 1000;
