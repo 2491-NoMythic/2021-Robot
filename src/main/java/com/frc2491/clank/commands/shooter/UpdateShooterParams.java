@@ -6,7 +6,6 @@ package com.frc2491.clank.commands.shooter;
 
 import com.frc2491.clank.HID.CurrentHIDs;
 import com.frc2491.clank.subsystems.Shooter;
-import com.frc2491.clank.Settings.Variables;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 

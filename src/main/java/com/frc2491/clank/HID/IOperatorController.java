@@ -7,9 +7,6 @@
 
 package com.frc2491.clank.HID;
 
-import com.frc2491.clank.Settings.Constants.ShooterHoodPositions;
-import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
-
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**

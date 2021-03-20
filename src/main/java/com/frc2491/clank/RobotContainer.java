@@ -18,7 +18,6 @@ import com.frc2491.clank.commands.shooter.UpdateShooterParams;
 import com.frc2491.clank.HID.CurrentHIDs;
 import com.frc2491.clank.HID.IDriveController;
 import com.frc2491.clank.HID.IOperatorController;
-import com.frc2491.clank.Settings.Constants;
 
 import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Shooter;
