@@ -172,6 +172,11 @@ public final class Constants {
 		public final static int kIzone = 100;
 		public final static double PeakOutput = 0;
 
+		// hood positions
+		public final static double hoodPositionOne = 0;
+		public final static double hoodPositionTwo = 90; 
+		public final static double hoodPositionThree = 170; 
+
 		// Values
 		public final static double testSpeed = 1000;
 		public final static int lowSpeedButton = 0;
