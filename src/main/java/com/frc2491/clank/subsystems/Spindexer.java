@@ -1,7 +1,5 @@
 package com.frc2491.clank.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.Settings.Variables;
 import com.revrobotics.CANSparkMax;
