@@ -27,6 +27,7 @@ public class IntakeRotation extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
+		//Rotates the spindexer at a set speed to intake balls at a uniform rate
 		spindexer.Rotate(Constants.Spindexer.intakeSpindexerSpeed);
 	}
 
