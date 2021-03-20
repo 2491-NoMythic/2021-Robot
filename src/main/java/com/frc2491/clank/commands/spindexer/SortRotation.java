@@ -3,7 +3,6 @@ package com.frc2491.clank.commands.spindexer;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.subsystems.Spindexer;
 import com.frc2491.clank.Settings.Variables;
 
