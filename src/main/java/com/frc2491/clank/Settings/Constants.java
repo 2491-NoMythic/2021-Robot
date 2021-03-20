@@ -103,6 +103,11 @@ public final class Constants {
 			public static final int backIndexerButtonID = 13;
 			public static final int slowModeButtonID = 10;
 		}
+
+		public final class TM {
+			public static final int triggerShooterButtonID = 1;
+			public static final int slowDriveButtonID = 8;
+		}
 	}
 
 	public final class Intake {

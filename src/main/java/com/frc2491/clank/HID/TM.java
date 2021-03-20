@@ -22,8 +22,8 @@ public class TM implements IDriveController {
 
 	public TM() {
 		m_Joystick = new Joystick(Constants.Controller.driveControllerID);
-		shootButton = new JoystickButton(m_Joystick, 1);
-		slowDriveButton = new JoystickButton(m_Joystick, 8);
+		shootButton = new JoystickButton(m_Joystick, Constants.Controller.TM.triggerShooterButtonID);
+		slowDriveButton = new JoystickButton(m_Joystick, Constants.Controller.TM.slowDriveButtonID);
 	}
 
 	@Override

@@ -24,7 +24,7 @@ Spindexer spindexer;
   public void initialize() {
     //Combines the IntakeRotation and RunAntiJam commands to sort and integrate balls into the spindexer
     spindexer.Rotate(Constants.Spindexer.intakeSpindexerSpeed);
-    spindexer.RunOuttakeMotor(Constants.Spindexer.AntiJamOutTakeSpeed);
+    spindexer.RunAntiJam(Constants.Spindexer.AntiJamOutTakeSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
