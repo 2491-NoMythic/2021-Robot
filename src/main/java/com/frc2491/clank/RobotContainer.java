@@ -73,8 +73,9 @@ public class RobotContainer {
 
 		//Set the default command to grab controller axis
 		drivetrain.setDefaultCommand(new Drive(drivetrain));
-		intake.setDefaultCommand(new IntakeCommand(intake));
+		//intake.setDefaultCommand(new IntakeCommand(intake));
 		shooter.setDefaultCommand(new UpdateShooterParams(shooter));
+		
 	}
 
 	/**

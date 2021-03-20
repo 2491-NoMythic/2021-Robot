@@ -108,11 +108,11 @@ public class PS4 implements IOperatorController {
 		// TODO Picking STOP as the default. Not sure what default should be. 
 		// We should remove the if for the default after we know what it is.
 		
-		if (joystick.getPOV() == 0) {
+		if (joystick.getRawButtonPressed(2)) {
 			Variables.Shooter.shooterSpeed = ShooterSpeeds.lowSpeed;
-		}else if (joystick.getPOV() == 180) {
+		}else if (joystick.getRawButtonPressed(4)) {
 			Variables.Shooter.shooterSpeed = ShooterSpeeds.highSpeed;
-		}else if (joystick.getPOV() == 90) {
+		}else if (joystick.getRawButtonPressed(3)) {
 			Variables.Shooter.shooterSpeed = ShooterSpeeds.stop;
 		}
 	}
@@ -121,11 +121,11 @@ public class PS4 implements IOperatorController {
 		// TODO Picking COLLAPSED as the default. Not sure what default should be.
 		// We should remove the if for the default after we know what it is.
 		
-		if (joystick.getPOV() == 0) {
+		if (joystick.getRawButtonPressed(2)) {
 			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.lowHood;
-		}else if (joystick.getPOV() == 180) {
+		}else if (joystick.getRawButtonPressed(4)) {
 			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.highHood;
-		}else if (joystick.getPOV() == 90) {
+		}else if (joystick.getRawButtonPressed(3)) {
 			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.collapsed;
 		}
 	}

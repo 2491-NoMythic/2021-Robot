@@ -79,6 +79,7 @@ public class Shooter extends SubsystemBase {
 		SmartDashboard.putNumber("kD", dGain);
 		SmartDashboard.putNumber("IZone", iZone);
 		SmartDashboard.putNumber("SpeedRightNow", getLeftEncoderRate());
+		SmartDashboard.putNumber("hood position",servo2.getAngle());
 	}
 
 	// Creating Drive Velocity for Motors

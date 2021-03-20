@@ -113,7 +113,7 @@ public final class Constants {
 	public final class Intake {
 		public static final int intakeMotorPort = 12;
 		public static final int intakeAxisID = 5;
-		public static final double autoIntakeSpeed = 0.5;
+		public static final double autoIntakeSpeed = 0.75;
 	}
 
 	public final class Indexer {
@@ -143,11 +143,11 @@ public final class Constants {
 		public static final int OuttakeMotor = 13;
 		public static final int AntiJamMotor = 11;
 
-		public static final double intakeSpindexerSpeed = -.3;
-		public static final double shootingSpindexerSpeed = -.3;
+		public static final double intakeSpindexerSpeed = -.15;
+		public static final double shootingSpindexerSpeed = -.5;
 
-		public static final double shootingOutTakeSpeed = 0.5;
-		public static final double AntiJamOutTakeSpeed = -.8;
+		public static final double shootingOutTakeSpeed = 0;
+		public static final double AntiJamOutTakeSpeed = 0.25;
 	}
 
 	public final class Shooter {
@@ -188,10 +188,14 @@ public final class Constants {
 		public final static int midSpeedButton = 270;
 		public final static int highSpeedButton = 180;
 
+		public final static double shooterSpeed1 = 0;
+		public final static double shooterSpeed2 = 3000;
+		public final static double shooterSpeed3 = 6000;
+
 	}
 
 	public enum ShooterSpeeds {
-		stop(0), lowSpeed(8000), highSpeed(21000); //TODO replace for real values
+		stop(Constants.Shooter.shooterSpeed1), lowSpeed(Constants.Shooter.shooterSpeed2), highSpeed(Constants.Shooter.shooterSpeed3); //TODO replace for real values
 		
 		private double speed;
 
@@ -205,7 +209,7 @@ public final class Constants {
 	}
 
 	public enum ShooterHoodPositions {
-		collapsed(0), lowHood(2491), highHood(2491); //TODO replace for real values
+		collapsed(Constants.Shooter.hoodPositionOne), lowHood(Constants.Shooter.hoodPositionTwo), highHood(Constants.Shooter.hoodPositionThree); //TODO replace for real values
 
 		private double angle;
 

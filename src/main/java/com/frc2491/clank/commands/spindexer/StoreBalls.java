@@ -5,6 +5,7 @@
 package com.frc2491.clank.commands.spindexer;
 
 import com.frc2491.clank.Settings.Constants;
+import com.frc2491.clank.commands.drivetrain.Rotate;
 import com.frc2491.clank.subsystems.Spindexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -33,7 +34,11 @@ Spindexer spindexer;
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+
+    spindexer.Rotate(0);
+    spindexer.RunAntiJam(0);
+  }
 
   // Returns true when the command should end.
   @Override
