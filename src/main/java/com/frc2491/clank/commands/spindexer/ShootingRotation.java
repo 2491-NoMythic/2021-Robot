@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank.commands.spindexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -16,7 +9,8 @@ public class ShootingRotation extends CommandBase {
 	private Spindexer spindexer;
 
 	/**
-	 * Creates a new Rotate command.
+	 * Creates a new Shooting Rotate command.
+	 * Spins the spindexer at Constants.Spindexer.shootingSpindexerSpeed
 	 */
 	public ShootingRotation(Spindexer spindexer) {
 		// Use addRequirements() here to declare subsystem dependencies.
@@ -27,18 +21,13 @@ public class ShootingRotation extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		spindexer.Rotate(Constants.Spindexer.shootingSpindexerSpeed);
-	}
-
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
-	public void execute() {
+		spindexer.rotate(Constants.Spindexer.shootingSpindexerSpeed);
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		spindexer.Rotate(0);
+		spindexer.rotate(Constants.ShooterSpeeds.stop.getSpeed());
 	}
 
 	// Returns true when the command should end.

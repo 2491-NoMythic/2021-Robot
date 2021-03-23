@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank.commands.spindexer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -16,10 +9,10 @@ public class IntakeRotation extends CommandBase {
 	private Spindexer spindexer;
 
 	/**
-	 * Creates a new Rotate command.
+	 * Creates a new IndakeRotate command.
+	 * Spins the intake at Constants.Spindexer.intakeSpindexerSpeed
 	 */
 	public IntakeRotation(Spindexer spindexer) {
-		// Use addRequirements() here to declare subsystem dependencies.
 		this.spindexer = spindexer;
 		addRequirements(spindexer);
 	}
@@ -28,7 +21,7 @@ public class IntakeRotation extends CommandBase {
 	@Override
 	public void initialize() {
 		//Rotates the spindexer at a set speed to intake balls at a uniform rate
-		spindexer.Rotate(Constants.Spindexer.intakeSpindexerSpeed);
+		spindexer.rotate(Constants.Spindexer.intakeSpindexerSpeed);
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
@@ -39,7 +32,7 @@ public class IntakeRotation extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		spindexer.Rotate(0);
+		spindexer.rotate(Constants.ShooterSpeeds.stop.getSpeed());
 	}
 
 	// Returns true when the command should end.

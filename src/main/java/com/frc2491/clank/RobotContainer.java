@@ -1,36 +1,25 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank;
-
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.frc2491.clank.commands.drivetrain.Drive;
-import com.frc2491.clank.commands.drivetrain.LineupDrive;
-import com.frc2491.clank.commands.drivetrain.Rotate;
-import com.frc2491.clank.commands.intake.IntakeCommand;
-import com.frc2491.clank.commands.shooter.PrepareShooter;
-import com.frc2491.clank.commands.shooter.RunShooterAtSpeedPID;
-import com.frc2491.clank.commands.shooter.UpdateShooterParams;
+import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.HID.CurrentHIDs;
 import com.frc2491.clank.HID.IDriveController;
 import com.frc2491.clank.HID.IOperatorController;
-
-import com.frc2491.clank.subsystems.Drivetrain;
-import com.frc2491.clank.subsystems.Shooter;
-
-import com.frc2491.clank.subsystems.Intake;
-
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
-//import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-
-import com.frc2491.clank.commands.spindexer.OuttakeMotorShoot;
+import com.frc2491.clank.commands.drivetrain.Drive;
+import com.frc2491.clank.commands.intake.IntakeCommand;
+import com.frc2491.clank.commands.shooter.OuttakeMotorShoot;
+import com.frc2491.clank.commands.shooter.PrepareShooter;
+import com.frc2491.clank.commands.shooter.SetShooterSpeed;
 import com.frc2491.clank.commands.spindexer.ShootingRotation;
 import com.frc2491.clank.commands.spindexer.StoreBalls;
+import com.frc2491.clank.subsystems.AntiJam;
+import com.frc2491.clank.subsystems.Drivetrain;
+import com.frc2491.clank.subsystems.Hood;
+import com.frc2491.clank.subsystems.Intake;
+import com.frc2491.clank.subsystems.Outtake;
+import com.frc2491.clank.subsystems.Shooter;
 import com.frc2491.clank.subsystems.Spindexer;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -49,6 +38,9 @@ public class RobotContainer {
 	private final Shooter shooter = new Shooter();
 	private final Intake intake = new Intake();
 	private final Spindexer spindexer = new Spindexer();
+	private final AntiJam antiJam = new AntiJam();
+	private final Outtake outtake = new Outtake();
+	private final Hood hood = new Hood();
 
 	/**
 	 * Here is where we get the current instace of the CurrentHIDs that we are using. There can only be one instance of
@@ -61,8 +53,6 @@ public class RobotContainer {
 	 * Here is where we declare instances of the commands that we want to run. Notice that these will only run the
 	 * instantiation of the class once. We only need these here if used more than once in class.
 	 */
-	private final RunShooterAtSpeedPID shooterAtSpeedPID = new RunShooterAtSpeedPID(shooter);
-	// private final AutonomousCommand autonomousCommand = new AutonomousCommand(m_drivetrain, m_Shooter, m_Indexer, Constants.Drivetrain.timeDriveSpeed, Constants.Drivetrain.timeDriveTime);
 
 	/**
 	 * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -73,8 +63,13 @@ public class RobotContainer {
 
 		//Set the default command to grab controller axis
 		drivetrain.setDefaultCommand(new Drive(drivetrain));
-		intake.setDefaultCommand(new IntakeCommand(intake));
-		shooter.setDefaultCommand(new UpdateShooterParams(shooter));
+
+		// SmartDashboard.putData(shooter);
+		// SmartDashboard.putData(intake);
+		// SmartDashboard.putData(spindexer);
+		// SmartDashboard.putData(antiJam);
+		// SmartDashboard.putData(outtake);
+		// SmartDashboard.putData(hood);
 	}
 
 	/**
@@ -84,27 +79,14 @@ public class RobotContainer {
 		IOperatorController operatorController = currentHIDs.getOperatorController();
 		IDriveController driveController = currentHIDs.getDriveController();
 
-		SmartDashboard.putData(shooterAtSpeedPID);
-		SmartDashboard.putNumber("Axis", operatorController.getLeftClimbAxis());
-		SmartDashboard.putData("TurnUp", new Rotate(drivetrain, 30));
-
 		//Button assignments
-		//.and is used to create the safteys. Note that in current form safteys are not neccesary for turining off the system.
+		operatorController.getShooterLowButton().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.lowSpeed, Constants.ShooterHoodPositions.lowHood));
+		operatorController.getShooterLowButton().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.highSpeed, Constants.ShooterHoodPositions.highHood));
 
-		SmartDashboard.putData("TurnUp", new Rotate(drivetrain, 30));
-		//operatorController.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
+		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new PrepareShooter(shooter, hood)));
+		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new StoreBalls(spindexer, antiJam), new IntakeCommand(intake)));
 
-		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new PrepareShooter(shooter)));
-		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new StoreBalls(spindexer), new IntakeCommand(intake)));
-		
-		driveController.getSlowDriveButton().whileHeld(new LineupDrive(drivetrain));
-		driveController.getShootButton().whileHeld(new OuttakeMotorShoot(spindexer));
+		driveController.getShootButton().whileHeld(new OuttakeMotorShoot(outtake));
 	}
-
-	/**
-	 * Use this to pass the autonomous command to the main {@link Robot} class.
-	 *
-	 * @return the command to run in autonomous
-	 */
 	
 }
