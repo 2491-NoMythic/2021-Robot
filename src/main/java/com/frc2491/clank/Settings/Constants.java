@@ -92,9 +92,6 @@ public final class Constants {
 			public static final int runIndexerButtonID = 2491; // TODO change to value
 			public static final int backIndexerButtonID = 2491; // TODO change to value
 			public static final int slowModeButtonID = 2491; // TODO change to value
-			public static final int setHoodPositionOneID = 2491; // TODO change to actual value
-			public static final int setHoodPositionTwoID = 2491; // TODO change to actual value
-			public static final int setHoodPositionThreeID = 2491; // TODO change to actual value
 		}
 
 		public final class PS4 {
@@ -105,9 +102,11 @@ public final class Constants {
 			public static final int runIndexerButtonID = 14;
 			public static final int backIndexerButtonID = 13;
 			public static final int slowModeButtonID = 10;
-			public static final int setHoodPositionOneID = 1;
-			public static final int setHoodPositionTwoID = 2;
-			public static final int setHoodPositionThreeID = 3;
+		}
+
+		public final class TM {
+			public static final int triggerShooterButtonID = 1;
+			public static final int slowDriveButtonID = 8;
 		}
 	}
 
@@ -180,8 +179,8 @@ public final class Constants {
 
 		// hood positions
 		public final static double hoodPositionOne = 0;
-		public final static double hoodPositionTwo = 50; 
-		public final static double hoodPositionThree = 130; 
+		public final static double hoodPositionTwo = 90; 
+		public final static double hoodPositionThree = 170; 
 
 		// Values
 		public final static double testSpeed = 1000;
@@ -196,12 +195,26 @@ public final class Constants {
 		
 		private double speed;
 
-		private ShooterSpeeds(double mSpeed) {
-			speed = mSpeed;
+		private ShooterSpeeds(double speed) {
+			this.speed = speed;
 		}
 
 		public double getSpeed() {
 			return speed;
+		}
+	}
+
+	public enum ShooterHoodPositions {
+		collapsed(0), lowHood(2491), highHood(2491); //TODO replace for real values
+
+		private double angle;
+
+		private ShooterHoodPositions(double angle) {
+			this.angle = angle;
+		}
+
+		public double getAngle() {
+			return angle;
 		}
 	}
 

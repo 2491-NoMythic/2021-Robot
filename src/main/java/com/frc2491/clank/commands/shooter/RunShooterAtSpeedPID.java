@@ -9,7 +9,7 @@ package com.frc2491.clank.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-import com.frc2491.clank.HID.CurrentHIDs;
+import com.frc2491.clank.Settings.Variables;
 import com.frc2491.clank.subsystems.Shooter;
 
 public class RunShooterAtSpeedPID extends CommandBase {
@@ -33,8 +33,7 @@ public class RunShooterAtSpeedPID extends CommandBase {
 	@Override
 	public void execute() {
 		// this will currently only run the shooter when a button is held down
-		System.out.println("run shooter at speed pid");
-		mShooter.runLeftShooterVelocity(CurrentHIDs.getInstance().getOperatorController().getShooterSpeed().getSpeed());
+		mShooter.runLeftShooterVelocity(Variables.Shooter.shooterSpeed.getSpeed());
 	}
 
 	// Called once the command ends or is interrupted.

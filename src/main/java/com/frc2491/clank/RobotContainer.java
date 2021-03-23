@@ -12,13 +12,12 @@ import com.frc2491.clank.commands.drivetrain.Drive;
 import com.frc2491.clank.commands.drivetrain.LineupDrive;
 import com.frc2491.clank.commands.drivetrain.Rotate;
 import com.frc2491.clank.commands.intake.IntakeCommand;
-import com.frc2491.clank.commands.shooter.FlywheelRev;
+import com.frc2491.clank.commands.shooter.PrepareShooter;
 import com.frc2491.clank.commands.shooter.RunShooterAtSpeedPID;
-import com.frc2491.clank.commands.shooter.SetHoodPosition;
+import com.frc2491.clank.commands.shooter.UpdateShooterParams;
 import com.frc2491.clank.HID.CurrentHIDs;
 import com.frc2491.clank.HID.IDriveController;
 import com.frc2491.clank.HID.IOperatorController;
-import com.frc2491.clank.Settings.Constants;
 
 import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Shooter;
@@ -28,13 +27,9 @@ import com.frc2491.clank.subsystems.Intake;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 //import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 
-import com.frc2491.clank.commands.spindexer.IntakeRotation;
 import com.frc2491.clank.commands.spindexer.OuttakeMotorShoot;
-import com.frc2491.clank.commands.spindexer.RunAntiJam;
-//import com.frc2491.clank.commands.spindexer.IntakeRotation;
-//import com.frc2491.clank.commands.spindexer.OuttakeMotorShoot;
-//import com.frc2491.clank.commands.spindexer.RunAntiJam;
 import com.frc2491.clank.commands.spindexer.ShootingRotation;
+import com.frc2491.clank.commands.spindexer.StoreBalls;
 import com.frc2491.clank.subsystems.Spindexer;
 
 /**
@@ -79,6 +74,7 @@ public class RobotContainer {
 		//Set the default command to grab controller axis
 		drivetrain.setDefaultCommand(new Drive(drivetrain));
 		intake.setDefaultCommand(new IntakeCommand(intake));
+		shooter.setDefaultCommand(new UpdateShooterParams(shooter));
 	}
 
 	/**
@@ -98,13 +94,9 @@ public class RobotContainer {
 		SmartDashboard.putData("TurnUp", new Rotate(drivetrain, 30));
 		//operatorController.getShooterRevFlywheelButton().whenHeld(new FlywheelRev(m_Shooter, Variables.Shooter.shooterSpeed));
 
-		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new FlywheelRev(shooter)));
-		//operatorController.getShooterPrepButton().whileHeld(new FlywheelRev(shooter));
-		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new RunAntiJam(spindexer), new IntakeCommand(intake)));
-		operatorController.getShooterHoodPositionOneButton().whenPressed(new SetHoodPosition(shooter, Constants.Shooter.hoodPositionOne));
-		operatorController.getShooterHoodPositionTwoButton().whenPressed(new SetHoodPosition(shooter, Constants.Shooter.hoodPositionTwo));
-		operatorController.getShooterHoodPositionThreeButton().whenPressed(new SetHoodPosition(shooter, Constants.Shooter.hoodPositionThree));
-
+		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new PrepareShooter(shooter)));
+		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new StoreBalls(spindexer), new IntakeCommand(intake)));
+		
 		driveController.getSlowDriveButton().whileHeld(new LineupDrive(drivetrain));
 		driveController.getShootButton().whileHeld(new OuttakeMotorShoot(spindexer));
 	}
