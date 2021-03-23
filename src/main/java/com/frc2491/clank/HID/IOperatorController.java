@@ -16,33 +16,9 @@ public interface IOperatorController {
 
 	public JoystickButton getActivateIntakeButton();
 
-	public JoystickButton getActivateLiftButton();
-
-	public JoystickButton getDeactivateLiftButton();
-
-	public JoystickButton getActivateRobotUp();
-
-	public JoystickButton getClimbCheck1();
-
-	public JoystickButton getClimbCheck2();
-
-	public JoystickButton getDisableRobotUp();
-
 	public JoystickButton getShooterPrepButton();
 
-	public JoystickButton getFunnelerAndIndexer();
+	public JoystickButton getShooterLowButton();
 
-	public JoystickButton runIndexer();
-
-	public JoystickButton backIndexer();
-
-	public double getIntakeAxis();
-
-	public double getLeftClimbAxis();
-
-	public boolean climbSaftey();
-
-	public void getShooterSpeed();
-
-	public void getShooterHoodPositions();
+	public JoystickButton getShooterHighButton();
 }

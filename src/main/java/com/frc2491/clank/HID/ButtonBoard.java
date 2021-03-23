@@ -1,19 +1,9 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank.HID;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 import com.frc2491.clank.Settings.Constants;
-import com.frc2491.clank.Settings.Variables;
-import com.frc2491.clank.Settings.Constants.ShooterHoodPositions;
-import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 
 /**
  * Add your docs here.
@@ -21,30 +11,14 @@ import com.frc2491.clank.Settings.Constants.ShooterSpeeds;
 public class ButtonBoard implements IOperatorController {
 
 	private final Joystick joystick;
-	private static ButtonBoard m_Instance = null;
-	private JoystickButton activateIntakeButton, activateClimbButton, deactivateClimbButton, activateRobotUpButton,
-	deactivateRobotUpButton, climbSaftey1, climbSaftey2, funnelerAndIndexer, shooterPrepButton, runIndexer, backIndexer;
+	private JoystickButton activateIntakeButton, prepShooterButton, lowShooterButton, highShooterButton;
 
-	public static ButtonBoard getInstance() {
-		if (m_Instance == null) {
-			m_Instance = new ButtonBoard();
-		}
-		return m_Instance;
-	}
-
-	private ButtonBoard() {
+	public ButtonBoard() {
 		joystick = new Joystick(Constants.Controller.opertatorControllerID);
 		activateIntakeButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.activateIntakeButtonID);
-		activateClimbButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.activateClimberButtonID);
-		deactivateClimbButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.deactivateClimbButtonID);
-		activateRobotUpButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.activateRobotUpButtonID);
-		deactivateRobotUpButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.deactivateRobotUpButtonID);
-		climbSaftey1 = new JoystickButton(joystick, Constants.Controller.ButtonBoard.climbSaftey1ID);
-		climbSaftey2 = new JoystickButton(joystick, Constants.Controller.ButtonBoard.climbSaftey2ID);
-		funnelerAndIndexer = new JoystickButton(joystick, Constants.Controller.ButtonBoard.funnelerAndIndexerID);
-		shooterPrepButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.shooterButtonID);
-		runIndexer = new JoystickButton(joystick, Constants.Controller.ButtonBoard.runIndexerButtonID);
-		backIndexer = new JoystickButton(joystick, Constants.Controller.ButtonBoard.backIndexerButtonID);
+		prepShooterButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.prepShooterButtonID);
+		lowShooterButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.lowShooterButtonID);
+		highShooterButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.highShooterButtonID);
 	}
 
 	@Override
@@ -53,94 +27,18 @@ public class ButtonBoard implements IOperatorController {
 	}
 
 	@Override
-	public double getIntakeAxis() {
-		return joystick.getRawAxis(Constants.Intake.intakeAxisID);
-	}
-
-	@Override
-	public double getLeftClimbAxis() {
-		return joystick.getRawAxis(Constants.Climber.rightAxisID);
-	}
-
-	@Override
-	public JoystickButton getActivateLiftButton() {
-		return activateClimbButton;
-	}
-
-	@Override
-	public JoystickButton getActivateRobotUp() {
-		return activateRobotUpButton;
-	}
-
-	@Override
-	public JoystickButton getDisableRobotUp() {
-		return deactivateRobotUpButton;
-	}
-
-	@Override
-	public boolean climbSaftey() {
-		return climbSaftey1.get() && climbSaftey2.get();
-	}
-
-	@Override
-	public JoystickButton getDeactivateLiftButton() {
-		return deactivateClimbButton;
-	}
-
-	@Override
-	public JoystickButton getClimbCheck1() {
-		return climbSaftey1;
-	}
-
-	@Override
-	public JoystickButton getClimbCheck2() {
-		return climbSaftey2;
-	}
-
-	@Override
 	public JoystickButton getShooterPrepButton() {
-		return shooterPrepButton;
+		return prepShooterButton;
 	}
 
 	@Override
-	public JoystickButton getFunnelerAndIndexer() {
-		return funnelerAndIndexer;
+	public JoystickButton getShooterLowButton() {
+		return lowShooterButton;
 	}
 
 	@Override
-	public JoystickButton runIndexer() {
-		return runIndexer;
-	}
-
-	@Override
-	public JoystickButton backIndexer() {
-		return backIndexer;
-	}
-	
-	public void getShooterSpeed() {
-		// TODO Picking STOP as the default. Not sure what default should be. 
-		// We should remove the if for the default after we know what it is.
-
-		if (joystick.getPOV() == 0) {
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.lowSpeed;
-		}else if (joystick.getPOV() == 180) {
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.highSpeed;
-		}else if (joystick.getPOV() == 90) {
-			Variables.Shooter.shooterSpeed = ShooterSpeeds.stop;
-		}
-	}
-
-	public void getShooterHoodPositions() {
-		// TODO Picking COLLAPSED as the default. Not sure what default should be.
-		// We should remove the if for the default after we know what it is.
-		
-		if (joystick.getPOV() == 0) {
-			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.lowHood;
-		}else if (joystick.getPOV() == 180) {
-			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.highHood;
-		}else if (joystick.getPOV() == 90) {
-			Variables.Shooter.shooterHoodPosition = ShooterHoodPositions.collapsed;
-		}
+	public JoystickButton getShooterHighButton() {
+		return highShooterButton;
 	}
 
 }

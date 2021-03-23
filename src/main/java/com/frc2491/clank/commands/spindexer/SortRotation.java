@@ -27,7 +27,6 @@ public class SortRotation extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-
 		timer.reset();
 		timer.start();
 	}
@@ -35,8 +34,6 @@ public class SortRotation extends CommandBase {
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-
-		
 		double time = timer.get();
 
 		//math.sin is a function that ocelates. you can then pick an x and determain what number should be there
@@ -44,14 +41,14 @@ public class SortRotation extends CommandBase {
 		//you can also multply the function to change the speed of the ocelation
 		//if you want more information go to https://www.desmos.com/calculator and type in "sin x" then you can multiply it by any nuber you want
 
-		spindexer.Rotate(Math.sin(time * Math.PI / Variables.Spindexer.sortModeReverseTime) * Variables.Spindexer.sortModeMaxPower );
+		spindexer.rotate(Math.sin(time * Math.PI / Variables.Spindexer.sortModeReverseTime) * Variables.Spindexer.sortModeMaxPower );
 		
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		spindexer.Rotate(0);
+		spindexer.rotate(0);
 	}
 
 	// Returns true when the command should end.

@@ -16,8 +16,6 @@ public interface IDriveController {
 
 	public JoystickButton getShootButton();
 
-	public JoystickButton getSlowDriveButton();
-
 	public double getRawDriveAxis();
 
 	public double getDriveAxisDeadzone();

@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank.Settings;
 
 /**
@@ -23,9 +16,7 @@ public final class Constants {
 		//TimeDrive Values
 		public final static double timeDriveSpeed = .6;
 		public final static double timeDriveTime = 2;
-
-		//controllers
-		public final static int driveController = 0;
+		
 		public final static double deadzone = 0.05;
 
 		// drive
@@ -49,15 +40,6 @@ public final class Constants {
 		public final static double driveEncoderVelocityToRPS = 1.0 / driveEncoderTicks * 10;
 		public final static double driveMaxSpeedRPS = 8.0;
 
-		// breaks
-		public final static int rightBreakChannelID = 4;
-		public final static int leftBreakChannelID = 5;
-
-		// Distance
-
-		//Relay
-		public final static int spikeRelayChannel = 0;
-
 		//Distance
 		public final class DistanceDrive {
 			public final static double kP = 0;
@@ -73,95 +55,56 @@ public final class Constants {
 	}
 
 	public final class Controller {
-		public static final int driveControllerID = 0; // TODO change to actual value (If its not zero I will literally
-		                                               // die)
-		public static final int opertatorControllerID = 1; // TODO change to actual value
+		// make sure in driver station the drive controller is first, and operator controller is second
+		public static final int driveControllerID = 0; 
+		public static final int opertatorControllerID = 1;
 
 		public final class ButtonBoard {
-			public static final int activateIntakeButtonID = 2491; // TODO change to value
-			public static final int rightClimbAxisID = 2491; // TODO change to value
-			public static final int leftClimbAxisID = 2491; // TODO change to value
-			public static final int activateClimberButtonID = 2491; // TODO change to value
-			public static final int deactivateClimbButtonID = 2491; // TODO change to value
-			public static final int activateRobotUpButtonID = 2491; // TODO change to value
-			public static final int deactivateRobotUpButtonID = 2491; // TODO change to value
-			public static final int climbSaftey1ID = 2491; // TODO change to value
-			public static final int climbSaftey2ID = 2491; // TODO change to value
-			public static final int funnelerAndIndexerID = 2491; // TODO change to value
-			public static final int shooterButtonID = 2491; // TODO change to value
-			public static final int runIndexerButtonID = 2491; // TODO change to value
-			public static final int backIndexerButtonID = 2491; // TODO change to value
-			public static final int slowModeButtonID = 2491; // TODO change to value
+			public static final int activateIntakeButtonID = 2491;
+			public static final int prepShooterButtonID = 2491;
+			public static final int lowShooterButtonID = 2491;
+			public static final int highShooterButtonID = 2491;
 		}
 
 		public final class PS4 {
-			public static final int activateIntakeButtonID = 6; // TODO change to value
-			public static final int deactivateRobotUpButtonID = 4;
-			public static final int funnelerAndIndexerID = 15;
-			public static final int shooterButtonID = 5;
-			public static final int runIndexerButtonID = 14;
-			public static final int backIndexerButtonID = 13;
-			public static final int slowModeButtonID = 10;
+			public static final int activateIntakeButtonID = 6;
+			public static final int prepShooterButtonID = 5;
+			public static final int lowShooterButtonID = 4;
+			public static final int highShooterButtonID = 2;
 		}
 
 		public final class TM {
 			public static final int triggerShooterButtonID = 1;
-			public static final int slowDriveButtonID = 8;
 		}
 	}
 
 	public final class Intake {
-		public static final int intakeMotorPort = 12;
-		public static final int intakeAxisID = 5;
+		public static final int intakeMotorID = 12;
 		public static final double autoIntakeSpeed = 0.5;
 	}
 
-	public final class Indexer {
-		// Motors
-		public static final int indexBeltTalonID = 9;
-		public static final int connectorTalonID = 11;
-		public static final int funnelLeftTalonID = 8;
-		public static final int funnelRightTalonID = 7;
-		// Motor Speeds
-		public static final double indexIntakeSpeed = 0;
-		public static final double connectorTalonSpeed = 1;
-		public static final double leftFunnelSpeed = 0;
-		public static final double rightFunnelSpeed = 0;
-		// Sensors
-		public static final int sensorOnePin = 17;
-		public static final int sensorTwoPin = 16;
-		public static final int sensorThreePin = 15;
-		public static final int sensorFourPin = 14;
-		public static final int sensorFivePin = 13;
-		public static final int sensorSixPin = 12;
-		public static final int sensorSevenPin = 11;
-		public static final int sensorEightPin = 10;
-	}
-
 	public final class Spindexer {
-		public static final int MainMotor = 10;
-		public static final int OuttakeMotor = 13;
-		public static final int AntiJamMotor = 11;
+		public static final int mainMotorID = 10;
+		public static final int outtakeMotorID = 13;
+		public static final int antiJamMotorID = 11;
 
 		public static final double intakeSpindexerSpeed = -.3;
 		public static final double shootingSpindexerSpeed = -.3;
 
 		public static final double shootingOutTakeSpeed = 0.5;
-		public static final double AntiJamOutTakeSpeed = -.8;
+		public static final double antiJamIntakeSpeed = -.8;
 	}
 
 	public final class Shooter {
 		// shooter
-		public static final int shooterTalonLeftMotor = 4;
-		public static final int shooterTalonRightMotor = 5;
-		public static final int servo1 = 2;
-		public static final int servo2 = 3;
+		public static final int shooterTalonLeftMotorID = 4;
+		public static final int shooterTalonRightMotorID = 5;
+		public static final int servo1PwmID = 2;
+		public static final int servo2PwmID = 3;
 		// encoders
 		public final static double shooterEncoderTicks = 2048.0; // Encoder ticks per wheel rotation is 2048
 		public final static double shooterWheelDiameter = 4.0; // Inches
-		public final static double shooterEncoderToInches = shooterWheelDiameter * Math.PI / shooterEncoderTicks; // Makes
-		                                                                                                          // number
-		                                                                                                          // inches
+		public final static double shooterEncoderToInches = shooterWheelDiameter * Math.PI / shooterEncoderTicks; // Makes number of inches
 		public final static double shooterEncoderVelocityToRPS = 1.0 / shooterEncoderTicks * 10;
 		// Speeds
 		public static final double shootSpeedRpm = 20000; // Rpm
@@ -176,22 +119,10 @@ public final class Constants {
 		public final static double kF = 0.0455;
 		public final static int kIzone = 100;
 		public final static double PeakOutput = 0;
-
-		// hood positions
-		public final static double hoodPositionOne = 0;
-		public final static double hoodPositionTwo = 90; 
-		public final static double hoodPositionThree = 170; 
-
-		// Values
-		public final static double testSpeed = 1000;
-		public final static int lowSpeedButton = 0;
-		public final static int midSpeedButton = 270;
-		public final static int highSpeedButton = 180;
-
 	}
 
 	public enum ShooterSpeeds {
-		stop(0), lowSpeed(8000), highSpeed(21000); //TODO replace for real values
+		stop(0), lowSpeed(3000), highSpeed(6000);
 		
 		private double speed;
 
@@ -205,7 +136,7 @@ public final class Constants {
 	}
 
 	public enum ShooterHoodPositions {
-		collapsed(0), lowHood(2491), highHood(2491); //TODO replace for real values
+		collapsed(0), lowHood(90), highHood(170);
 
 		private double angle;
 
@@ -216,15 +147,5 @@ public final class Constants {
 		public double getAngle() {
 			return angle;
 		}
-	}
-
-	public final class Climber {
-		public static final int liftMotorID = 10;
-		public static final int shifterForwardChannel = 3;
-		public static final int shifterReverseChannel = 2;
-		public static final double manualLiftExtensionSpeed = 0;
-		public static final int brakeChannel = 6;
-		public static final int rightAxisID = 1;
-		public static final int leftAxisID = 0;
 	}
 }
