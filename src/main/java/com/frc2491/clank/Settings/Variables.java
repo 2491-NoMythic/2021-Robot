@@ -29,7 +29,7 @@ public class Variables {
 
 	public static class Spindexer{
 		//this is the amount of time it will take for the spindexer to reverse in sort mode
-		public static double sortModeReverseTime = 2; 
+		public static double sortModeReverseTime = .8; 
 		public static double sortModeMaxPower = 0.5;
 	}
 }
