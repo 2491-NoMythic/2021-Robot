@@ -11,7 +11,7 @@ import com.frc2491.clank.Settings.Constants;
 public class ButtonBoard implements IOperatorController {
 
 	private final Joystick joystick;
-	private JoystickButton activateIntakeButton, prepShooterButton, lowShooterButton, highShooterButton;
+	private JoystickButton activateIntakeButton, prepShooterButton, lowShooterButton, highShooterButton, shootButton;
 
 	public ButtonBoard() {
 		joystick = new Joystick(Constants.Controller.opertatorControllerID);
@@ -19,6 +19,7 @@ public class ButtonBoard implements IOperatorController {
 		prepShooterButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.prepShooterButtonID);
 		lowShooterButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.lowShooterButtonID);
 		highShooterButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.highShooterButtonID);
+		shootButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.shootButtonID);
 	}
 
 	@Override
@@ -39,6 +40,11 @@ public class ButtonBoard implements IOperatorController {
 	@Override
 	public JoystickButton getShooterHighButton() {
 		return highShooterButton;
+	}
+
+	@Override
+	public JoystickButton getShootButton() {
+		return shootButton;
 	}
 
 }

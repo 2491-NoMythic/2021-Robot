@@ -23,6 +23,7 @@ public class RunAntiJam extends CommandBase {
 	public void initialize() {
 		//Runs an anti jam motor at a uniform speed
 		antiJam.runAntiJam(Constants.Spindexer.antiJamIntakeSpeed);
+		
 	}
 
 	// Called once the command ends or is interrupted.

@@ -8,7 +8,9 @@ import com.frc2491.clank.commands.intake.IntakeCommand;
 import com.frc2491.clank.commands.shooter.OuttakeMotorShoot;
 import com.frc2491.clank.commands.shooter.PrepareShooter;
 import com.frc2491.clank.commands.shooter.SetShooterSpeed;
+import com.frc2491.clank.commands.spindexer.RunAntiJam;
 import com.frc2491.clank.commands.spindexer.ShootingRotation;
+import com.frc2491.clank.commands.spindexer.SortRotation;
 import com.frc2491.clank.commands.spindexer.StoreBalls;
 import com.frc2491.clank.subsystems.AntiJam;
 import com.frc2491.clank.subsystems.Drivetrain;
@@ -81,12 +83,15 @@ public class RobotContainer {
 
 		//Button assignments
 		operatorController.getShooterLowButton().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.lowSpeed, Constants.ShooterHoodPositions.lowHood));
-		operatorController.getShooterLowButton().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.highSpeed, Constants.ShooterHoodPositions.highHood));
+		operatorController.getShooterHighButton().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.highSpeed, Constants.ShooterHoodPositions.highHood));
 
 		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new PrepareShooter(shooter, hood)));
-		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new StoreBalls(spindexer, antiJam), new IntakeCommand(intake)));
+		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new SortRotation(spindexer), new IntakeCommand(intake), new RunAntiJam(antiJam)));
+		operatorController.getShootButton().whileHeld(new OuttakeMotorShoot(outtake));
 
 		driveController.getShootButton().whileHeld(new OuttakeMotorShoot(outtake));
+
+
 	}
 	
 }

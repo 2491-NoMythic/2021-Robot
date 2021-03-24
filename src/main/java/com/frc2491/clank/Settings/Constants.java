@@ -64,6 +64,7 @@ public final class Constants {
 			public static final int prepShooterButtonID = 2491;
 			public static final int lowShooterButtonID = 2491;
 			public static final int highShooterButtonID = 2491;
+			public static final int shootButtonID = 2491;
 		}
 
 		public final class PS4 {
@@ -71,6 +72,7 @@ public final class Constants {
 			public static final int prepShooterButtonID = 5;
 			public static final int lowShooterButtonID = 4;
 			public static final int highShooterButtonID = 2;
+			public static final int shootButtonID = 1;
 		}
 
 		public final class TM {
@@ -92,7 +94,7 @@ public final class Constants {
 		public static final double shootingSpindexerSpeed = -.3;
 
 		public static final double shootingOutTakeSpeed = 0.5;
-		public static final double antiJamIntakeSpeed = -.8;
+		public static final double antiJamIntakeSpeed = .05;
 	}
 
 	public final class Shooter {
@@ -122,7 +124,7 @@ public final class Constants {
 	}
 
 	public enum ShooterSpeeds {
-		stop(0), lowSpeed(3000), highSpeed(6000);
+		stop(0), lowSpeed(3000), highSpeed(8000);
 		
 		private double speed;
 

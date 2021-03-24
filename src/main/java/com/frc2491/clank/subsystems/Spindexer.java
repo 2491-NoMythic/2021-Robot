@@ -1,6 +1,7 @@
 package com.frc2491.clank.subsystems;
 
 import com.frc2491.clank.Settings.Constants;
+import com.frc2491.clank.Settings.Variables;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -13,6 +14,8 @@ public class Spindexer extends SubsystemBase {
 
 	public Spindexer() {
 		mainRotationMotor = new CANSparkMax(Constants.Spindexer.mainMotorID, MotorType.kBrushless);
+		SmartDashboard.putNumber("Spindexer reverse rotation time", Variables.Spindexer.sortModeReverseTime);
+		SmartDashboard.putNumber("Spindexer sorting motor power", Variables.Spindexer.sortModeMaxPower);
 	}
 
 	/**
@@ -29,5 +32,7 @@ public class Spindexer extends SubsystemBase {
 	@Override
 	public void periodic() {
 		SmartDashboard.putNumber("Spindexer Encoder", mainRotationMotor.getEncoder().getVelocity());
+		Variables.Spindexer.sortModeReverseTime = SmartDashboard.getNumber("Spindexer reverse rotation time", 2);
+		Variables.Spindexer.sortModeMaxPower = SmartDashboard.getNumber("Spindexer sorting motor power", .5);
 	}
 }

@@ -11,7 +11,7 @@ import com.frc2491.clank.Settings.Constants;
 public class PS4 implements IOperatorController {
 
 	private final Joystick joystick;
-	private JoystickButton activateIntakeButton, prepShooterButton, lowShooterButton, highShooterButton;
+	private JoystickButton activateIntakeButton, prepShooterButton, lowShooterButton, highShooterButton, shootButton;
 
 	public PS4() {
 		joystick = new Joystick(Constants.Controller.opertatorControllerID);
@@ -19,6 +19,7 @@ public class PS4 implements IOperatorController {
 		prepShooterButton = new JoystickButton(joystick, Constants.Controller.PS4.prepShooterButtonID);
 		lowShooterButton = new JoystickButton(joystick, Constants.Controller.PS4.lowShooterButtonID);
 		highShooterButton = new JoystickButton(joystick, Constants.Controller.PS4.highShooterButtonID);
+		shootButton = new JoystickButton(joystick, Constants.Controller.PS4.shootButtonID);
 	}
 
 	@Override
@@ -40,5 +41,12 @@ public class PS4 implements IOperatorController {
 	public JoystickButton getShooterHighButton() {
 		return highShooterButton;
 	}
+
+	@Override
+	public JoystickButton getShootButton() {
+		return shootButton;
+	}
+
+	
 
 }

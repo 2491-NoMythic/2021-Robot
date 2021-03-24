@@ -14,4 +14,6 @@ public interface IOperatorController {
 	public JoystickButton getShooterLowButton();
 
 	public JoystickButton getShooterHighButton();
+
+	public JoystickButton getShootButton();
 }
