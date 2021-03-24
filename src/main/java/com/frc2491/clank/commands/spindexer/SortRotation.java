@@ -41,7 +41,7 @@ public class SortRotation extends CommandBase {
 		//you can also multply the function to change the speed of the ocelation
 		//if you want more information go to https://www.desmos.com/calculator and type in "sin x" then you can multiply it by any nuber you want
 
-		spindexer.rotate((Math.sin(time * Math.PI / Variables.Spindexer.sortModeReverseTime) + Math.sin(2* time * Math.PI / Variables.Spindexer.sortModeReverseTime) * Variables.Spindexer.sortModeMaxPower / 2));
+		spindexer.rotate((Math.sin(time * Math.PI / Variables.Spindexer.sortModeReverseTime) + Math.sin(2* time * Math.PI / Variables.Spindexer.sortModeReverseTime)) * Variables.Spindexer.sortModeMaxPower / 2);
 		
 	}
 
