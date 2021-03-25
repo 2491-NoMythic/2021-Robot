@@ -123,12 +123,14 @@ public final class Constants {
 		public final static double PeakOutput = 0;
 	}
 
-	public enum ShooterSpeeds {
-		stop(0), lowSpeed(3000), highSpeed(8000);
-		
+	public static class ShooterSpeeds {
+		public static final ShooterSpeeds stop = new ShooterSpeeds(0);
+		public static final ShooterSpeeds lowSpeed = new ShooterSpeeds(3000);
+		public static final ShooterSpeeds highSpeed = new ShooterSpeeds(8000);
+
 		private double speed;
 
-		private ShooterSpeeds(double speed) {
+		public ShooterSpeeds(double speed) {
 			this.speed = speed;
 		}
 
@@ -137,12 +139,14 @@ public final class Constants {
 		}
 	}
 
-	public enum ShooterHoodPositions {
-		collapsed(0), lowHood(90), highHood(170);
+	public static class ShooterHoodPositions {
+		public static final ShooterHoodPositions collapsed = new ShooterHoodPositions(0);
+		public static final ShooterHoodPositions lowHood = new ShooterHoodPositions(90);
+		public static final ShooterHoodPositions highHood =  new ShooterHoodPositions(170);
 
 		private double angle;
 
-		private ShooterHoodPositions(double angle) {
+		public ShooterHoodPositions(double angle) {
 			this.angle = angle;
 		}
 

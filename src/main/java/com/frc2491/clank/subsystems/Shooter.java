@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.frc2491.clank.Settings.Constants;
+import com.frc2491.clank.Settings.Variables;
 
 public class Shooter extends SubsystemBase {
 
@@ -66,6 +67,8 @@ public class Shooter extends SubsystemBase {
 		SmartDashboard.putNumber("kD", dGain);
 		SmartDashboard.putNumber("IZone", iZone);
 		SmartDashboard.putNumber("SpeedRightNow", getLeftEncoderRate());
+
+		SmartDashboard.putNumber("shooter speed overide", 0);
 	}
 
 	// Creating Drive Velocity for Motors
@@ -135,6 +138,12 @@ public class Shooter extends SubsystemBase {
 		final double z = SmartDashboard.getNumber("IZone", 0);
 
 		SmartDashboard.putNumber("Shooter Speed", getEncoderRate());
+		final double shooterSpeed = SmartDashboard.getNumber("shooter speed overide", 0);
+
+		if (shooterSpeed > 0 && shooterSpeed != Variables.Shooter.shooterSpeed.getSpeed())
+		{
+			Variables.Shooter.shooterSpeed = new Constants.ShooterSpeeds(shooterSpeed);
+		}
 
 		// if PID coefficients on SmartDashboard have changed, write new values to
 		// controller
