@@ -21,21 +21,14 @@ public class RunAntiJam extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-<<<<<<< HEAD
-=======
-		//Runs an anti jam motor at a uniform speed
-<<<<<<< HEAD
->>>>>>> develop
-		spindexer.RunAntiJam(Constants.Spindexer.AntiJamOutTakeSpeed);
+		antiJam.runAntiJam(Constants.Spindexer.antiJamIntakeSpeed);
+
 	}
 
 	// Called every time the scheduler runs while the command is scheduled.
 	@Override
 	public void execute() {
-=======
-		antiJam.runAntiJam(Constants.Spindexer.antiJamIntakeSpeed);
 		
->>>>>>> develop
 	}
 
 	// Called once the command ends or is interrupted.
