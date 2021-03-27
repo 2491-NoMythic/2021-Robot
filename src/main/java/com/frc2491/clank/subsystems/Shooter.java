@@ -44,7 +44,7 @@ public class Shooter extends SubsystemBase {
 		// Config peak and nominal outputs
 		shooterLeftMotor.configNominalOutputForward(0, Constants.Shooter.TimeoutMs);
 		shooterLeftMotor.configNominalOutputReverse(0, Constants.Shooter.TimeoutMs);
-		shooterLeftMotor.configPeakOutputForward(1, Constants.Shooter.TimeoutMs);
+		//shooterLeftMotor.configPeakOutputForward(1, Constants.Shooter.TimeoutMs);
 		shooterLeftMotor.configPeakOutputReverse(0, Constants.Shooter.TimeoutMs);
 
 		fGain = Constants.Shooter.kF;
@@ -137,12 +137,23 @@ public class Shooter extends SubsystemBase {
 		final double f = SmartDashboard.getNumber("kF", 0);
 		final double z = SmartDashboard.getNumber("IZone", 0);
 
-		SmartDashboard.putNumber("Shooter Speed", getEncoderRate());
+		SmartDashboard.putNumber("Shooter Encoder", getEncoderRate());
+		SmartDashboard.putNumber("Speed Variable", Variables.Shooter.shooterSpeed);
 		final double shooterSpeed = SmartDashboard.getNumber("shooter speed overide", 0);
 
-		if (shooterSpeed > 0 && shooterSpeed != Variables.Shooter.shooterSpeed.getSpeed())
+		if (shooterSpeed > 0)// && shooterSpeed != Variables.Shooter.shooterSpeed)
 		{
-			Variables.Shooter.shooterSpeed = new Constants.ShooterSpeeds(shooterSpeed);
+			Variables.Shooter.shooterSpeed = shooterSpeed;
+			//System.out.println("changed shooter overide variable to: " + shooterSpeed);
+			//System.out.println("actual speed: " +  Variables.Shooter.shooterSpeed);
+		}
+
+		if (getEncoderRate() < 3000)
+		{
+			shooterLeftMotor.configPeakOutputForward(0.75, Constants.Shooter.TimeoutMs);
+		}
+		else{
+			shooterLeftMotor.configPeakOutputForward(1, Constants.Shooter.TimeoutMs);;
 		}
 
 		// if PID coefficients on SmartDashboard have changed, write new values to

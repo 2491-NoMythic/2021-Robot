@@ -27,8 +27,8 @@ private Hood hood;
   public void execute() {
     //Combines the actions in FlywheelRev and SetHoodPosition into one command for joint execution
     hood.setHoodPosition(Variables.Shooter.shooterHoodPosition.getAngle());
-   // shooter.runLeftShooterVelocity(Variables.Shooter.shooterSpeed.getSpeed());
-    shooter.runLeftShooterPercent(1);
+   shooter.runLeftShooterVelocity(Variables.Shooter.shooterSpeed);
+    // shooter.runLeftShooterPercent(1);
   }
 
   // Called once the command ends or is interrupted.

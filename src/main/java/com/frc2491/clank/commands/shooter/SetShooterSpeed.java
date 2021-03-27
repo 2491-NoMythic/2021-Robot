@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.Settings.Variables;
-import com.frc2491.clank.subsystems.Hood;
 
 public class SetShooterSpeed extends CommandBase {
 
@@ -24,7 +23,7 @@ public class SetShooterSpeed extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		Variables.Shooter.shooterSpeed = speed;
+		Variables.Shooter.shooterSpeed = speed.getSpeed();
 		Variables.Shooter.shooterHoodPosition = position;
 	}
 }
