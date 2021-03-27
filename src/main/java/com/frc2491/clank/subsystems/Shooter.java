@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -13,17 +6,15 @@ import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.TalonFX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.frc2491.clank.Settings.Constants;
+import com.frc2491.clank.Settings.Variables;
 
 public class Shooter extends SubsystemBase {
 
 	WPI_TalonFX shooterLeftMotor;
 	WPI_TalonFX shooterRightMotor;
-	Servo servo1;
-	Servo servo2;
 
 	double fGain, pGain, iGain, dGain;
 	int iZone;
@@ -32,14 +23,11 @@ public class Shooter extends SubsystemBase {
 	 * Creates a new Shooter.
 	 */
 	public Shooter() {
-		shooterLeftMotor = new WPI_TalonFX(Constants.Shooter.shooterTalonLeftMotor);
-		shooterRightMotor = new WPI_TalonFX(Constants.Shooter.shooterTalonRightMotor);
+		shooterLeftMotor = new WPI_TalonFX(Constants.Shooter.shooterTalonLeftMotorID);
+		shooterRightMotor = new WPI_TalonFX(Constants.Shooter.shooterTalonRightMotorID);
 
 		shooterRightMotor.follow(shooterLeftMotor);
 		shooterRightMotor.setInverted(InvertType.OpposeMaster);
-
-		servo1 = new Servo(Constants.Shooter.servo1);
-		servo2 = new Servo(Constants.Shooter.servo2);
 
 		// PID
 
@@ -79,21 +67,14 @@ public class Shooter extends SubsystemBase {
 		SmartDashboard.putNumber("kD", dGain);
 		SmartDashboard.putNumber("IZone", iZone);
 		SmartDashboard.putNumber("SpeedRightNow", getLeftEncoderRate());
+
+		SmartDashboard.putNumber("shooter speed overide", 0);
 	}
 
 	// Creating Drive Velocity for Motors
 	public void runLeftShooterVelocity(final double speed) {
 		System.out.println("velocity " + speed);
 		shooterLeftMotor.set(ControlMode.Velocity, speed);
-	}
-	/**
-	 * Set hood position
-	 * @param servoUnits (between 0-180 servo units)
-	 * 0 is zero degrees and 180 is 54 degrees (maximum supported hood position)
-	 */
-	public void setHoodPosition(double servoUnits){
-		servo1.setAngle(180 - servoUnits);
-		servo2.setAngle(servoUnits);
 	}
 
 	public void runLeftShooterPercent(double speed){
@@ -157,6 +138,12 @@ public class Shooter extends SubsystemBase {
 		final double z = SmartDashboard.getNumber("IZone", 0);
 
 		SmartDashboard.putNumber("Shooter Speed", getEncoderRate());
+		final double shooterSpeed = SmartDashboard.getNumber("shooter speed overide", 0);
+
+		if (shooterSpeed > 0 && shooterSpeed != Variables.Shooter.shooterSpeed.getSpeed())
+		{
+			Variables.Shooter.shooterSpeed = new Constants.ShooterSpeeds(shooterSpeed);
+		}
 
 		// if PID coefficients on SmartDashboard have changed, write new values to
 		// controller

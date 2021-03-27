@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank.HID;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -17,33 +10,32 @@ import com.frc2491.clank.Settings.Constants;
  */
 public class TM implements IDriveController {
 
-	private Joystick m_Joystick;
-	private JoystickButton shootButton, slowDriveButton;
+	private Joystick joystick;
+	private JoystickButton shootButton;
 
 	public TM() {
-		m_Joystick = new Joystick(Constants.Controller.driveControllerID);
-		shootButton = new JoystickButton(m_Joystick, Constants.Controller.TM.triggerShooterButtonID);
-		slowDriveButton = new JoystickButton(m_Joystick, Constants.Controller.TM.slowDriveButtonID);
+		joystick = new Joystick(Constants.Controller.driveControllerID);
+		shootButton = new JoystickButton(joystick, Constants.Controller.TM.triggerShooterButtonID);
 	}
 
 	@Override
 	public double getRawDriveAxis() {
-		return m_Joystick.getRawAxis(Constants.Drivetrain.driveMainAxis);
+		return joystick.getRawAxis(Constants.Drivetrain.driveMainAxis);
 	}
 
 	@Override
 	public double getDriveAxisDeadzone() {
-		return getAxisDeadzoned(m_Joystick.getRawAxis(Constants.Drivetrain.driveMainAxis));
+		return getAxisDeadzoned(joystick.getRawAxis(Constants.Drivetrain.driveMainAxis));
 	}
 
 	@Override
 	public double getRawTurnAxis() {
-		return m_Joystick.getRawAxis(Constants.Drivetrain.driveTurnAxis);
+		return joystick.getRawAxis(Constants.Drivetrain.driveTurnAxis);
 	}
 
 	@Override
 	public double getHorizontalClimbAxis() {
-		return m_Joystick.getRawAxis(Constants.Drivetrain.driveHorizontalAxis);
+		return joystick.getRawAxis(Constants.Drivetrain.driveHorizontalAxis);
 	}
 
 	private double getAxisDeadzoned(double value) {
@@ -53,13 +45,6 @@ public class TM implements IDriveController {
 
 	@Override
 	public JoystickButton getShootButton() {
-
 		return shootButton;
-	}
-
-	@Override
-	public JoystickButton getSlowDriveButton() {
-		// TODO Auto-generated method stub
-		return slowDriveButton;
 	}
 }

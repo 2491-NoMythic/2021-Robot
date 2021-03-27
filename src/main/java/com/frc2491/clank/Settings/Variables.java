@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank.Settings;
 
 import com.frc2491.clank.Settings.Constants.ShooterHoodPositions;
@@ -36,7 +29,7 @@ public class Variables {
 
 	public static class Spindexer{
 		//this is the amount of time it will take for the spindexer to reverse in sort mode
-		public static double sortModeReverseTime = 2; 
+		public static double sortModeReverseTime = .8; 
 		public static double sortModeMaxPower = 0.5;
 	}
 }
