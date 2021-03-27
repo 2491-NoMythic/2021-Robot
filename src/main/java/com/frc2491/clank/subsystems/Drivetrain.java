@@ -1,15 +1,5 @@
-
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank.subsystems;
 
-import edu.wpi.first.wpilibj.Relay;
-import edu.wpi.first.wpilibj.Relay.Value;
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -26,7 +16,6 @@ import com.kauailabs.navx.frc.AHRS;
 public class Drivetrain extends SubsystemBase {
 	private WPI_TalonFX driveLeftMotor1,driveLeftMotor2,driveRightMotor1,driveRightMotor2;
 	private AHRS gyro;
-	private Relay spike;
 
 	public Drivetrain() {
 
@@ -50,9 +39,7 @@ public class Drivetrain extends SubsystemBase {
 		driveLeftMotor2.setInverted(false);
 
 		gyro = new AHRS(Port.kUSB);
-		spike = new Relay(1);
 
-		stopSpike();
 		resetGyro();
 
 		SmartDashboard.putNumber("Rotate P", Variables.Drivetrain.RotationCommand.kP);
@@ -93,24 +80,6 @@ public class Drivetrain extends SubsystemBase {
 
 	public void driveRightPercentOutput(double speed){
 		driveRightMotor1.set(ControlMode.PercentOutput, speed);
-	}
-
-	//creative drive voltage for both right and left
-	public void driveVoltage(double outputVolts){
-		driveVoltage(outputVolts, outputVolts);
-	}
-
-	public void driveVoltage(double leftOutputVolts, double rightOutputVolts){
-		driveRightVoltage(rightOutputVolts);
-		driveLeftVoltage(leftOutputVolts);
-	}
-
-	public void driveRightVoltage(double outputVolts){
-		driveRightMotor1.setVoltage(outputVolts);
-	}
-
-	public void driveLeftVoltage(double outputVolts){
-		driveLeftMotor1.setVoltage(outputVolts);
 	}
 
 	//creating drive velocity for both right and left
@@ -185,15 +154,6 @@ public class Drivetrain extends SubsystemBase {
 
 	public double getEncoderRate() {
 		return ((getRightEncoderRate() + getLeftEncoderRate()) / 2);
-	}
-
-	//Relay Toggles
-	public void powerSpike() {
-		spike.set(Value.kForward);
-	}
-
-	public void stopSpike() {
-		spike.set(Value.kReverse);
 	}
 
 	@Override

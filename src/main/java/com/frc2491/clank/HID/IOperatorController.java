@@ -1,10 +1,3 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2018-2019 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank.HID;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -16,33 +9,11 @@ public interface IOperatorController {
 
 	public JoystickButton getActivateIntakeButton();
 
-	public JoystickButton getActivateLiftButton();
-
-	public JoystickButton getDeactivateLiftButton();
-
-	public JoystickButton getActivateRobotUp();
-
-	public JoystickButton getClimbCheck1();
-
-	public JoystickButton getClimbCheck2();
-
-	public JoystickButton getDisableRobotUp();
-
 	public JoystickButton getShooterPrepButton();
 
-	public JoystickButton getFunnelerAndIndexer();
+	public JoystickButton getShooterLowButton();
 
-	public JoystickButton runIndexer();
+	public JoystickButton getShooterHighButton();
 
-	public JoystickButton backIndexer();
-
-	public double getIntakeAxis();
-
-	public double getLeftClimbAxis();
-
-	public boolean climbSaftey();
-
-	public void getShooterSpeed();
-
-	public void getShooterHoodPositions();
+	public JoystickButton getShootButton();
 }

@@ -1,28 +1,21 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 package com.frc2491.clank.commands.drivetrain;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import com.frc2491.clank.subsystems.Drivetrain;
 
-public class timeDrive extends CommandBase {
+public class TimedDrive extends CommandBase {
 	/**
 	 * Creates a new timeDrive.
 	 */
-	Drivetrain m_drivetrain;
+	Drivetrain drivetrain;
 	double speedOfDrive;
 	double timeOfDrive;
 	Timer activeTimer;
 	boolean timeDriveFinished;
-	public timeDrive(Drivetrain driveTransfer, double speedDriveTransfer, double timeTransfer) {
-		m_drivetrain = driveTransfer;
-		addRequirements(m_drivetrain);
+	public TimedDrive(Drivetrain driveTransfer, double speedDriveTransfer, double timeTransfer) {
+		drivetrain = driveTransfer;
+		addRequirements(drivetrain);
 		speedOfDrive = speedDriveTransfer;
 		timeOfDrive = timeTransfer;
 		activeTimer = new Timer();
@@ -32,7 +25,7 @@ public class timeDrive extends CommandBase {
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		m_drivetrain.drivePercentOutput(speedOfDrive);
+		drivetrain.drivePercentOutput(speedOfDrive);
 		activeTimer.start();
 	}
 
@@ -44,7 +37,7 @@ public class timeDrive extends CommandBase {
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		m_drivetrain.stop();
+		drivetrain.stop();
 	}
 
 	// Returns true when the command should end.

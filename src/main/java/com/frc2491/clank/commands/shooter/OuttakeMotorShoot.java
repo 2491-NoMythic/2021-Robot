@@ -1,41 +1,33 @@
-
-
-package com.frc2491.clank.commands.spindexer;
+package com.frc2491.clank.commands.shooter;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import com.frc2491.clank.Settings.Constants;
-import com.frc2491.clank.subsystems.Spindexer;
+import com.frc2491.clank.subsystems.Outtake;
 
 public class OuttakeMotorShoot extends CommandBase {
 
-	private Spindexer spindexer;
+	private Outtake outtake;
 
 	/**
-	 * Creates a new Rotate command.
+	 * Creates a new Outtake Motor Shoot command.
+	 * Turns on the outtake motor to shoot balls based on constant shooter speeds.
 	 */
-	public OuttakeMotorShoot(Spindexer spindexer) {
+	public OuttakeMotorShoot(Outtake outtake) {
 		// Use addRequirements() here to declare subsystem dependencies.
-		this.spindexer = spindexer;
-		addRequirements(spindexer);
+		this.outtake = outtake;
+		addRequirements(outtake);
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		System.out.println("outake motor shoot");
-		spindexer.RunOuttakeMotor(Constants.Spindexer.shootingOutTakeSpeed);
-	}
-
-	// Called every time the scheduler runs while the command is scheduled.
-	@Override
-	public void execute() {
-		
+		outtake.runOuttakeMotor(Constants.Spindexer.shootingOutTakeSpeed);
 	}
 
 	// Called once the command ends or is interrupted.
 	@Override
 	public void end(boolean interrupted) {
-		spindexer.RunOuttakeMotor(0);
+		outtake.runOuttakeMotor(Constants.ShooterSpeeds.stop.getSpeed());
 	}
 
 	// Returns true when the command should end.
