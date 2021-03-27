@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import com.frc2491.clank.subsystems.Drivetrain;
 
-public class TimeDrive extends CommandBase {
+public class TimedDrive extends CommandBase {
 	/**
 	 * Creates a new timeDrive.
 	 */
@@ -13,7 +13,7 @@ public class TimeDrive extends CommandBase {
 	double timeOfDrive;
 	Timer activeTimer;
 	boolean timeDriveFinished;
-	public TimeDrive(Drivetrain driveTransfer, double speedDriveTransfer, double timeTransfer) {
+	public TimedDrive(Drivetrain driveTransfer, double speedDriveTransfer, double timeTransfer) {
 		drivetrain = driveTransfer;
 		addRequirements(drivetrain);
 		speedOfDrive = speedDriveTransfer;
