@@ -17,7 +17,7 @@ public class Shooter extends SubsystemBase {
 	WPI_TalonFX shooterRightMotor;
 
 	double fGain, pGain, iGain, dGain;
-	int iZone;
+	int iZone, allowableError;
 
 	/**
 	 * Creates a new Shooter.
@@ -52,6 +52,7 @@ public class Shooter extends SubsystemBase {
 		iGain = Constants.Shooter.kI;
 		dGain = Constants.Shooter.kD;
 		iZone = Constants.Shooter.kIzone;
+		allowableError = 1;
 
 		// Config velocity closed loop gains in slot0
 		shooterLeftMotor.config_kF(Constants.Shooter.PIDLoopIdx, fGain, Constants.Shooter.TimeoutMs);
@@ -59,6 +60,7 @@ public class Shooter extends SubsystemBase {
 		shooterLeftMotor.config_kI(Constants.Shooter.PIDLoopIdx, iGain, Constants.Shooter.TimeoutMs);
 		shooterLeftMotor.config_kD(Constants.Shooter.PIDLoopIdx, dGain, Constants.Shooter.TimeoutMs);
 		shooterLeftMotor.config_IntegralZone(Constants.Shooter.PIDLoopIdx, iZone);
+		shooterLeftMotor.configAllowableClosedloopError(Constants.Shooter.PIDLoopIdx, allowableError, Constants.Shooter.TimeoutMs);
 
 		// Put PID values on SmartDashboard
 		SmartDashboard.putNumber("kF", fGain);
@@ -67,6 +69,7 @@ public class Shooter extends SubsystemBase {
 		SmartDashboard.putNumber("kD", dGain);
 		SmartDashboard.putNumber("IZone", iZone);
 		SmartDashboard.putNumber("SpeedRightNow", getLeftEncoderRate());
+		SmartDashboard.putNumber("allowableError", allowableError);
 
 		SmartDashboard.putNumber("shooter speed overide", 0);
 	}
@@ -136,6 +139,7 @@ public class Shooter extends SubsystemBase {
 		final double d = SmartDashboard.getNumber("kD", 0);
 		final double f = SmartDashboard.getNumber("kF", 0);
 		final double z = SmartDashboard.getNumber("IZone", 0);
+		final double a = SmartDashboard.getNumber("Allowable Error", 0);
 
 		SmartDashboard.putNumber("Shooter Encoder", getEncoderRate());
 		SmartDashboard.putNumber("Speed Variable", Variables.Shooter.shooterSpeed);
@@ -177,6 +181,10 @@ public class Shooter extends SubsystemBase {
 		if ((z != iZone)) {
 			shooterLeftMotor.config_IntegralZone(Constants.Shooter.PIDLoopIdx, (int)Math.round(z));
 			iZone = (int)Math.round(z);
+		}
+		if ((a != allowableError)) {
+			shooterLeftMotor.configAllowableClosedloopError(Constants.Shooter.PIDLoopIdx, (int)Math.round(a), Constants.Shooter.TimeoutMs);
+			allowableError = (int)Math.round(a);
 		}
 	}
 }
