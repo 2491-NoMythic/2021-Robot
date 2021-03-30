@@ -28,7 +28,7 @@ public class FlywheelRev extends CommandBase {
 	@Override
 	public void execute() {
 		//Rev the Flywheel to an enum defined in constants
-		shooter.runLeftShooterVelocity(Variables.Shooter.shooterSpeed.getSpeed());
+		shooter.runLeftShooterVelocity(Variables.Shooter.shooterSpeed);
 	}
 
 	// Called once the command ends or is interrupted.

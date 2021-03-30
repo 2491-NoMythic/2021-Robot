@@ -91,7 +91,7 @@ public final class Constants {
 		public static final int antiJamMotorID = 11;
 
 		public static final double intakeSpindexerSpeed = -.3;
-		public static final double shootingSpindexerSpeed = .225;
+		public static final double shootingSpindexerSpeed = -.21;
 
 		public static final double shootingOutTakeSpeed = 0.95;
 		public static final double antiJamIntakeSpeed = .05;

@@ -14,7 +14,7 @@ public class Variables {
 	}
 
 	public static class Shooter{
-		public static ShooterSpeeds shooterSpeed = ShooterSpeeds.lowSpeed;
+		public static double shooterSpeed = ShooterSpeeds.lowSpeed.getSpeed();
 		public static ShooterHoodPositions shooterHoodPosition = ShooterHoodPositions.lowHood;
 	}
 
