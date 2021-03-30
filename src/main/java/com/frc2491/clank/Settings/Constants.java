@@ -97,6 +97,18 @@ public final class Constants {
 		public static final double antiJamIntakeSpeed = .05;
 	}
 
+	public final class ShooterPID {
+		public final static double kP = 2491; // change to real value
+		public final static double kI = 2491; // change to real value
+		public final static double kD = 2491; // change to real value
+		public final static double kF = 2491; // change to real value
+		public final static int kIzone = 2491; // change to real value
+		public final static double kIz = 2491;
+		public final static double kFF = 2491;
+		public final static double kMinOutput = 2491;
+		public final static double kMaxOutput = 2491;
+	}
+
 	public final class Shooter {
 		// shooter
 		public static final int shooterTalonLeftMotorID = 4;

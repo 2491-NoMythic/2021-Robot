@@ -17,6 +17,7 @@ import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Hood;
 import com.frc2491.clank.subsystems.Intake;
 import com.frc2491.clank.subsystems.Outtake;
+import com.frc2491.clank.subsystems.OuttakePID;
 import com.frc2491.clank.subsystems.Shooter;
 import com.frc2491.clank.subsystems.Spindexer;
 
@@ -43,6 +44,9 @@ public class RobotContainer {
 	private final AntiJam antiJam = new AntiJam();
 	private final Outtake outtake = new Outtake();
 	private final Hood hood = new Hood();
+	// Don't use this at same time as Outtake
+	// This PID version has a periodic method implemented to control from the dashboard
+	// private final OuttakePID outtakePID = new OuttakePID();
 
 	/**
 	 * Here is where we get the current instace of the CurrentHIDs that we are using. There can only be one instance of
