@@ -52,7 +52,7 @@ public class Shooter extends SubsystemBase {
 		iGain = Constants.Shooter.kI;
 		dGain = Constants.Shooter.kD;
 		iZone = Constants.Shooter.kIzone;
-		allowableError = 1;
+		allowableError = 0;
 
 		// Config velocity closed loop gains in slot0
 		shooterLeftMotor.config_kF(Constants.Shooter.PIDLoopIdx, fGain, Constants.Shooter.TimeoutMs);
@@ -69,7 +69,7 @@ public class Shooter extends SubsystemBase {
 		SmartDashboard.putNumber("kD", dGain);
 		SmartDashboard.putNumber("IZone", iZone);
 		SmartDashboard.putNumber("SpeedRightNow", getLeftEncoderRate());
-		SmartDashboard.putNumber("allowableError", allowableError);
+		SmartDashboard.putNumber("Allowable Error", allowableError);
 
 		SmartDashboard.putNumber("shooter speed overide", 0);
 	}

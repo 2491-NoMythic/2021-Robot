@@ -91,9 +91,9 @@ public final class Constants {
 		public static final int antiJamMotorID = 11;
 
 		public static final double intakeSpindexerSpeed = -.3;
-		public static final double shootingSpindexerSpeed = -.21;
+		public static final double shootingSpindexerSpeed = -.09;
 
-		public static final double shootingOutTakeSpeed = 0.95;
+		public static final double shootingOutTakeSpeed = 1;
 		public static final double antiJamIntakeSpeed = .05;
 	}
 
@@ -127,10 +127,10 @@ public final class Constants {
 		public final static int SlotIdx = 0;
 		public final static int PIDLoopIdx = 0;
 		public final static int TimeoutMs = 0;
-		public final static double kP = 0.275;
-		public final static double kI = 0.0006;
-		public final static double kD = 0;
-		public final static double kF = 0.0455;
+		public final static double kP = 2.5;
+		public final static double kI = 0.001;
+		public final static double kD = 0.4;
+		public final static double kF = 0.055;
 		public final static int kIzone = 100;
 		public final static double PeakOutput = 0;
 	}

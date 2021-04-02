@@ -1,5 +1,6 @@
 package com.frc2491.clank.commands.spindexer;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.subsystems.Spindexer;
@@ -16,12 +17,15 @@ public class ShootingRotation extends CommandBase {
 		// Use addRequirements() here to declare subsystem dependencies.
 		this.spindexer = spindexer;
 		addRequirements(spindexer);
+
+		SmartDashboard.putNumber("spindexer Shooting speed", -.21);
 	}
 
 	// Called when the command is initially scheduled.
 	@Override
 	public void initialize() {
-		spindexer.rotate(Constants.Spindexer.shootingSpindexerSpeed);
+		double shootSpeed = SmartDashboard.getNumber("spindexer Shooting speed", -.21);
+		spindexer.rotate(shootSpeed);
 	}
 
 	// Called once the command ends or is interrupted.
