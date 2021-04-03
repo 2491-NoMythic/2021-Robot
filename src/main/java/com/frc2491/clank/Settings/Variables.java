@@ -15,7 +15,7 @@ public class Variables {
 
 	public static class Shooter{
 		public static double shooterSpeed = ShooterSpeeds.stop.getSpeed();
-		public static ShooterHoodPositions shooterHoodPosition = ShooterHoodPositions.collapsed;
+		public static double shooterHoodPosition = ShooterHoodPositions.collapsed.getAngle();
 	}
 
 	public static class Drivetrain{

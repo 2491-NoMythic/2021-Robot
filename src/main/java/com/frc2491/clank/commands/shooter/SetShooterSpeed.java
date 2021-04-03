@@ -24,6 +24,6 @@ public class SetShooterSpeed extends CommandBase {
 	@Override
 	public void initialize() {
 		Variables.Shooter.shooterSpeed = speed.getSpeed();
-		Variables.Shooter.shooterHoodPosition = position;
+		Variables.Shooter.shooterHoodPosition = position.getAngle();
 	}
 }

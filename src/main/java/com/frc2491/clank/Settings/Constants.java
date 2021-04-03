@@ -72,9 +72,9 @@ public final class Constants {
 		public final class PS4 {
 			public static final int activateIntakeButtonID = 6;
 			public static final int prepShooterButtonID = 5;
-			public static final int shooterLocation1ButtonID = 4;
+			public static final int shooterLocation1ButtonID = 2;
 			public static final int shooterLocation2ButtonID = 1;
-			public static final int shooterLocation3ButtonID = 2;
+			public static final int shooterLocation3ButtonID = 4;
 			public static final int shooterLocation4ButtonID = 3;
 			public static final int shootButtonID = 2491;
 		}
@@ -119,7 +119,7 @@ public final class Constants {
 		public static final int shooterTalonRightMotorID = 5;
 		public static final int servo1PwmID = 2;
 		public static final int servo2PwmID = 3;
-		public final static int photonCannonPwmID = 4;
+		public final static int photonCannonPwmID = 0;
 		
 		// encoders
 		public final static double shooterEncoderTicks = 2048.0; // Encoder ticks per wheel rotation is 2048
@@ -144,10 +144,10 @@ public final class Constants {
 	// These go from low to high
 	public static class ShooterSpeeds {
 		public static final ShooterSpeeds stop = new ShooterSpeeds(0);
-		public static final ShooterSpeeds speed1 = new ShooterSpeeds(6000);
-		public static final ShooterSpeeds speed2 = new ShooterSpeeds(6500);
+		public static final ShooterSpeeds speed1 = new ShooterSpeeds(6500);
+		public static final ShooterSpeeds speed2 = new ShooterSpeeds(7000);
 		public static final ShooterSpeeds speed3 = new ShooterSpeeds(7500);
-		public static final ShooterSpeeds speed4 = new ShooterSpeeds(8000);
+		public static final ShooterSpeeds speed4 = new ShooterSpeeds(8300);
 
 		private double speed;
 
@@ -164,9 +164,9 @@ public final class Constants {
 	public static class ShooterHoodPositions {
 		public static final ShooterHoodPositions collapsed = new ShooterHoodPositions(0);
 		public static final ShooterHoodPositions position1 = new ShooterHoodPositions(70);
-		public static final ShooterHoodPositions position2 =  new ShooterHoodPositions(100);
+		public static final ShooterHoodPositions position2 =  new ShooterHoodPositions(105);
 		public static final ShooterHoodPositions position3 =  new ShooterHoodPositions(120);
-		public static final ShooterHoodPositions position4 =  new ShooterHoodPositions(130);
+		public static final ShooterHoodPositions position4 =  new ShooterHoodPositions(136);
 
 		private double angle;
 

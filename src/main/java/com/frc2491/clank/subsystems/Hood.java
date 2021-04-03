@@ -40,9 +40,10 @@ public class Hood extends SubsystemBase {
 
 		final double hoodPosition = SmartDashboard.getNumber("hood position overide", 0);
 
-		if (hoodPosition > 0 && hoodPosition != Variables.Shooter.shooterHoodPosition.getAngle())
+		if (hoodPosition > 0 && hoodPosition != Variables.Shooter.shooterHoodPosition)
 		{
-			Variables.Shooter.shooterHoodPosition = new Constants.ShooterHoodPositions(hoodPosition);
+			Variables.Shooter.shooterHoodPosition = hoodPosition;
 		}
+		SmartDashboard.putNumber("Angle", Variables.Shooter.shooterHoodPosition);
 	}
 }
