@@ -18,6 +18,7 @@ import com.frc2491.clank.subsystems.Intake;
 import com.frc2491.clank.subsystems.Outtake;
 import com.frc2491.clank.subsystems.OuttakePID;
 import com.frc2491.clank.subsystems.PhotonCannon;
+import com.frc2491.clank.subsystems.PositionButtonChecker;
 import com.frc2491.clank.subsystems.Shooter;
 import com.frc2491.clank.subsystems.Spindexer;
 
@@ -46,6 +47,7 @@ public class RobotContainer {
 	private final Outtake outtake = new Outtake();
 	private final Hood hood = new Hood();
 	private final PhotonCannon photonCannon = new PhotonCannon();
+	private final PositionButtonChecker buttonChecker = new PositionButtonChecker();
 
 	// Don't use this at same time as Outtake
 	// This PID version has a periodic method implemented to control from the dashboard
@@ -89,10 +91,10 @@ public class RobotContainer {
 		IDriveController driveController = currentHIDs.getDriveController();
 
 		//Button assignments
-		operatorController.getShooter1Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed1, Constants.ShooterHoodPositions.position1));
-		operatorController.getShooter2Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed2, Constants.ShooterHoodPositions.position2));
-		operatorController.getShooter3Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed3, Constants.ShooterHoodPositions.position3));
-		operatorController.getShooter4Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed4, Constants.ShooterHoodPositions.position4));
+		// operatorController.getShooter1Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed1, Constants.ShooterHoodPositions.position1));
+		// operatorController.getShooter2Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed2, Constants.ShooterHoodPositions.position2));
+		// operatorController.getShooter3Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed3, Constants.ShooterHoodPositions.position3));
+		// operatorController.getShooter4Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed4, Constants.ShooterHoodPositions.position4));
 
 		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new PrepareShooter(shooter, hood)));
 		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new SortRotation(spindexer), new IntakeCommand(intake), new RunAntiJam(antiJam)));
@@ -108,10 +110,10 @@ public class RobotContainer {
 	 * It will execute the method and immediately quit the command.
 	 */
 	public void firePhotonCannon() {
-		new InstantCommand(photonCannon::firePhotonCannon, photonCannon);
+		// new InstantCommand(photonCannon::firePhotonCannon, photonCannon);
 	}
 
 	public void shutdownPhotonCannon() {
-		new InstantCommand(photonCannon::shutdownPhotonCannon, photonCannon);
+		// new InstantCommand(photonCannon::shutdownPhotonCannon, photonCannon);
 	}
 }

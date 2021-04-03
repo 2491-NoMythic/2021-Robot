@@ -25,10 +25,8 @@ private Hood hood;
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Combines the actions in FlywheelRev and SetHoodPosition into one command for joint execution
-    hood.setHoodPosition(Variables.Shooter.shooterHoodPosition.getAngle());
-   shooter.runLeftShooterVelocity(Variables.Shooter.shooterSpeed);
-    // shooter.runLeftShooterPercent(1);
+    hood.setHoodPosition(Variables.Shooter.shooterHoodPosition);
+    shooter.runLeftShooterVelocity(Variables.Shooter.shooterSpeed);
   }
 
   // Called once the command ends or is interrupted.

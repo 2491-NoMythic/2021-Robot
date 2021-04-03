@@ -27,7 +27,7 @@ public class SetHoodPosition extends CommandBase {
 	@Override
 	public void execute() {
 		//Set hood position to the a degree defined by an enum un constants
-		hood.setHoodPosition(Variables.Shooter.shooterHoodPosition.getAngle());
+		hood.setHoodPosition(Variables.Shooter.shooterHoodPosition);
 	}
 
 	// Called once the command ends or is interrupted.

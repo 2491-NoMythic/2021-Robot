@@ -47,7 +47,7 @@ public class Drive extends CommandBase {
 	public void execute() {
 		IDriveController driveController = CurrentHIDs.getInstance().getDriveController();
 		
-		turnSpeed = 0.5 * driveController.getRawTurnAxis();
+		turnSpeed = 0.15 * driveController.getRawTurnAxis();
 		lastLeftSpeed = currentLeftSpeed;
 		lastRightSpeed = currentRightSpeed;
 
