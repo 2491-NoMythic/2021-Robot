@@ -11,17 +11,18 @@ import com.frc2491.clank.commands.shooter.SetShooterSpeed;
 import com.frc2491.clank.commands.spindexer.RunAntiJam;
 import com.frc2491.clank.commands.spindexer.ShootingRotation;
 import com.frc2491.clank.commands.spindexer.SortRotation;
-import com.frc2491.clank.commands.spindexer.StoreBalls;
 import com.frc2491.clank.subsystems.AntiJam;
 import com.frc2491.clank.subsystems.Drivetrain;
 import com.frc2491.clank.subsystems.Hood;
 import com.frc2491.clank.subsystems.Intake;
 import com.frc2491.clank.subsystems.Outtake;
 import com.frc2491.clank.subsystems.OuttakePID;
+import com.frc2491.clank.subsystems.PhotonCannon;
 import com.frc2491.clank.subsystems.Shooter;
 import com.frc2491.clank.subsystems.Spindexer;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
 /**
@@ -44,6 +45,8 @@ public class RobotContainer {
 	private final AntiJam antiJam = new AntiJam();
 	private final Outtake outtake = new Outtake();
 	private final Hood hood = new Hood();
+	private final PhotonCannon photonCannon = new PhotonCannon();
+
 	// Don't use this at same time as Outtake
 	// This PID version has a periodic method implemented to control from the dashboard
 	// private final OuttakePID outtakePID = new OuttakePID();
@@ -94,8 +97,19 @@ public class RobotContainer {
 		operatorController.getShootButton().whileHeld(new OuttakeMotorShoot(outtake));
 
 		driveController.getShootButton().whileHeld(new OuttakeMotorShoot(outtake));
-
-
 	}
 	
+	/**
+	 * Method is public here so Robot.java can access it when it changes to teleop.
+	 * This way we don't need to worry about the subsystem over there.
+	 * Using InstantCommand so we don't even need to create commands.
+	 * It will execute the method and immediately quit the command.
+	 */
+	public void firePhotonCannon() {
+		new InstantCommand(photonCannon::firePhotonCannon, photonCannon);
+	}
+
+	public void shutdownPhotonCannon() {
+		new InstantCommand(photonCannon::shutdownPhotonCannon, photonCannon);
+	}
 }

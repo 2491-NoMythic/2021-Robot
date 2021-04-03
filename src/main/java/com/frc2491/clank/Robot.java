@@ -47,6 +47,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		robotContainer.shutdownPhotonCannon();
 	}
 
 	@Override
@@ -82,6 +83,7 @@ public class Robot extends TimedRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
 		}
+		robotContainer.firePhotonCannon();
 	}
 
 	/**
