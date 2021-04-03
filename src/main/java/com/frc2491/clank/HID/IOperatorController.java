@@ -11,9 +11,13 @@ public interface IOperatorController {
 
 	public JoystickButton getShooterPrepButton();
 
-	public JoystickButton getShooterLowButton();
+	public JoystickButton getShooter1Button();
 
-	public JoystickButton getShooterHighButton();
+	public JoystickButton getShooter2Button();
+
+	public JoystickButton getShooter3Button();
+
+	public JoystickButton getShooter4Button();
 
 	public JoystickButton getShootButton();
 }

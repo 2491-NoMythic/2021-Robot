@@ -89,8 +89,10 @@ public class RobotContainer {
 		IDriveController driveController = currentHIDs.getDriveController();
 
 		//Button assignments
-		operatorController.getShooterLowButton().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.lowSpeed, Constants.ShooterHoodPositions.lowHood));
-		operatorController.getShooterHighButton().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.highSpeed, Constants.ShooterHoodPositions.highHood));
+		operatorController.getShooter1Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed1, Constants.ShooterHoodPositions.position1));
+		operatorController.getShooter2Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed2, Constants.ShooterHoodPositions.position2));
+		operatorController.getShooter3Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed3, Constants.ShooterHoodPositions.position3));
+		operatorController.getShooter4Button().whenPressed(new SetShooterSpeed(Constants.ShooterSpeeds.speed4, Constants.ShooterHoodPositions.position4));
 
 		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new PrepareShooter(shooter, hood)));
 		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new SortRotation(spindexer), new IntakeCommand(intake), new RunAntiJam(antiJam)));
