@@ -71,7 +71,7 @@ public final class Constants {
 
 		public final class PS4 {
 			public static final int activateIntakeButtonID = 6;
-			public static final int reverseIntakeButtonID = 2491;
+			public static final int reverseIntakeButtonID = 8;
 			public static final int prepShooterButtonID = 5;
 			public static final int shooterLocation1ButtonID = 2;
 			public static final int shooterLocation2ButtonID = 1;
