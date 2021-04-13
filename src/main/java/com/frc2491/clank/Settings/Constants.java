@@ -86,7 +86,7 @@ public final class Constants {
 
 	public final class Intake {
 		public static final int intakeMotorID = 12;
-		public static final double autoIntakeSpeed = 0.5;
+		public static final double autoIntakeSpeed = 1;
 	}
 
 	public final class Spindexer {
