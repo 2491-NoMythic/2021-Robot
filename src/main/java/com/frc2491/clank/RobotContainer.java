@@ -5,6 +5,7 @@ import com.frc2491.clank.HID.IDriveController;
 import com.frc2491.clank.HID.IOperatorController;
 import com.frc2491.clank.commands.drivetrain.Drive;
 import com.frc2491.clank.commands.intake.IntakeCommand;
+import com.frc2491.clank.commands.intake.IntakeReverse;
 import com.frc2491.clank.commands.shooter.OuttakeMotorShoot;
 import com.frc2491.clank.commands.shooter.PrepareShooter;
 import com.frc2491.clank.commands.shooter.SetShooterSpeed;
@@ -98,6 +99,8 @@ public class RobotContainer {
 
 		operatorController.getShooterPrepButton().whileHeld(new ParallelCommandGroup(new ShootingRotation(spindexer), new PrepareShooter(shooter, hood)));
 		operatorController.getActivateIntakeButton().whileHeld(new ParallelCommandGroup(new SortRotation(spindexer), new IntakeCommand(intake), new RunAntiJam(antiJam)));
+		operatorController.getReverseIntakeButton().whileHeld(new ParallelCommandGroup(new IntakeReverse(intake), new RunAntiJam(antiJam)));
+
 		operatorController.getShootButton().whileHeld(new OuttakeMotorShoot(outtake));
 
 		driveController.getShootButton().whileHeld(new OuttakeMotorShoot(outtake));

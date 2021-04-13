@@ -9,6 +9,8 @@ public interface IOperatorController {
 
 	public JoystickButton getActivateIntakeButton();
 
+	public JoystickButton getReverseIntakeButton();
+
 	public JoystickButton getShooterPrepButton();
 
 	public JoystickButton getShooter1Button();
