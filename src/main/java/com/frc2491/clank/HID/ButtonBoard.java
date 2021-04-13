@@ -11,11 +11,12 @@ import com.frc2491.clank.Settings.Constants;
 public class ButtonBoard implements IOperatorController {
 
 	private final Joystick joystick;
-	private JoystickButton activateIntakeButton, prepShooterButton, shooterLocation1Button, shooterLocation2Button, shooterLocation3Button, shooterLocation4Button, shootButton;
+	private JoystickButton activateIntakeButton, reverseIntakeButton, prepShooterButton, shooterLocation1Button, shooterLocation2Button, shooterLocation3Button, shooterLocation4Button, shootButton;
 
 	public ButtonBoard() {
 		joystick = new Joystick(Constants.Controller.opertatorControllerID);
 		activateIntakeButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.activateIntakeButtonID);
+		reverseIntakeButton = new JoystickButton(joystick, Constants.Controller.PS4.reverseIntakeButtonID);
 		prepShooterButton = new JoystickButton(joystick, Constants.Controller.ButtonBoard.prepShooterButtonID);
 		shooterLocation1Button = new JoystickButton(joystick, Constants.Controller.ButtonBoard.shooterLocation1ButtonID);
 		shooterLocation2Button = new JoystickButton(joystick, Constants.Controller.ButtonBoard.shooterLocation2ButtonID);
@@ -27,6 +28,11 @@ public class ButtonBoard implements IOperatorController {
 	@Override
 	public JoystickButton getActivateIntakeButton() {
 		return activateIntakeButton;
+	}
+
+	@Override
+	public JoystickButton getReverseIntakeButton() {
+		return reverseIntakeButton;
 	}
 
 	@Override
