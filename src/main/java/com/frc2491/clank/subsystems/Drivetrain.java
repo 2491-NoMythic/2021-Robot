@@ -81,6 +81,29 @@ public class Drivetrain extends SubsystemBase {
 	public void driveRightPercentOutput(double speed){
 		driveRightMotor1.set(ControlMode.PercentOutput, speed);
 	}
+	
+
+	//createing voltge output for both right and left.	
+	public void driveVoltageOutput (double speed) {
+		driveVoltageOutput(speed, speed);
+
+	}
+
+	public void driveVoltageOutput (double leftSpeed, double rightSpeed) {
+		driveLeftVoltageOutput(leftSpeed);
+		driveRightVoltageOutput(rightSpeed);
+
+
+	}
+
+	public void driveLeftVoltageOutput (double speed) {
+		driveLeftMotor1.setVoltage(speed);
+
+	}
+
+	public void driveRightVoltageOutput (double speed) {
+		driveRightMotor1.setVoltage(speed);
+	}
 
 	//creating drive velocity for both right and left
 	public void driveVelocity(double speed){
