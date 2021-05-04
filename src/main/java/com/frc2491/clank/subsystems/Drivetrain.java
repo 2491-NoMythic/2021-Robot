@@ -1,6 +1,10 @@
 package com.frc2491.clank.subsystems;
 
 import edu.wpi.first.wpilibj.SerialPort.Port;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.frc2491.clank.Settings.Constants;
@@ -16,6 +20,7 @@ import com.kauailabs.navx.frc.AHRS;
 public class Drivetrain extends SubsystemBase {
 	private WPI_TalonFX driveLeftMotor1,driveLeftMotor2,driveRightMotor1,driveRightMotor2;
 	private AHRS gyro;
+	private DifferentialDriveOdometry odometry;
 
 	public Drivetrain() {
 
@@ -42,6 +47,9 @@ public class Drivetrain extends SubsystemBase {
 
 		resetGyro();
 
+		resetEncoders();
+		odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(gyro.getAngle()));
+
 		SmartDashboard.putNumber("Rotate P", Variables.Drivetrain.RotationCommand.kP);
 		SmartDashboard.putNumber("Rotate I", Variables.Drivetrain.RotationCommand.kI);
 		SmartDashboard.putNumber("Rotate D", Variables.Drivetrain.RotationCommand.kD);
@@ -62,6 +70,22 @@ public class Drivetrain extends SubsystemBase {
 
 	public TalonFX[] getTalonFX(){
 		return new TalonFX[]{driveLeftMotor1,driveLeftMotor2,driveRightMotor1,driveRightMotor2};
+	}
+
+	//pose tingz
+	public Pose2d getPose() {
+		return odometry.getPoseMeters();
+	}
+
+	//Returns wheel speeds of the robot
+	public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+		return new DifferentialDriveWheelSpeeds(getLeftEncoderRate(), getRightEncoderRate());
+	}
+
+	//Resets odometry to the specified pose
+	public void resetOdometry(Pose2d pose) {
+		resetEncoders();
+		odometry.resetPosition(pose, Rotation2d.fromDegrees(gyro.getAngle()));
 	}
 
 	//creating percent output for both right and left
@@ -86,19 +110,15 @@ public class Drivetrain extends SubsystemBase {
 	//createing voltge output for both right and left.	
 	public void driveVoltageOutput (double speed) {
 		driveVoltageOutput(speed, speed);
-
 	}
 
 	public void driveVoltageOutput (double leftSpeed, double rightSpeed) {
 		driveLeftVoltageOutput(leftSpeed);
 		driveRightVoltageOutput(rightSpeed);
-
-
 	}
 
 	public void driveLeftVoltageOutput (double speed) {
 		driveLeftMotor1.setVoltage(speed);
-
 	}
 
 	public void driveRightVoltageOutput (double speed) {
@@ -179,6 +199,11 @@ public class Drivetrain extends SubsystemBase {
 		return ((getRightEncoderRate() + getLeftEncoderRate()) / 2);
 	}
 
+	public void resetEncoders() {
+		driveRightMotor1.setSelectedSensorPosition(0);
+		driveLeftMotor1.setSelectedSensorPosition(0);
+	}
+
 	@Override
 	public void periodic() {
 		SmartDashboard.putNumber("Angle", getGyroAngle());
@@ -192,5 +217,8 @@ public class Drivetrain extends SubsystemBase {
 			Variables.Drivetrain.RotationCommand.kD = SmartDashboard.getNumber("Rotate D", 0);
 		}
 		// This method will be called once per scheduler run
+
+		//Update the odometry in the periodic block
+		odometry.update(Rotation2d.fromDegrees(gyro.getAngle()), getLeftEncoderDistance(), getRightEncoderDistance()); //TODO Test encoder distance method, check gearing ratio between distanceand encoder
 	}
 }
