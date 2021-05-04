@@ -1,5 +1,7 @@
 package com.frc2491.clank.Settings;
 
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -11,6 +13,14 @@ package com.frc2491.clank.Settings;
  * wherever the constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+	public final class Autonomous {
+		public final static double kMaxSpeedMetersPerSecond = 3; //TODO change to actual value
+		public final static double kMaxAccelerationMetersPerSecondSquared = 3; //TODO change to actual value
+
+		public final static double kRamseteB = 2; //TODO Change to actual values
+		public final static double kRamseteZeta = 0.7; //TODO Change to actual values
+	}
 
 	public final class Drivetrain {
 		//TimeDrive Values
@@ -49,9 +59,17 @@ public final class Constants {
 
 		public final class RotationCommand {
 			public final static double kP = 0;
-			public final static double kI = 0;
+			public final static double kI = 0;	
 			public final static double kD = 0;
 		}
+
+		//Trajectory
+		public final static double trackWidthMeters = .32; //TODO Change to actual values
+		public final static double ksVolts = .767; //TODO Change to actual values
+		public final static double kvVoltSecondsPerMeter = 4.21; //TODO Change xto actual values
+		public final static double kaVoltSecondsSquaredPerMeter = .596; //TODO Change to actual values
+
+		public final static double kPDriveVel = 8.5; //TODO Change to actual values
 	}
 
 	public final class Controller {

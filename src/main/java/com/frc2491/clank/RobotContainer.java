@@ -1,9 +1,11 @@
 package com.frc2491.clank;
+
 import com.frc2491.clank.Settings.Constants;
 import com.frc2491.clank.HID.CurrentHIDs;
 import com.frc2491.clank.HID.IDriveController;
 import com.frc2491.clank.HID.IOperatorController;
 import com.frc2491.clank.commands.drivetrain.Drive;
+import com.frc2491.clank.commands.drivetrain.DriveTrajectory;
 import com.frc2491.clank.commands.intake.IntakeCommand;
 import com.frc2491.clank.commands.intake.IntakeReverse;
 import com.frc2491.clank.commands.shooter.OuttakeMotorShoot;
@@ -24,6 +26,7 @@ import com.frc2491.clank.subsystems.Shooter;
 import com.frc2491.clank.subsystems.Spindexer;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 
@@ -118,5 +121,12 @@ public class RobotContainer {
 
 	public void shutdownPhotonCannon() {
 		// new InstantCommand(photonCannon::shutdownPhotonCannon, photonCannon);
+	}
+
+	/**
+	 * Returns the autonomous command currently in use.
+	 */
+	public Command getAutonomousCommand() {
+		return new DriveTrajectory(drivetrain).andThen(() -> drivetrain.driveVoltageOutput(0, 0));
 	}
 }
