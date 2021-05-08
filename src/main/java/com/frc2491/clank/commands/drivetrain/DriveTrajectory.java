@@ -31,14 +31,20 @@ public class DriveTrajectory extends CommandBase {
 
     /** Creates a new DriveTrajectory. */
     public DriveTrajectory(Drivetrain drivetrain) {
-        drivetrain = this.drivetrain;
+        this.drivetrain = drivetrain;
         addRequirements(drivetrain);
     }
 
     // Called when the command is initially scheduled.
     @Override
     public void initialize() {
+        System.out.println("started auto");
+    }
 
+    // Called every time the scheduler runs while the command is scheduled.
+    @Override
+    public void execute() {
+        
         // Create a voltage constraint to ensure we don't accelerate too fast
         var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint (
@@ -66,11 +72,10 @@ public class DriveTrajectory extends CommandBase {
             new Pose2d(0,0, new Rotation2d(0)),
             //Pass through a list of defined points 
             List.of(
-                new Translation2d(1,1),
-                new Translation2d(2,-1)
+                new Translation2d(0,0)
             ),
             //Define Endpoint
-            new Pose2d(3,0, new Rotation2d(0)),
+            new Pose2d(0,0, new Rotation2d(90)),
             //Pass config
             config
         );
@@ -94,11 +99,8 @@ public class DriveTrajectory extends CommandBase {
 
         //Reset odometry to the starting pose of the trajectory
         drivetrain.resetOdometry(autoTrajectory.getInitialPose());
-    }
 
-    // Called every time the scheduler runs while the command is scheduled.
-    @Override
-    public void execute() {
+        System.out.println("Auto cycle complete");
     }
 
     // Called once the command ends or is interrupted.

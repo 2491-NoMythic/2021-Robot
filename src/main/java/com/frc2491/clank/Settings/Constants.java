@@ -35,10 +35,10 @@ public final class Constants {
 		public final static int driveTurnAxis = 2;
 		public final static int driveMainAxis = 1;
 		public final static int driveHorizontalAxis = 0;
-		public final static int driveTalonLeftMotor1 = 6;
-		public final static int driveTalonLeftMotor2 = 1;
-		public final static int driveTalonRightMotor1 = 2;
-		public final static int driveTalonRightMotor2 = 3;
+		public final static int driveTalonLeftMotor1 = 2;
+		public final static int driveTalonLeftMotor2 = 3;
+		public final static int driveTalonRightMotor1 = 0;
+		public final static int driveTalonRightMotor2 = 1;
 
 		// encoders
 		public final static double driveEncoderTicks = 2048.0; // encoder ticks per wheel rotation is 2048
@@ -64,12 +64,12 @@ public final class Constants {
 		}
 
 		//Trajectory
-		public final static double trackWidthMeters = .32; //TODO Change to actual values
-		public final static double ksVolts = .767; //TODO Change to actual values
-		public final static double kvVoltSecondsPerMeter = 4.21; //TODO Change xto actual values
-		public final static double kaVoltSecondsSquaredPerMeter = .596; //TODO Change to actual values
+		public final static double trackWidthMeters = .32;
+		public final static double ksVolts = .767;
+		public final static double kvVoltSecondsPerMeter = 4.21;
+		public final static double kaVoltSecondsSquaredPerMeter = .596; 
 
-		public final static double kPDriveVel = 8.5; //TODO Change to actual values
+		public final static double kPDriveVel = .01; //TODO Change to actual values
 	}
 
 	public final class Controller {
@@ -104,7 +104,7 @@ public final class Constants {
 	}
 
 	public final class Intake {
-		public static final int intakeMotorID = 12;
+		public static final int intakeMotorID = 6;
 		public static final double autoIntakeSpeed = 1;
 		public static final double intakeReverseSpeed = -1;
 	}
