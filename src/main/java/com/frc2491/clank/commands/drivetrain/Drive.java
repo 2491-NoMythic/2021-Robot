@@ -22,6 +22,7 @@ public class Drive extends CommandBase {
 		// Use addRequirements() here to declare subsystem dependencies.
 		this.drivetrain = drivetrain;
 		addRequirements(drivetrain);
+		SmartDashboard.putNumber("drive train rotate speed",  0.15);
 	}
 
 	/**
@@ -47,7 +48,7 @@ public class Drive extends CommandBase {
 	public void execute() {
 		IDriveController driveController = CurrentHIDs.getInstance().getDriveController();
 		
-		turnSpeed = 0.15 * driveController.getRawTurnAxis();
+		turnSpeed = SmartDashboard.getNumber("drive train rotate speed", .15) * driveController.getRawTurnAxis();
 		lastLeftSpeed = currentLeftSpeed;
 		lastRightSpeed = currentRightSpeed;
 
