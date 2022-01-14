@@ -52,6 +52,7 @@ public class RobotContainer {
 	private final Hood hood = new Hood();
 	private final PhotonCannon photonCannon = new PhotonCannon();
 	private final PositionButtonChecker buttonChecker = new PositionButtonChecker();
+	private final DriveTrajectory driveTrajectory = new DriveTrajectory(drivetrain);
 
 	// Don't use this at same time as Outtake
 	// This PID version has a periodic method implemented to control from the dashboard
@@ -127,6 +128,6 @@ public class RobotContainer {
 	 * Returns the autonomous command currently in use.
 	 */
 	public Command getAutonomousCommand() {
-		return new DriveTrajectory(drivetrain).andThen(() -> drivetrain.driveVoltageOutput(0, 0));
+		return driveTrajectory.getRamsete().andThen(() -> drivetrain.driveVoltageOutput(0, 0));
 	}
 }
