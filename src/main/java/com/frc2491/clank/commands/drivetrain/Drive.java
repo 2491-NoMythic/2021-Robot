@@ -48,7 +48,7 @@ public class Drive extends CommandBase {
 	public void execute() {
 		IDriveController driveController = CurrentHIDs.getInstance().getDriveController();
 		
-		turnSpeed = SmartDashboard.getNumber("drive train rotate speed", .15) * driveController.getRawTurnAxis();
+		turnSpeed = Constants.Drivetrain.turnSpeed * driveController.getRawTurnAxis();
 		lastLeftSpeed = currentLeftSpeed;
 		lastRightSpeed = currentRightSpeed;
 
@@ -64,7 +64,7 @@ public class Drive extends CommandBase {
 			currentRightSpeed = limitAcceleration(lastRightSpeed, currentRightSpeed);
 		}
 
-		drivetrain.drivePercentOutput(currentLeftSpeed, currentRightSpeed);
+		drivetrain.drivePercentOutput(currentLeftSpeed * Constants.Drivetrain.speedControl, currentRightSpeed * Constants.Drivetrain.speedControl);
 	}
 
 	// Called once the command ends or is interrupted.

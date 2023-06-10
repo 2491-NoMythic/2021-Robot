@@ -40,6 +40,11 @@ public final class Constants {
 		public final static int driveTalonRightMotor1 = 2;
 		public final static int driveTalonRightMotor2 = 3;
 
+			//this controlls the overall speed of the robot 0 is off, 1 is %100
+		public final static double speedControl = .25;
+
+		public final static double turnSpeed = .75;
+
 		// encoders
 		public final static double driveEncoderTicks = 2048.0; // encoder ticks per wheel rotation is 2048
 		public final static double driveWheelDiameter = 6.0; // inches
