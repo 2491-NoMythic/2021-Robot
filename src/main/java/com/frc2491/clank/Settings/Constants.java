@@ -104,6 +104,8 @@ public final class Constants {
 		}
 
 		public final class TM {
+			public static final boolean useSliderHoodPosition = true;
+			public static final int sliderAxidID = 3;
 			public static final int triggerShooterButtonID = 1;
 		}
 	}

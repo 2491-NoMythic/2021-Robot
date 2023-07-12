@@ -38,6 +38,12 @@ public class TM implements IDriveController {
 		return joystick.getRawAxis(Constants.Drivetrain.driveHorizontalAxis);
 	}
 
+	@Override
+	public double getSliderAxis() {
+		return joystick.getRawAxis(Constants.Controller.TM.sliderAxidID);
+	}
+
+
 	private double getAxisDeadzoned(double value) {
 		value = value * Math.abs(value);
 		return Math.abs(value) > Constants.Drivetrain.deadzone ? value : 0;

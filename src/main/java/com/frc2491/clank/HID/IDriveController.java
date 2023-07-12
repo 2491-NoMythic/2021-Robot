@@ -16,4 +16,6 @@ public interface IDriveController {
 	public double getRawTurnAxis();
 
 	public double getHorizontalClimbAxis();
+
+	public double getSliderAxis();
 }
